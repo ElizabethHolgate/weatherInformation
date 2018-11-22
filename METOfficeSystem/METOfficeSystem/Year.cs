@@ -9,7 +9,7 @@ namespace METOfficeSystem
     class Year
     {
         private string yrDescrip;
-        private DateTime year; //change to a date/time
+        private string year; //change to a date/time
         private MonthyObservations[] yrObserv;
 
         public Year()
@@ -21,7 +21,7 @@ namespace METOfficeSystem
         /// </summary>
         /// <param name="theYear">The year.</param>
         /// <param name="theYrDescript">The yr descript.</param>
-        public Year(DateTime theYear, string theYrDescript)
+        public Year(string theYear, string theYrDescript)
         {
             year = theYear;
             yrDescrip = theYrDescript;
@@ -33,7 +33,7 @@ namespace METOfficeSystem
         /// Gets the year.
         /// </summary>
         /// <returns>The year.</returns>
-        public DateTime GetYear()
+        public string GetYear()
         {
             return year;
         }
@@ -67,7 +67,7 @@ namespace METOfficeSystem
         {
             try
             {
-                year = Convert.ToDateTime(inYear);
+                year = inYear;
             }
             catch (Exception e)
             {
