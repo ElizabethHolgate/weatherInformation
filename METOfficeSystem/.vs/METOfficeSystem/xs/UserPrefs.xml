@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{F478B5AF-9F01-4B5F-8F70-21B5F60A4357}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="METOfficeSystem/Location.cs">
+    <Files>
+      <File FileName="METOfficeSystem/MonthyObservations.cs" Line="32" Column="38" />
+      <File FileName="METOfficeSystem/Year.cs" Line="56" Column="10" />
+      <File FileName="METOfficeSystem/Location.cs" Line="39" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.METOfficeSystem PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
