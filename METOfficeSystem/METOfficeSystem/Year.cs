@@ -28,9 +28,18 @@ namespace METOfficeSystem
             yrObserv = null;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:METOfficeSystem.Year"/> class.
+        /// </summary>
+        /// <param name="theYrDescript"></param>
+        public Year(string theYrDescript)
+        {
+            yrDescrip = theYrDescript;
+        }
+
         //GETTERS
         /// <summary>
-        /// Gets the year.
+        /// Gets the year ID.
         /// </summary>
         /// <returns>The year.</returns>
         public string GetYear()
@@ -60,7 +69,7 @@ namespace METOfficeSystem
         //SETTERS
 
         /// <summary>
-        /// Sets the year.
+        /// Sets the year ID.
         /// </summary>
         /// <param name="inYear">In year.</param>
         public void SetYear(string inYear)

@@ -9,7 +9,7 @@ namespace METOfficeSystem
     class Location
     {
         private string locationName, strtNameNum, county, postCode;
-        private int latitude, longitude;
+        private double latitude, longitude;
         private Year[] allYears;
         
         public Location()
@@ -31,8 +31,8 @@ namespace METOfficeSystem
             strtNameNum = theStrtNameNum;
             county = theCounty;
             postCode = thePostCode;
-            latitude = Convert.ToInt32(theLatitude);
-            longitude = Convert.ToInt32(theLongitude);
+            latitude = Convert.ToDouble(theLatitude);
+            longitude = Convert.ToDouble(theLongitude);
             allYears = null;
         }
 
@@ -114,7 +114,7 @@ namespace METOfficeSystem
         /// Gets the latitude.
         /// </summary>
         /// <returns>The latitude.</returns>
-        public int GetLatitude()
+        public double GetLatitude()
         {
             return latitude;
         }
@@ -123,7 +123,7 @@ namespace METOfficeSystem
         /// Gets the longitude.
         /// </summary>
         /// <returns>The longitude.</returns>
-        public int GetLongitude()
+        public double GetLongitude()
         {
             return longitude;
         }
@@ -227,7 +227,7 @@ namespace METOfficeSystem
         {
             try
             {
-                latitude = Convert.ToInt32(inLatitude);
+                latitude = Convert.ToDouble(inLatitude);
             }
             catch (FormatException e)
             {
@@ -236,14 +236,14 @@ namespace METOfficeSystem
         }
 
         /// <summary>
-        /// Sets the longitude.
+        /// Sets the longitude. 
         /// </summary>
         /// <param name="inLongitude">In longitude.</param>
         public void SetLongitude(string inLongitude)
         {
             try
             {
-                longitude = Convert.ToInt32(inLongitude);
+                longitude = Convert.ToDouble(inLongitude);
             }
             catch (FormatException e)
             {

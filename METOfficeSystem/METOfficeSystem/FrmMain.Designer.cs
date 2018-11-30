@@ -28,26 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstOutput = new System.Windows.Forms.ListBox();
+            this.lstLocation = new System.Windows.Forms.ListBox();
+            this.lstYear = new System.Windows.Forms.ListBox();
+            this.lstMonths = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // lstOutput
+            // lstLocation
             // 
-            this.lstOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstOutput.FormattingEnabled = true;
-            this.lstOutput.ItemHeight = 25;
-            this.lstOutput.Location = new System.Drawing.Point(246, 125);
-            this.lstOutput.Name = "lstOutput";
-            this.lstOutput.Size = new System.Drawing.Size(792, 404);
-            this.lstOutput.TabIndex = 0;
+            this.lstLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstLocation.FormattingEnabled = true;
+            this.lstLocation.ItemHeight = 25;
+            this.lstLocation.Location = new System.Drawing.Point(246, 88);
+            this.lstLocation.Name = "lstLocation";
+            this.lstLocation.Size = new System.Drawing.Size(191, 429);
+            this.lstLocation.TabIndex = 0;
+            // 
+            // lstYear
+            // 
+            this.lstYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstYear.FormattingEnabled = true;
+            this.lstYear.ItemHeight = 25;
+            this.lstYear.Location = new System.Drawing.Point(464, 88);
+            this.lstYear.Name = "lstYear";
+            this.lstYear.Size = new System.Drawing.Size(303, 429);
+            this.lstYear.TabIndex = 1;
+            this.lstYear.SelectedIndexChanged += new System.EventHandler(this.lstYear_SelectedIndexChanged);
+            // 
+            // lstMonths
+            // 
+            this.lstMonths.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstMonths.FormattingEnabled = true;
+            this.lstMonths.ItemHeight = 25;
+            this.lstMonths.Location = new System.Drawing.Point(790, 88);
+            this.lstMonths.Name = "lstMonths";
+            this.lstMonths.Size = new System.Drawing.Size(373, 429);
+            this.lstMonths.TabIndex = 2;
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.lstOutput);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClientSize = new System.Drawing.Size(1191, 554);
+            this.Controls.Add(this.lstMonths);
+            this.Controls.Add(this.lstYear);
+            this.Controls.Add(this.lstLocation);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmMain";
             this.Text = "Main";
             this.Load += new System.EventHandler(this.FrmMain_Load);
@@ -57,7 +82,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lstOutput;
+        private System.Windows.Forms.ListBox lstLocation;
+        private System.Windows.Forms.ListBox lstYear;
+        private System.Windows.Forms.ListBox lstMonths;
     }
 }
 
