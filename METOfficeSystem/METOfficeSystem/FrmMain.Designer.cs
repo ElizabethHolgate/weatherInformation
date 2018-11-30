@@ -38,19 +38,20 @@
             this.lstLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstLocation.FormattingEnabled = true;
             this.lstLocation.ItemHeight = 25;
-            this.lstLocation.Location = new System.Drawing.Point(246, 88);
+            this.lstLocation.Location = new System.Drawing.Point(246, 77);
             this.lstLocation.Name = "lstLocation";
             this.lstLocation.Size = new System.Drawing.Size(191, 429);
             this.lstLocation.TabIndex = 0;
+            this.lstLocation.SelectedIndexChanged += new System.EventHandler(this.lstLocation_SelectedIndexChanged);
             // 
             // lstYear
             // 
             this.lstYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstYear.FormattingEnabled = true;
             this.lstYear.ItemHeight = 25;
-            this.lstYear.Location = new System.Drawing.Point(464, 88);
+            this.lstYear.Location = new System.Drawing.Point(464, 77);
             this.lstYear.Name = "lstYear";
-            this.lstYear.Size = new System.Drawing.Size(303, 429);
+            this.lstYear.Size = new System.Drawing.Size(444, 429);
             this.lstYear.TabIndex = 1;
             this.lstYear.SelectedIndexChanged += new System.EventHandler(this.lstYear_SelectedIndexChanged);
             // 
@@ -59,16 +60,17 @@
             this.lstMonths.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstMonths.FormattingEnabled = true;
             this.lstMonths.ItemHeight = 25;
-            this.lstMonths.Location = new System.Drawing.Point(790, 88);
+            this.lstMonths.Location = new System.Drawing.Point(935, 77);
             this.lstMonths.Name = "lstMonths";
-            this.lstMonths.Size = new System.Drawing.Size(373, 429);
+            this.lstMonths.Size = new System.Drawing.Size(191, 429);
             this.lstMonths.TabIndex = 2;
+            this.lstMonths.SelectedIndexChanged += new System.EventHandler(this.lstMonths_SelectedIndexChanged);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1191, 554);
+            this.ClientSize = new System.Drawing.Size(1158, 855);
             this.Controls.Add(this.lstMonths);
             this.Controls.Add(this.lstYear);
             this.Controls.Add(this.lstLocation);

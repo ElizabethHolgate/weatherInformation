@@ -16,9 +16,10 @@ namespace METOfficeSystem
         //var for this form
         public static FrmMain KeepFrmMain = null;
 
-        //public vars for which location and year is selected
+        //public vars for which location, year and month is selected
         public static int currentLoc = -1;
         public static int currentYear = -1;
+        public static int currentMonth = -1;
 
         public FrmMain()
         {
@@ -134,10 +135,32 @@ namespace METOfficeSystem
             }
         }
 
+        private void showMonths()
+        {
+            Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
+            MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
+
+            foreach (MonthyObservations m in monthsInYear)
+            {
+                lstMonths.Items.Add(m.GetMonthID());
+            }
+        }
+
         private void lstYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            currentYear = lstYear.SelectedIndex;
+
+        }
+
+        private void lstLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentLoc = lstLocation.SelectedIndex;
             showYears();
+        }
+
+        private void lstMonths_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
