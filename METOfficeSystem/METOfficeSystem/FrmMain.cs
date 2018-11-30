@@ -129,6 +129,8 @@ namespace METOfficeSystem
         {
             Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
 
+            lstYear.Items.Clear();
+
             foreach (Year y in yearsInLoc)
             {
                 lstYear.Items.Add(y.GetYear() + ": " + y.GetYrDescrip());
@@ -140,27 +142,53 @@ namespace METOfficeSystem
             Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
             MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
 
+            lstMonths.Items.Clear();
+
             foreach (MonthyObservations m in monthsInYear)
             {
                 lstMonths.Items.Add(m.GetMonthID());
             }
         }
 
+        private void showMonthsInfo()
+        {
+            Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
+            MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
+
+            MonthyObservations m = monthsInYear[currentMonth];
+
+            lstMonthInfo.Items.Clear();
+
+            lstMonthInfo.Items.Add("Month ID: " + m.GetMonthID());
+            lstMonthInfo.Items.Add("Maximum Temperature: " + m.GetMaxTemp());
+            lstMonthInfo.Items.Add("Minimum Temperature: " + m.GetMinTemp());
+            lstMonthInfo.Items.Add("Air Frost Days: " + m.GetFrostDays());
+            lstMonthInfo.Items.Add("Rainfall in mm: " + m.GetMmRainfall());
+            lstMonthInfo.Items.Add("Hours of Sunshine: " + m.GetSunHours());
+        }
+
         private void lstYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentYear = lstYear.SelectedIndex;
-
+            lstMonths.Items.Clear();
+            lstMonthInfo.Items.Clear();
+            showMonths();
         }
 
         private void lstLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentLoc = lstLocation.SelectedIndex;
+            lstYear.Items.Clear();
+            lstMonths.Items.Clear();
+            lstMonthInfo.Items.Clear();
             showYears();
         }
 
         private void lstMonths_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            currentMonth = lstMonths.SelectedIndex;
+            lstMonthInfo.Items.Clear();
+            showMonthsInfo();
         }
     }
 }
