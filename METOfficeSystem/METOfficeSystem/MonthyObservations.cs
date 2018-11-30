@@ -24,14 +24,14 @@ namespace METOfficeSystem
         /// <param name="theFrostDays">The frost days.</param>
         /// <param name="theMmRainfall">The mm rainfall.</param>
         /// <param name="theSunHours">The sun hours.</param>
-        public MonthyObservations(string theMonthID, int theMaxTemp, int theMinTemp, int theFrostDays, int theMmRainfall, int theSunHours)
+        public MonthyObservations(string theMonthID, string theMaxTemp, string theMinTemp, string theFrostDays, string theMmRainfall, string theSunHours)
         {
             monthID = theMonthID;
-            maxTemp = theMaxTemp;
-            minTemp = theMinTemp;
-            frostDays = theFrostDays;
-            mmRainfall = theMmRainfall;
-            sunHours = theSunHours;
+            maxTemp = Convert.ToInt32(theMaxTemp);
+            minTemp = Convert.ToInt32(theMinTemp);
+            frostDays = Convert.ToInt32(theFrostDays);
+            mmRainfall = Convert.ToInt32(theMmRainfall);
+            sunHours = Convert.ToInt32(theSunHours);
         }
 
         //GETTERS
