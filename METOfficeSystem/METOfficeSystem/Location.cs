@@ -8,8 +8,8 @@ namespace METOfficeSystem
 {
     class Location
     {
-        private string locationName, strtName, county, postCode;
-        private int strtNum, latitude, longitude;
+        private string locationName, strtNameNum, county, postCode;
+        private double latitude, longitude;
         private Year[] allYears;
         
         public Location()
@@ -20,21 +20,19 @@ namespace METOfficeSystem
         /// Initializes a new instance of the <see cref="T:METOfficeSystem.Location"/> class.
         /// </summary>
         /// <param name="theLocationName">The location name.</param>
-        /// <param name="thestrtNum">Thestrt number.</param>
-        /// <param name="theStrtName">The strt name.</param>
+        /// <param name="theStrtNameNum">The street name and number.</param>
         /// <param name="theCounty">The county.</param>
         /// <param name="thePostCode">The post code.</param>
         /// <param name="theLatitude">The latitude.</param>
         /// <param name="theLongitude">The longitude.</param>
-        public Location(string theLocationName, int thestrtNum, string theStrtName, string theCounty, string thePostCode, int theLatitude, int theLongitude)
+        public Location(string theLocationName, string theStrtNameNum, string theCounty, string thePostCode, string theLatitude, string theLongitude)
         {
             locationName = theLocationName;
-            strtNum = thestrtNum;
-            strtName = theStrtName;
+            strtNameNum = theStrtNameNum;
             county = theCounty;
             postCode = thePostCode;
-            latitude = theLatitude;
-            longitude = theLongitude;
+            latitude = Convert.ToDouble(theLatitude);
+            longitude = Convert.ToDouble(theLongitude);
             allYears = null;
         }
 
@@ -55,24 +53,24 @@ namespace METOfficeSystem
             }
         }
 
-        /// <summary>
-        /// Gets the street number.
-        /// </summary>
-        /// <returns>The strt number.</returns>
-        public int GetStrtNum()
-        {
-            return strtNum;
-        }
+        ///// <summary>
+        ///// Gets the street number.
+        ///// </summary>
+        ///// <returns>The strt number.</returns>
+        //public int GetStrtNum()
+        //{
+        //    return strtNum;
+        //}
 
         /// <summary>
-        /// Gets the name of the street.
+        /// Gets the street number and the name of the street.
         /// </summary>
         /// <returns>The strt name.</returns>
         public string GetStrtName()
         {
-            if (!String.IsNullOrEmpty(strtName))
+            if (!String.IsNullOrEmpty(strtNameNum))
             {
-                return strtName;
+                return strtNameNum;
             }
             else
             {
@@ -116,7 +114,7 @@ namespace METOfficeSystem
         /// Gets the latitude.
         /// </summary>
         /// <returns>The latitude.</returns>
-        public int GetLatitude()
+        public double GetLatitude()
         {
             return latitude;
         }
@@ -125,7 +123,7 @@ namespace METOfficeSystem
         /// Gets the longitude.
         /// </summary>
         /// <returns>The longitude.</returns>
-        public int GetLongitude()
+        public double GetLongitude()
         {
             return longitude;
         }
@@ -157,31 +155,31 @@ namespace METOfficeSystem
             }
         }
 
-        /// <summary>
-        /// Sets the street number.
-        /// </summary>
-        /// <param name="inStrtNum">In strt number.</param>
-        public void SetStrtNum(string inStrtNum)
-        {
-            try
-            {
-                strtNum = Convert.ToInt32(inStrtNum);
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show("ERROR: " + e.Message + " Please input a vaild street number");
-            }
-        }
+        ///// <summary>
+        ///// Sets the street number.
+        ///// </summary>
+        ///// <param name="inStrtNum">In strt number.</param>
+        //public void SetStrtNum(string inStrtNum)
+        //{
+        //    try
+        //    {
+        //        strtNum = Convert.ToInt32(inStrtNum);
+        //    }
+        //    catch (FormatException e)
+        //    {
+        //        System.Windows.Forms.MessageBox.Show("ERROR: " + e.Message + " Please input a vaild street number");
+        //    }
+        //}
 
         /// <summary>
         /// Sets the name of the street.
         /// </summary>
         /// <param name="inStrtName">In strt name.</param>
-        public void SetStrtName(string inStrtName)
+        public void SetStrtName(string inStrtNameNum)
         {
             try
             {
-                strtName = inStrtName;
+                strtNameNum = inStrtNameNum;
             }
             catch (FormatException e)
             {
@@ -229,7 +227,7 @@ namespace METOfficeSystem
         {
             try
             {
-                latitude = Convert.ToInt32(inLatitude);
+                latitude = Convert.ToDouble(inLatitude);
             }
             catch (FormatException e)
             {
@@ -238,14 +236,14 @@ namespace METOfficeSystem
         }
 
         /// <summary>
-        /// Sets the longitude.
+        /// Sets the longitude. 
         /// </summary>
         /// <param name="inLongitude">In longitude.</param>
         public void SetLongitude(string inLongitude)
         {
             try
             {
-                longitude = Convert.ToInt32(inLongitude);
+                longitude = Convert.ToDouble(inLongitude);
             }
             catch (FormatException e)
             {

@@ -1,0 +1,15 @@
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\bin\Debug\METOfficeSystem.exe.config
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\bin\Debug\METOfficeSystem.exe
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\bin\Debug\METOfficeSystem.pdb
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.csprojAssemblyReference.cache
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmMain.resources
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.Properties.Resources.resources
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.csproj.GenerateResource.cache
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.csproj.CoreCompileInputs.cache
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.exe
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.pdb
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmEditLocation.resources
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmAddLocation.resources
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmEditYear.resources
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmAddYear.resources
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmEditMonth.resources

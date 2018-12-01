@@ -9,7 +9,7 @@ namespace METOfficeSystem
     class MonthyObservations
     {
         private string monthID;
-        private int maxTemp, minTemp, frostDays, mmRainfall, sunHours;
+        private double maxTemp, minTemp, frostDays, mmRainfall, sunHours;
 
         public MonthyObservations()
         {
@@ -24,14 +24,14 @@ namespace METOfficeSystem
         /// <param name="theFrostDays">The frost days.</param>
         /// <param name="theMmRainfall">The mm rainfall.</param>
         /// <param name="theSunHours">The sun hours.</param>
-        public MonthyObservations(string theMonthID, int theMaxTemp, int theMinTemp, int theFrostDays, int theMmRainfall, int theSunHours)
+        public MonthyObservations(string theMonthID, string theMaxTemp, string theMinTemp, string theFrostDays, string theMmRainfall, string theSunHours)
         {
             monthID = theMonthID;
-            maxTemp = theMaxTemp;
-            minTemp = theMinTemp;
-            frostDays = theFrostDays;
-            mmRainfall = theMmRainfall;
-            sunHours = theSunHours;
+            maxTemp = Convert.ToDouble(theMaxTemp);
+            minTemp = Convert.ToDouble(theMinTemp);
+            frostDays = Convert.ToDouble(theFrostDays);
+            mmRainfall = Convert.ToDouble(theMmRainfall);
+            sunHours = Convert.ToDouble(theSunHours);
         }
 
         //GETTERS
@@ -57,9 +57,9 @@ namespace METOfficeSystem
         /// Gets the maximum temperature.
         /// </summary>
         /// <returns>The max temp.</returns>
-        public int GetMaxTemp()
+        public double GetMaxTemp()
         {
-            if (maxTemp != default(int))
+            if (maxTemp != default(double))
             {
                 return maxTemp;
             }
@@ -73,9 +73,9 @@ namespace METOfficeSystem
         /// Gets the minimum temperature.
         /// </summary>
         /// <returns>The minimum temp.</returns>
-        public int GetMinTemp()
+        public double GetMinTemp()
         {
-            if (minTemp != default(int))
+            if (minTemp != default(double))
             {
                 return minTemp;
             }
@@ -89,9 +89,9 @@ namespace METOfficeSystem
         /// Gets the number of airfrost days.
         /// </summary>
         /// <returns>The frost days.</returns>
-        public int GetFrostDays()
+        public double GetFrostDays()
         {
-            if (frostDays != default(int))
+            if (frostDays != default(double))
             {
                 return frostDays;
             }
@@ -105,9 +105,9 @@ namespace METOfficeSystem
         /// Gets the millimeters of rainfall.
         /// </summary>
         /// <returns>The mm rainfall.</returns>
-        public int GetMmRainfall()
+        public double GetMmRainfall()
         {
-            if (mmRainfall != default(int))
+            if (mmRainfall != default(double))
             {
                 return mmRainfall;
             }
@@ -121,9 +121,16 @@ namespace METOfficeSystem
         /// Gets the number of sunshine hours.
         /// </summary>
         /// <returns>The sun hours.</returns>
-        public int GetSunHours()
+        public double GetSunHours()
         {
-            return sunHours;
+            if (sunHours != default(double))
+            {
+                return sunHours;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         //SETTERS
@@ -152,7 +159,7 @@ namespace METOfficeSystem
         {
             try
             {
-                maxTemp = Convert.ToInt32(inMaxTemp);
+                maxTemp = Convert.ToDouble(inMaxTemp);
             }
             catch (Exception e)
             {
@@ -168,7 +175,7 @@ namespace METOfficeSystem
         {
             try
             {
-                minTemp = Convert.ToInt32(inMinTemp);
+                minTemp = Convert.ToDouble(inMinTemp);
             }
             catch (Exception e)
             {
@@ -184,7 +191,7 @@ namespace METOfficeSystem
         {
             try
             {
-                frostDays = Convert.ToInt32(inFrostDays);
+                frostDays = Convert.ToDouble(inFrostDays);
             }
             catch (Exception e)
             {
@@ -200,7 +207,7 @@ namespace METOfficeSystem
         {
             try
             {
-                mmRainfall = Convert.ToInt32(inMmRainfall);
+                mmRainfall = Convert.ToDouble(inMmRainfall);
             }
             catch (Exception e)
             {
@@ -216,7 +223,7 @@ namespace METOfficeSystem
         {
             try
             {
-                sunHours = Convert.ToInt32(inSunHours);
+                sunHours = Convert.ToDouble(inSunHours);
             }
             catch (Exception e)
             {
