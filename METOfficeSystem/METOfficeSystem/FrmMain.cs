@@ -321,7 +321,11 @@ namespace METOfficeSystem
         {
             string userSearch;
 
+            
+
             userSearch = txtSearch.Text;
+
+
         }
     }
 }
