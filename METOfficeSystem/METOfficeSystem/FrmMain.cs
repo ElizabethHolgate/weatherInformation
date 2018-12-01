@@ -190,5 +190,10 @@ namespace METOfficeSystem
             lstMonthInfo.Items.Clear();
             showMonthsInfo();
         }
+
+        private void btnViewLocation_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
