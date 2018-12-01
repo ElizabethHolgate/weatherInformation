@@ -72,7 +72,7 @@
             this.lstMonths.ItemHeight = 25;
             this.lstMonths.Location = new System.Drawing.Point(1021, 97);
             this.lstMonths.Name = "lstMonths";
-            this.lstMonths.Size = new System.Drawing.Size(191, 429);
+            this.lstMonths.Size = new System.Drawing.Size(148, 429);
             this.lstMonths.TabIndex = 2;
             this.lstMonths.SelectedIndexChanged += new System.EventHandler(this.lstMonths_SelectedIndexChanged);
             // 
@@ -81,7 +81,7 @@
             this.lstMonthInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstMonthInfo.FormattingEnabled = true;
             this.lstMonthInfo.ItemHeight = 25;
-            this.lstMonthInfo.Location = new System.Drawing.Point(1239, 97);
+            this.lstMonthInfo.Location = new System.Drawing.Point(1194, 97);
             this.lstMonthInfo.Name = "lstMonthInfo";
             this.lstMonthInfo.Size = new System.Drawing.Size(292, 254);
             this.lstMonthInfo.TabIndex = 3;
@@ -114,6 +114,7 @@
             this.btnEditLocation.TabIndex = 6;
             this.btnEditLocation.Text = "Edit Location";
             this.btnEditLocation.UseVisualStyleBackColor = true;
+            this.btnEditLocation.Click += new System.EventHandler(this.btnEditLocation_Click);
             // 
             // btnEditYear
             // 
@@ -178,7 +179,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1559, 554);
+            this.ClientSize = new System.Drawing.Size(1331, 554);
             this.Controls.Add(this.lblSeachLoc);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnEditMonth);

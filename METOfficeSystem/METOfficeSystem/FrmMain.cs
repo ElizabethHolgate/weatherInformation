@@ -193,7 +193,43 @@ namespace METOfficeSystem
 
         private void btnViewLocation_Click(object sender, EventArgs e)
         {
+            //select current location
+            currentLoc = lstLocation.SelectedIndex;
+            Location locInfo = Data.locations[currentLoc];
 
+            //clear other list boxes
+            lstYear.Items.Clear();
+            lstMonths.Items.Clear();
+            lstMonthInfo.Items.Clear();
+
+            lstYear.Items.Add(locInfo.GetLocationName());
+            lstYear.Items.Add("");
+            lstYear.Items.Add("Address:");
+            lstYear.Items.Add(locInfo.GetStrtName());
+            lstYear.Items.Add(locInfo.GetCounty());
+            lstYear.Items.Add(locInfo.GetPostCode());
+            lstYear.Items.Add("");
+            lstYear.Items.Add("Coordinates:");
+            lstYear.Items.Add(locInfo.GetLongitude());
+            lstYear.Items.Add(locInfo.GetLatitude());
+        }
+
+        private void btnEditLocation_Click(object sender, EventArgs e)
+        {
+            FrmEditLocation frmEditLocation = new FrmEditLocation();
+            currentLoc = lstLocation.SelectedIndex;
+            
+            frmEditLocation.Show();
+            KeepFrmMain.Hide();
+
+            clearLstBoxes();
+        }
+
+        private void clearLstBoxes()
+        {
+            lstMonthInfo.Items.Clear();
+            lstMonths.Items.Clear();
+            lstYear.Items.Clear();
         }
     }
 }
