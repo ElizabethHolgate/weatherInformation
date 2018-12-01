@@ -222,7 +222,7 @@
             this.Controls.Add(this.txtLocationName);
             this.Controls.Add(this.btnCancel);
             this.Name = "FrmAddLocation";
-            this.Text = "AddLocation";
+            this.Text = "Add Location";
             this.Load += new System.EventHandler(this.FrmAddLocation_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

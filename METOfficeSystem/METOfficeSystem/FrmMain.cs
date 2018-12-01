@@ -251,7 +251,23 @@ namespace METOfficeSystem
 
         private void btnEditYear_Click(object sender, EventArgs e)
         {
+            
+            currentLoc = lstLocation.SelectedIndex;
+            currentYear = lstYear.SelectedIndex;
 
+            if (currentYear < 0 | currentLoc < 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Please select a location and a year proir to 'Edit Year'.");
+            }
+            else if (currentYear > -1 & currentLoc > -1)
+            {
+                FrmEditYear frmEditYear = new FrmEditYear();
+
+                frmEditYear.Show();
+                KeepFrmMain.Hide();
+
+                clearLstBoxes();
+            }
         }
     }
 }

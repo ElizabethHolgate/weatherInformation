@@ -9,3 +9,5 @@ C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METO
 C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.exe
 C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.pdb
 C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmEditLocation.resources
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmAddLocation.resources
+C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmEditYear.resources
