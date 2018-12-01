@@ -218,11 +218,18 @@ namespace METOfficeSystem
         {
             FrmEditLocation frmEditLocation = new FrmEditLocation();
             currentLoc = lstLocation.SelectedIndex;
-            
-            frmEditLocation.Show();
-            KeepFrmMain.Hide();
 
-            clearLstBoxes();
+            if (currentLoc < 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Please select a location prior to 'Edit Location'.");
+            }
+            else
+            {
+                frmEditLocation.Show();
+                KeepFrmMain.Hide();
+
+                clearLstBoxes();
+            }
         }
 
         private void clearLstBoxes()
@@ -230,6 +237,16 @@ namespace METOfficeSystem
             lstMonthInfo.Items.Clear();
             lstMonths.Items.Clear();
             lstYear.Items.Clear();
+        }
+
+        private void btnAddLocation_Click(object sender, EventArgs e)
+        {
+            FrmAddLocation frmAddLocation = new FrmAddLocation();
+
+            frmAddLocation.Show();
+            KeepFrmMain.Hide();
+
+            clearLstBoxes();
         }
     }
 }

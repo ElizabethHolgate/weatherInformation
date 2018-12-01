@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmAddLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddLocation.Designer.cs">
+      <DependentUpon>FrmAddLocation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data.cs" />
     <Compile Include="FrmEditLocation.cs">
       <SubType>Form</SubType>

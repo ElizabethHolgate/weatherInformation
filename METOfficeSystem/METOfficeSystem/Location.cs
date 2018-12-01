@@ -63,7 +63,7 @@ namespace METOfficeSystem
         //}
 
         /// <summary>
-        /// Gets the name of the street.
+        /// Gets the street number and the name of the street.
         /// </summary>
         /// <returns>The strt name.</returns>
         public string GetStrtName()
