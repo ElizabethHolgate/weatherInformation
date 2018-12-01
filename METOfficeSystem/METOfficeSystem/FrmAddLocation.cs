@@ -43,11 +43,21 @@ namespace METOfficeSystem
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string locName, locStrtNameNum, locCounty, locLat, locLong;
+            int locArrLength;
 
-            Location newLoc = new Location();
+            Location locNew = new Location();
 
+            locNew.SetLocationName(txtLocationName.Text);
+            locNew.SetStrtName(txtStreetNameNum.Text);
+            locNew.SetCounty(txtCounty.Text);
+            locNew.SetPostCode(txtPostcode.Text);
+            locNew.SetLatitude(txtLatitude.Text);
+            locNew.SetLongitude(txtLongitude.Text);
 
+            locArrLength = Data.locations.Length;
+
+            Array.Resize(ref Data.locations, locArrLength + 1);
+            Data.locations[locArrLength] = locNew;
         }
     }
 }

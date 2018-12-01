@@ -133,6 +133,7 @@
             this.btnEditYear.TabIndex = 7;
             this.btnEditYear.Text = "Edit Year";
             this.btnEditYear.UseVisualStyleBackColor = true;
+            this.btnEditYear.Click += new System.EventHandler(this.btnEditYear_Click);
             // 
             // btnAddLocation
             // 

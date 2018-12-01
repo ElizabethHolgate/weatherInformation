@@ -248,5 +248,10 @@ namespace METOfficeSystem
 
             clearLstBoxes();
         }
+
+        private void btnEditYear_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
