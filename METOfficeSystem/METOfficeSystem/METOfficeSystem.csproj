@@ -53,6 +53,12 @@
       <DependentUpon>FrmAddLocation.cs</DependentUpon>
     </Compile>
     <Compile Include="Data.cs" />
+    <Compile Include="FrmAddYear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddYear.Designer.cs">
+      <DependentUpon>FrmAddYear.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmEditLocation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     <Compile Include="Year.cs" />
     <EmbeddedResource Include="FrmAddLocation.resx">
       <DependentUpon>FrmAddLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddYear.resx">
+      <DependentUpon>FrmAddYear.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEditLocation.resx">
       <DependentUpon>FrmEditLocation.cs</DependentUpon>

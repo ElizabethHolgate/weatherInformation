@@ -157,6 +157,7 @@
             this.btnAddYear.TabIndex = 9;
             this.btnAddYear.Text = "Add Year";
             this.btnAddYear.UseVisualStyleBackColor = true;
+            this.btnAddYear.Click += new System.EventHandler(this.btnAddYear_Click);
             // 
             // btnEditMonth
             // 

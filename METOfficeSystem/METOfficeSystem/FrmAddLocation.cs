@@ -45,15 +45,8 @@ namespace METOfficeSystem
         {
             int locArrLength;
 
-            Location locNew = new Location();
-
-            locNew.SetLocationName(txtLocationName.Text);
-            locNew.SetStrtName(txtStreetNameNum.Text);
-            locNew.SetCounty(txtCounty.Text);
-            locNew.SetPostCode(txtPostcode.Text);
-            locNew.SetLatitude(txtLatitude.Text);
-            locNew.SetLongitude(txtLongitude.Text);
-
+            Location locNew = new Location(txtLocationName.Text, txtStreetNameNum.Text, txtCounty.Text, txtPostcode.Text, txtLatitude.Text, txtLongitude.Text);
+            
             locArrLength = Data.locations.Length;
 
             Array.Resize(ref Data.locations, locArrLength + 1);

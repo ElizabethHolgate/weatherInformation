@@ -195,28 +195,34 @@ namespace METOfficeSystem
         {
             //select current location
             currentLoc = lstLocation.SelectedIndex;
-            Location locInfo = Data.locations[currentLoc];
 
-            //clear other list boxes
-            lstYear.Items.Clear();
-            lstMonths.Items.Clear();
-            lstMonthInfo.Items.Clear();
+            if (currentLoc < 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Please select the location prior to 'View Location'.");
+            }
+            else
+            {
+                Location locInfo = Data.locations[currentLoc];
 
-            lstYear.Items.Add(locInfo.GetLocationName());
-            lstYear.Items.Add("");
-            lstYear.Items.Add("Address:");
-            lstYear.Items.Add(locInfo.GetStrtName());
-            lstYear.Items.Add(locInfo.GetCounty());
-            lstYear.Items.Add(locInfo.GetPostCode());
-            lstYear.Items.Add("");
-            lstYear.Items.Add("Coordinates:");
-            lstYear.Items.Add(locInfo.GetLongitude());
-            lstYear.Items.Add(locInfo.GetLatitude());
+                clearLstBoxes();
+
+                lstYear.Items.Add(locInfo.GetLocationName());
+                lstYear.Items.Add("");
+                lstYear.Items.Add("Address:");
+                lstYear.Items.Add(locInfo.GetStrtName());
+                lstYear.Items.Add(locInfo.GetCounty());
+                lstYear.Items.Add(locInfo.GetPostCode());
+                lstYear.Items.Add("");
+                lstYear.Items.Add("Coordinates:");
+                lstYear.Items.Add(locInfo.GetLongitude());
+                lstYear.Items.Add(locInfo.GetLatitude());
+            }
+
+            
         }
 
         private void btnEditLocation_Click(object sender, EventArgs e)
         {
-            FrmEditLocation frmEditLocation = new FrmEditLocation();
             currentLoc = lstLocation.SelectedIndex;
 
             if (currentLoc < 0)
@@ -225,6 +231,8 @@ namespace METOfficeSystem
             }
             else
             {
+                FrmEditLocation frmEditLocation = new FrmEditLocation();
+
                 frmEditLocation.Show();
                 KeepFrmMain.Hide();
 
@@ -251,7 +259,6 @@ namespace METOfficeSystem
 
         private void btnEditYear_Click(object sender, EventArgs e)
         {
-            
             currentLoc = lstLocation.SelectedIndex;
             currentYear = lstYear.SelectedIndex;
 
@@ -264,6 +271,25 @@ namespace METOfficeSystem
                 FrmEditYear frmEditYear = new FrmEditYear();
 
                 frmEditYear.Show();
+                KeepFrmMain.Hide();
+
+                clearLstBoxes();
+            }
+        }
+
+        private void btnAddYear_Click(object sender, EventArgs e)
+        {
+            currentLoc = lstLocation.SelectedIndex;
+
+            if (currentLoc < 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Please select a location to store the year in.");
+            }
+            else if (currentLoc > -1)
+            {
+                FrmAddYear frmAddYear = new FrmAddYear();
+
+                frmAddYear.Show();
                 KeepFrmMain.Hide();
 
                 clearLstBoxes();
