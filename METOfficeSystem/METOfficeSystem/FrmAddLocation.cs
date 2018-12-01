@@ -27,8 +27,7 @@ namespace METOfficeSystem
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            FrmMain.KeepFrmMain.Show();
-            tempAddLocation.Hide();
+            ReturnToMain();
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -51,6 +50,14 @@ namespace METOfficeSystem
 
             Array.Resize(ref Data.locations, locArrLength + 1);
             Data.locations[locArrLength] = locNew;
+
+            ReturnToMain();
+        }
+
+        private void ReturnToMain()
+        {
+            FrmMain.KeepFrmMain.Show();
+            tempAddLocation.Hide();
         }
     }
 }

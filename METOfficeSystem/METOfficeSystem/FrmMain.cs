@@ -295,5 +295,33 @@ namespace METOfficeSystem
                 clearLstBoxes();
             }
         }
+
+        private void btnEditMonth_Click(object sender, EventArgs e)
+        {
+            currentLoc = lstLocation.SelectedIndex;
+            currentYear = lstYear.SelectedIndex;
+            currentMonth = lstMonths.SelectedIndex;
+
+            if (currentYear < 0 | currentLoc < 0 | currentMonth < 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Please select a location, a year and a month proir to 'Edit Month'.");
+            }
+            else
+            {
+                FrmEditMonth frmEditMonth = new FrmEditMonth();
+
+                frmEditMonth.Show();
+                KeepFrmMain.Hide();
+
+                lstMonthInfo.Items.Clear();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string userSearch;
+
+            userSearch = txtSearch.Text;
+        }
     }
 }

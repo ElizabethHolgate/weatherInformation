@@ -22,8 +22,7 @@ namespace METOfficeSystem
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            FrmMain.KeepFrmMain.Show();
-            tempAddYear.Hide();
+            ReturnToMain();
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -44,6 +43,14 @@ namespace METOfficeSystem
             yearLength = yearsArr.Length;
             Array.Resize(ref yearsArr, yearLength + 1);
             yearsArr[yearLength] = yearNew;
+
+            ReturnToMain();
+        }
+
+        private void ReturnToMain()
+        {
+            FrmMain.KeepFrmMain.Show();
+            tempAddYear.Hide();
         }
     }
 }

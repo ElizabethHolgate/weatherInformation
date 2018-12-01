@@ -30,8 +30,7 @@ namespace METOfficeSystem
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            FrmMain.KeepFrmMain.Show();
-            TempEditLocation.Hide();
+            ReturnToMain();
         }
 
         private void FillTextBoxes()
@@ -57,6 +56,14 @@ namespace METOfficeSystem
             editLoc.SetPostCode(txtPostcode.Text);
             editLoc.SetLatitude(txtLatitude.Text);
             editLoc.SetLongitude(txtLongitude.Text);
+
+            ReturnToMain();
+        }
+
+        private void ReturnToMain()
+        {
+            FrmMain.KeepFrmMain.Show();
+            TempEditLocation.Hide();
         }
     }
 }

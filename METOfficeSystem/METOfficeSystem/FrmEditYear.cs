@@ -26,8 +26,7 @@ namespace METOfficeSystem
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            FrmMain.KeepFrmMain.Show();
-            tempEditYear.Hide();
+            ReturnToMain();
         }
 
         private void FillTextBoxes()
@@ -49,6 +48,14 @@ namespace METOfficeSystem
         private void btnSave_Click(object sender, EventArgs e)
         {
             editYear.SetYrDescrip(txtYearDescrip.Text);
+
+            ReturnToMain();
+        }
+
+        private void ReturnToMain()
+        {
+            FrmMain.KeepFrmMain.Show();
+            tempEditYear.Hide();
         }
     }
 }

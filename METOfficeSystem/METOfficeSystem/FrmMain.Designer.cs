@@ -169,6 +169,7 @@
             this.btnEditMonth.TabIndex = 10;
             this.btnEditMonth.Text = "Edit Month";
             this.btnEditMonth.UseVisualStyleBackColor = true;
+            this.btnEditMonth.Click += new System.EventHandler(this.btnEditMonth_Click);
             // 
             // btnSearch
             // 
@@ -180,6 +181,7 @@
             this.btnSearch.TabIndex = 12;
             this.btnSearch.Text = "Go";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lblSeachLoc
             // 
@@ -187,9 +189,9 @@
             this.lblSeachLoc.Location = new System.Drawing.Point(29, 338);
             this.lblSeachLoc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSeachLoc.Name = "lblSeachLoc";
-            this.lblSeachLoc.Size = new System.Drawing.Size(93, 13);
+            this.lblSeachLoc.Size = new System.Drawing.Size(44, 13);
             this.lblSeachLoc.TabIndex = 13;
-            this.lblSeachLoc.Text = "Search Locations:";
+            this.lblSeachLoc.Text = "Search:";
             // 
             // FrmMain
             // 
