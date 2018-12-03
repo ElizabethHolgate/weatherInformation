@@ -40,7 +40,14 @@ namespace METOfficeSystem
 
             Year yearNew = new Year(txtYearID.Text, txtYearDescrip.Text);
 
-            yearLength = yearsArr.Length;
+            if (yearsArr == null)
+            {
+                yearLength = 0;
+            }
+            else
+            {
+                yearLength = yearsArr.Length;
+            }
             Array.Resize(ref yearsArr, yearLength + 1);
             yearsArr[yearLength] = yearNew;
 

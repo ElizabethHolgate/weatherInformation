@@ -55,7 +55,7 @@
             this.txtYearDescrip.Margin = new System.Windows.Forms.Padding(2);
             this.txtYearDescrip.Name = "txtYearDescrip";
             this.txtYearDescrip.Size = new System.Drawing.Size(419, 26);
-            this.txtYearDescrip.TabIndex = 42;
+            this.txtYearDescrip.TabIndex = 2;
             // 
             // lblYear
             // 
@@ -111,7 +111,8 @@
             this.txtYearID.Margin = new System.Windows.Forms.Padding(2);
             this.txtYearID.Name = "txtYearID";
             this.txtYearID.Size = new System.Drawing.Size(121, 26);
-            this.txtYearID.TabIndex = 45;
+            this.txtYearID.TabIndex = 1;
+            this.txtYearID.UseWaitCursor = true;
             // 
             // FrmAddYear
             // 
