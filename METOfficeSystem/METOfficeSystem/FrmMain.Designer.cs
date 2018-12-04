@@ -53,7 +53,7 @@
             this.lstLocation.Margin = new System.Windows.Forms.Padding(2);
             this.lstLocation.Name = "lstLocation";
             this.lstLocation.Size = new System.Drawing.Size(152, 344);
-            this.lstLocation.TabIndex = 0;
+            this.lstLocation.TabIndex = 10;
             this.lstLocation.SelectedIndexChanged += new System.EventHandler(this.lstLocation_SelectedIndexChanged);
             // 
             // lstYear
@@ -65,7 +65,7 @@
             this.lstYear.Margin = new System.Windows.Forms.Padding(2);
             this.lstYear.Name = "lstYear";
             this.lstYear.Size = new System.Drawing.Size(334, 344);
-            this.lstYear.TabIndex = 1;
+            this.lstYear.TabIndex = 11;
             this.lstYear.SelectedIndexChanged += new System.EventHandler(this.lstYear_SelectedIndexChanged);
             // 
             // lstMonths
@@ -77,7 +77,7 @@
             this.lstMonths.Margin = new System.Windows.Forms.Padding(2);
             this.lstMonths.Name = "lstMonths";
             this.lstMonths.Size = new System.Drawing.Size(112, 344);
-            this.lstMonths.TabIndex = 2;
+            this.lstMonths.TabIndex = 12;
             this.lstMonths.SelectedIndexChanged += new System.EventHandler(this.lstMonths_SelectedIndexChanged);
             // 
             // lstMonthInfo
@@ -89,7 +89,7 @@
             this.lstMonthInfo.Margin = new System.Windows.Forms.Padding(2);
             this.lstMonthInfo.Name = "lstMonthInfo";
             this.lstMonthInfo.Size = new System.Drawing.Size(220, 204);
-            this.lstMonthInfo.TabIndex = 3;
+            this.lstMonthInfo.TabIndex = 13;
             // 
             // txtSearch
             // 
@@ -98,7 +98,7 @@
             this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(102, 26);
-            this.txtSearch.TabIndex = 4;
+            this.txtSearch.TabIndex = 8;
             // 
             // btnViewLocation
             // 
@@ -107,7 +107,7 @@
             this.btnViewLocation.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewLocation.Name = "btnViewLocation";
             this.btnViewLocation.Size = new System.Drawing.Size(148, 29);
-            this.btnViewLocation.TabIndex = 5;
+            this.btnViewLocation.TabIndex = 2;
             this.btnViewLocation.Text = "View Location";
             this.btnViewLocation.UseVisualStyleBackColor = true;
             this.btnViewLocation.Click += new System.EventHandler(this.btnViewLocation_Click);
@@ -119,7 +119,7 @@
             this.btnEditLocation.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditLocation.Name = "btnEditLocation";
             this.btnEditLocation.Size = new System.Drawing.Size(148, 29);
-            this.btnEditLocation.TabIndex = 6;
+            this.btnEditLocation.TabIndex = 3;
             this.btnEditLocation.Text = "Edit Location";
             this.btnEditLocation.UseVisualStyleBackColor = true;
             this.btnEditLocation.Click += new System.EventHandler(this.btnEditLocation_Click);
@@ -131,7 +131,7 @@
             this.btnEditYear.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditYear.Name = "btnEditYear";
             this.btnEditYear.Size = new System.Drawing.Size(148, 29);
-            this.btnEditYear.TabIndex = 7;
+            this.btnEditYear.TabIndex = 5;
             this.btnEditYear.Text = "Edit Year";
             this.btnEditYear.UseVisualStyleBackColor = true;
             this.btnEditYear.Click += new System.EventHandler(this.btnEditYear_Click);
@@ -143,7 +143,7 @@
             this.btnAddLocation.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddLocation.Name = "btnAddLocation";
             this.btnAddLocation.Size = new System.Drawing.Size(148, 29);
-            this.btnAddLocation.TabIndex = 8;
+            this.btnAddLocation.TabIndex = 4;
             this.btnAddLocation.Text = "Add Location";
             this.btnAddLocation.UseVisualStyleBackColor = true;
             this.btnAddLocation.Click += new System.EventHandler(this.btnAddLocation_Click);
@@ -155,7 +155,7 @@
             this.btnAddYear.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddYear.Name = "btnAddYear";
             this.btnAddYear.Size = new System.Drawing.Size(148, 29);
-            this.btnAddYear.TabIndex = 9;
+            this.btnAddYear.TabIndex = 6;
             this.btnAddYear.Text = "Add Year";
             this.btnAddYear.UseVisualStyleBackColor = true;
             this.btnAddYear.Click += new System.EventHandler(this.btnAddYear_Click);
@@ -167,7 +167,7 @@
             this.btnEditMonth.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditMonth.Name = "btnEditMonth";
             this.btnEditMonth.Size = new System.Drawing.Size(148, 29);
-            this.btnEditMonth.TabIndex = 10;
+            this.btnEditMonth.TabIndex = 7;
             this.btnEditMonth.Text = "Edit Month";
             this.btnEditMonth.UseVisualStyleBackColor = true;
             this.btnEditMonth.Click += new System.EventHandler(this.btnEditMonth_Click);
@@ -179,7 +179,7 @@
             this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(37, 29);
-            this.btnSearch.TabIndex = 12;
+            this.btnSearch.TabIndex = 9;
             this.btnSearch.Text = "Go";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -201,7 +201,7 @@
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(2);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(148, 29);
-            this.btnRefresh.TabIndex = 14;
+            this.btnRefresh.TabIndex = 1;
             this.btnRefresh.Text = "Refresh Report";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);

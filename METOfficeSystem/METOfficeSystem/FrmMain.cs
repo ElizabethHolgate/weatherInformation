@@ -29,11 +29,11 @@ namespace METOfficeSystem
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            setUpWeatherInfo();
+            SetUpWeatherInfo();
             showLocations();
         }
 
-        private void setUpWeatherInfo()
+        private void SetUpWeatherInfo()
         {
             string locName, locStrtNameNum, locCounty, locPostcode, locLatitude, locLongitude, yearDescription, yearID, monthID, maxTemp, minTemp, airFrostDays, mmRainfall, sunHours;
             int numLocations, numLocationYears, locArrSize;
@@ -346,13 +346,57 @@ namespace METOfficeSystem
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string userSearch;
+            string userSearch, locName, yrID;
+            bool resultFound = false, searching = true;
 
+            Location loc = new Location();
+            Year year = new Year();
             
-
             userSearch = txtSearch.Text.ToUpper();
 
+            while (searching == true)
+            {
+                for (int l = 0; l < Data.locations.Length; l++)
+                {
+                    loc = Data.locations[l];
+                    locName = loc.GetLocationName().ToUpper();
 
+                    if (userSearch == locName)
+                    {
+                        lstLocation.SelectedIndex = l;
+                        resultFound = true;
+                        searching = false;
+                    }
+
+                    //Year[] yearArr = loc.GetAllYears();
+
+                    //for (int y = 0; y < yearArr.Length; y++)
+                    //{
+                    //    year = yearArr[y];
+                    //    yrID = year.ToString().ToUpper();
+
+                    //    if (userSearch == yrID)
+                    //    {
+                    //        lstLocation.SelectedIndex = l;
+                    //        lstYear.SelectedIndex = y;
+                    //        resultFound = true;
+                    //        searching = false;
+                    //    }
+                    //}
+                }
+
+                
+            }
+            
+
+            if (resultFound == false)
+            {
+                System.Windows.Forms.MessageBox.Show("No result found");
+            }
+            else
+            {
+                txtSearch.Clear();
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
