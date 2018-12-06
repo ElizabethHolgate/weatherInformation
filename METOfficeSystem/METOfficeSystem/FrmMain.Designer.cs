@@ -42,6 +42,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.lblSeachLoc = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // lstLocation
@@ -249,6 +250,7 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label lblSeachLoc;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
     }
 }
 
