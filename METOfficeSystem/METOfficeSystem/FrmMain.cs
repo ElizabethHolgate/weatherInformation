@@ -35,18 +35,20 @@ namespace METOfficeSystem
 
         private void SetUpWeatherInfo()
         {
-            string locName, locStrtNameNum, locCounty, locPostcode, locLatitude, locLongitude, yearDescription, yearID, monthID, maxTemp, minTemp, airFrostDays, mmRainfall, sunHours;
+            string userFile, locName, locStrtNameNum, locCounty, locPostcode, locLatitude, locLongitude, yearDescription, yearID, monthID, maxTemp, minTemp, airFrostDays, mmRainfall, sunHours;
             int numLocations, numLocationYears, locArrSize;
 
             StreamReader getData = new StreamReader(@"inputEXTENDED.txt");
+            
+            //openFileDialog.ShowDialog();
+            //userFile = openFileDialog.FileName;
+            //StreamReader getData = new StreamReader(@userFile);
 
             //read number of locations in data file
             numLocations = Convert.ToInt32(getData.ReadLine());
 
             while (!getData.EndOfStream)
             {
-                //shall a put a for loop number locations <-----
-
                 //read in location data
                 locName = getData.ReadLine();
                 locStrtNameNum = getData.ReadLine();

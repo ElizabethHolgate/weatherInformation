@@ -42,7 +42,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.lblSeachLoc = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // lstLocation
@@ -207,11 +207,15 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1113, 450);
+            this.ClientSize = new System.Drawing.Size(1113, 439);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblSeachLoc);
             this.Controls.Add(this.btnSearch);
@@ -250,7 +254,7 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label lblSeachLoc;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 

@@ -10,7 +10,7 @@ namespace METOfficeSystem
     {
         private string yrDescrip;
         private string year; //change to a date/time
-        private MonthyObservations[] yrObserv;
+        private MonthyObservations[] monthObserv;
 
         public Year()
         {
@@ -25,7 +25,7 @@ namespace METOfficeSystem
         {
             year = theYear;
             yrDescrip = theYrDescript;
-            yrObserv = null;
+            monthObserv = null;
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace METOfficeSystem
         /// <returns>The yr observ.</returns>
         public MonthyObservations[] GetYrObserv()
         {
-            return yrObserv;
+            return monthObserv;
         }
 
         //SETTERS
@@ -108,7 +108,7 @@ namespace METOfficeSystem
         {
             try
             {
-                yrObserv = inYrObserv;
+                monthObserv = inYrObserv;
             }
             catch (Exception e)
             {
