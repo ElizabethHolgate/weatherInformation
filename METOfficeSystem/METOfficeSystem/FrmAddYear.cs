@@ -51,6 +51,9 @@ namespace METOfficeSystem
             Array.Resize(ref yearsArr, yearLength + 1);
             yearsArr[yearLength] = yearNew;
 
+            Data.locations[FrmMain.currentLoc].SetAllYears(yearsArr);
+            yearsArr = null;
+
             ReturnToMain();
         }
 
