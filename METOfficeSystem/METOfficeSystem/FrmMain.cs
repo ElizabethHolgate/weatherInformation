@@ -29,24 +29,26 @@ namespace METOfficeSystem
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            setUpWeatherInfo();
+            SetUpWeatherInfo();
             showLocations();
         }
 
-        private void setUpWeatherInfo()
+        private void SetUpWeatherInfo()
         {
-            string locName, locStrtNameNum, locCounty, locPostcode, locLatitude, locLongitude, yearDescription, yearID, monthID, maxTemp, minTemp, airFrostDays, mmRainfall, sunHours;
+            string userFile, locName, locStrtNameNum, locCounty, locPostcode, locLatitude, locLongitude, yearDescription, yearID, monthID, maxTemp, minTemp, airFrostDays, mmRainfall, sunHours;
             int numLocations, numLocationYears, locArrSize;
 
             StreamReader getData = new StreamReader(@"inputEXTENDED.txt");
+            
+            //openFileDialog.ShowDialog();
+            //userFile = openFileDialog.FileName;
+            //StreamReader getData = new StreamReader(@userFile);
 
             //read number of locations in data file
             numLocations = Convert.ToInt32(getData.ReadLine());
 
             while (!getData.EndOfStream)
             {
-                //shall a put a for loop number locations <-----
-
                 //read in location data
                 locName = getData.ReadLine();
                 locStrtNameNum = getData.ReadLine();
@@ -131,44 +133,69 @@ namespace METOfficeSystem
 
             lstYear.Items.Clear();
 
-            foreach (Year y in yearsInLoc)
+            if (yearsInLoc == null)
             {
-                lstYear.Items.Add(y.GetYear() + ": " + y.GetYrDescrip());
+                lstYear.Items.Add("No year data availble.");
+            }
+            else
+            {
+                foreach (Year y in yearsInLoc)
+                {
+                    lstYear.Items.Add(y.GetYear() + ": " + y.GetYrDescrip());
+                }
             }
         }
 
         private void showMonths()
         {
             Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
-            MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
-
-            lstMonths.Items.Clear();
-
-            foreach (MonthyObservations m in monthsInYear)
+            
+            if (yearsInLoc == null)
             {
-                lstMonths.Items.Add(m.GetMonthID());
+                lstMonths.Items.Add("No month ");
+                lstMonths.Items.Add("data availble.");
+            }
+            else
+            {
+                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
+
+                lstMonths.Items.Clear();
+
+                foreach (MonthyObservations m in monthsInYear)
+                {
+                    lstMonths.Items.Add("Month ID: " + m.GetMonthID());
+                }
             }
         }
 
         private void showMonthsInfo()
         {
             Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
-            MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
 
-            MonthyObservations m = monthsInYear[currentMonth];
+            if (yearsInLoc == null)
+            {
+                lstMonthInfo.Items.Add("No month data availble.");
+            }
+            else
+            {
+                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
 
-            lstMonthInfo.Items.Clear();
+                MonthyObservations m = monthsInYear[currentMonth];
 
-            lstMonthInfo.Items.Add("Month ID: " + m.GetMonthID());
-            lstMonthInfo.Items.Add("Maximum Temperature: " + m.GetMaxTemp());
-            lstMonthInfo.Items.Add("Minimum Temperature: " + m.GetMinTemp());
-            lstMonthInfo.Items.Add("Air Frost Days: " + m.GetFrostDays());
-            lstMonthInfo.Items.Add("Rainfall in mm: " + m.GetMmRainfall());
-            lstMonthInfo.Items.Add("Hours of Sunshine: " + m.GetSunHours());
+                lstMonthInfo.Items.Clear();
+
+                lstMonthInfo.Items.Add("Month ID: " + m.GetMonthID());
+                lstMonthInfo.Items.Add("Maximum Temperature: " + m.GetMaxTemp());
+                lstMonthInfo.Items.Add("Minimum Temperature: " + m.GetMinTemp());
+                lstMonthInfo.Items.Add("Air Frost Days: " + m.GetFrostDays());
+                lstMonthInfo.Items.Add("Rainfall in mm: " + m.GetMmRainfall());
+                lstMonthInfo.Items.Add("Hours of Sunshine: " + m.GetSunHours());
+            }
         }
 
         private void lstYear_SelectedIndexChanged(object sender, EventArgs e)
         {
+            currentLoc = lstLocation.SelectedIndex;
             currentYear = lstYear.SelectedIndex;
             lstMonths.Items.Clear();
             lstMonthInfo.Items.Clear();
@@ -186,6 +213,8 @@ namespace METOfficeSystem
 
         private void lstMonths_SelectedIndexChanged(object sender, EventArgs e)
         {
+            currentLoc = lstLocation.SelectedIndex;
+            currentYear = lstYear.SelectedIndex;
             currentMonth = lstMonths.SelectedIndex;
             lstMonthInfo.Items.Clear();
             showMonthsInfo();
@@ -319,13 +348,85 @@ namespace METOfficeSystem
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string userSearch;
+            string userSearch, locName, yrID;
+            bool resultFound = false, searching = true;
 
+            Location loc = new Location();
+            Year year = new Year();
+            
+            userSearch = txtSearch.Text.ToUpper();
+
+            while (searching == true)
+            {
+                for (int l = 0; l < Data.locations.Length; l++)
+                {
+                    loc = Data.locations[l];
+                    locName = loc.GetLocationName().ToUpper();
+
+                    if (userSearch == locName)
+                    {
+                        lstLocation.SelectedIndex = l;
+                        resultFound = true;
+                        searching = false;
+                    }
+
+                    //Year[] yearArr = loc.GetAllYears();
+
+                    //for (int y = 0; y < yearArr.Length; y++)
+                    //{
+                    //    year = yearArr[y];
+                    //    yrID = year.ToString().ToUpper();
+
+                    //    if (userSearch == yrID)
+                    //    {
+                    //        lstLocation.SelectedIndex = l;
+                    //        lstYear.SelectedIndex = y;
+                    //        resultFound = true;
+                    //        searching = false;
+                    //    }
+                    //}
+                }
+
+                
+            }
             
 
-            userSearch = txtSearch.Text;
+            if (resultFound == false)
+            {
+                System.Windows.Forms.MessageBox.Show("No result found");
+            }
+            else
+            {
+                txtSearch.Clear();
+            }
+        }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            currentLoc = lstLocation.SelectedIndex;
+            currentYear = lstYear.SelectedIndex;
+            currentMonth = lstMonths.SelectedIndex;
 
+            lstLocation.Items.Clear();
+            showLocations();
+
+            if (currentLoc > 0)
+            {
+                lstYear.Items.Clear();
+                showYears();
+
+                if (currentYear > 0)
+                {
+                    lstMonths.Items.Clear();
+                    showMonths();
+
+                    if (currentMonth > 0)
+                    {
+                        lstMonthInfo.Items.Clear();
+                        showMonthsInfo();
+                    }
+                }
+            }
         }
     }
 }
