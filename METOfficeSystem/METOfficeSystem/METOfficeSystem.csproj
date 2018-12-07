@@ -65,12 +65,6 @@
     <Compile Include="FrmEditLocation.Designer.cs">
       <DependentUpon>FrmEditLocation.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmEditMonth.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmEditMonth.Designer.cs">
-      <DependentUpon>FrmEditMonth.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmEditYear.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,9 +90,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEditLocation.resx">
       <DependentUpon>FrmEditLocation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmEditMonth.resx">
-      <DependentUpon>FrmEditMonth.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEditYear.resx">
       <DependentUpon>FrmEditYear.cs</DependentUpon>

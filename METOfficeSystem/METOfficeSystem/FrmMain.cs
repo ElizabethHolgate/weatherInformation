@@ -152,44 +152,26 @@ namespace METOfficeSystem
             
             if (yearsInLoc == null)
             {
-                lstMonths.Items.Add("No month ");
-                lstMonths.Items.Add("data availble.");
+                dtgMonthInfo.Rows[0].Cells[0].Value = "No month info";
             }
             else
             {
-                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
+                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetMonthObserv();
+                
+                dtgMonthInfo.Rows.Clear();
 
-                lstMonths.Items.Clear();
-
-                foreach (MonthyObservations m in monthsInYear)
+                for (int i = 0; i < monthsInYear.Length; i++)
                 {
-                    lstMonths.Items.Add("Month ID: " + m.GetMonthID());
+                    MonthyObservations m = monthsInYear[i];
+
+                    dtgMonthInfo.Rows.Add();
+                    dtgMonthInfo.Rows[i].Cells[0].Value = m.GetMonthID();
+                    dtgMonthInfo.Rows[i].Cells[1].Value = m.GetMaxTemp();
+                    dtgMonthInfo.Rows[i].Cells[2].Value = m.GetMinTemp();
+                    dtgMonthInfo.Rows[i].Cells[3].Value = m.GetFrostDays();
+                    dtgMonthInfo.Rows[i].Cells[4].Value = m.GetMmRainfall();
+                    dtgMonthInfo.Rows[i].Cells[5].Value = m.GetSunHours();
                 }
-            }
-        }
-
-        private void showMonthsInfo()
-        {
-            Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
-
-            if (yearsInLoc == null)
-            {
-                lstMonthInfo.Items.Add("No month data availble.");
-            }
-            else
-            {
-                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
-
-                MonthyObservations m = monthsInYear[currentMonth];
-
-                lstMonthInfo.Items.Clear();
-
-                lstMonthInfo.Items.Add("Month ID: " + m.GetMonthID());
-                lstMonthInfo.Items.Add("Maximum Temperature: " + m.GetMaxTemp());
-                lstMonthInfo.Items.Add("Minimum Temperature: " + m.GetMinTemp());
-                lstMonthInfo.Items.Add("Air Frost Days: " + m.GetFrostDays());
-                lstMonthInfo.Items.Add("Rainfall in mm: " + m.GetMmRainfall());
-                lstMonthInfo.Items.Add("Hours of Sunshine: " + m.GetSunHours());
             }
         }
 
@@ -197,17 +179,15 @@ namespace METOfficeSystem
         {
             currentLoc = lstLocation.SelectedIndex;
             currentYear = lstYear.SelectedIndex;
-            lstMonths.Items.Clear();
-            lstMonthInfo.Items.Clear();
             showMonths();
         }
 
         private void lstLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentLoc = lstLocation.SelectedIndex;
+            lstLocationInfo.Items.Clear();
             lstYear.Items.Clear();
-            lstMonths.Items.Clear();
-            lstMonthInfo.Items.Clear();
+            ShowLocationInfo();
             showYears();
         }
 
@@ -215,39 +195,26 @@ namespace METOfficeSystem
         {
             currentLoc = lstLocation.SelectedIndex;
             currentYear = lstYear.SelectedIndex;
-            currentMonth = lstMonths.SelectedIndex;
-            lstMonthInfo.Items.Clear();
-            showMonthsInfo();
         }
-
-        private void btnViewLocation_Click(object sender, EventArgs e)
+        
+        private void ShowLocationInfo()
         {
-            //select current location
             currentLoc = lstLocation.SelectedIndex;
 
-            if (currentLoc < 0)
-            {
-                System.Windows.Forms.MessageBox.Show("Please select the location prior to 'View Location'.");
-            }
-            else
-            {
-                Location locInfo = Data.locations[currentLoc];
+            Location locInfo = Data.locations[currentLoc];
 
-                clearLstBoxes();
+            clearLstBoxes();
 
-                lstYear.Items.Add(locInfo.GetLocationName());
-                lstYear.Items.Add("");
-                lstYear.Items.Add("Address:");
-                lstYear.Items.Add(locInfo.GetStrtName());
-                lstYear.Items.Add(locInfo.GetCounty());
-                lstYear.Items.Add(locInfo.GetPostCode());
-                lstYear.Items.Add("");
-                lstYear.Items.Add("Coordinates:");
-                lstYear.Items.Add(locInfo.GetLongitude());
-                lstYear.Items.Add(locInfo.GetLatitude());
-            }
-
-            
+            lstLocationInfo.Items.Add(locInfo.GetLocationName());
+            lstLocationInfo.Items.Add("");
+            lstLocationInfo.Items.Add("Address:");
+            lstLocationInfo.Items.Add(locInfo.GetStrtName());
+            lstLocationInfo.Items.Add(locInfo.GetCounty());
+            lstLocationInfo.Items.Add(locInfo.GetPostCode());
+            lstLocationInfo.Items.Add("");
+            lstLocationInfo.Items.Add("Coordinates:");
+            lstLocationInfo.Items.Add(locInfo.GetLongitude());
+            lstLocationInfo.Items.Add(locInfo.GetLatitude());
         }
 
         private void btnEditLocation_Click(object sender, EventArgs e)
@@ -271,8 +238,6 @@ namespace METOfficeSystem
 
         private void clearLstBoxes()
         {
-            lstMonthInfo.Items.Clear();
-            lstMonths.Items.Clear();
             lstYear.Items.Clear();
         }
 
@@ -322,27 +287,6 @@ namespace METOfficeSystem
                 KeepFrmMain.Hide();
 
                 clearLstBoxes();
-            }
-        }
-
-        private void btnEditMonth_Click(object sender, EventArgs e)
-        {
-            currentLoc = lstLocation.SelectedIndex;
-            currentYear = lstYear.SelectedIndex;
-            currentMonth = lstMonths.SelectedIndex;
-
-            if (currentYear < 0 | currentLoc < 0 | currentMonth < 0)
-            {
-                System.Windows.Forms.MessageBox.Show("Please select a location, a year and a month proir to 'Edit Month'.");
-            }
-            else
-            {
-                FrmEditMonth frmEditMonth = new FrmEditMonth();
-
-                frmEditMonth.Show();
-                KeepFrmMain.Hide();
-
-                lstMonthInfo.Items.Clear();
             }
         }
 
@@ -405,7 +349,6 @@ namespace METOfficeSystem
         {
             currentLoc = lstLocation.SelectedIndex;
             currentYear = lstYear.SelectedIndex;
-            currentMonth = lstMonths.SelectedIndex;
 
             lstLocation.Items.Clear();
             showLocations();
@@ -417,16 +360,34 @@ namespace METOfficeSystem
 
                 if (currentYear > 0)
                 {
-                    lstMonths.Items.Clear();
                     showMonths();
 
                     if (currentMonth > 0)
                     {
-                        lstMonthInfo.Items.Clear();
-                        showMonthsInfo();
+                        
                     }
                 }
             }
+        }
+
+        private void btnSaveMonth_Click(object sender, EventArgs e)
+        {
+            currentLoc = lstLocation.SelectedIndex;
+            currentYear = lstYear.SelectedIndex;
+
+            Year[] yearArray = Data.locations[currentLoc].GetAllYears();
+            MonthyObservations[] monthArray = yearArray[currentYear].GetMonthObserv();
+
+            for (int i = 0; i < monthArray.Length; i++)
+            {
+                monthArray[i].SetMonthID(dtgMonthInfo.Rows[i].Cells[0].Value.ToString());
+                monthArray[i].SetMaxTemp(dtgMonthInfo.Rows[i].Cells[1].Value.ToString());
+                monthArray[i].SetMinTemp(dtgMonthInfo.Rows[i].Cells[2].Value.ToString());
+                monthArray[i].SetFrostDays(dtgMonthInfo.Rows[i].Cells[3].Value.ToString());
+                monthArray[i].SetMmRainfall(dtgMonthInfo.Rows[i].Cells[4].Value.ToString());
+                monthArray[i].SetSunHours(dtgMonthInfo.Rows[i].Cells[5].Value.ToString());
+            }
+            
         }
     }
 }
