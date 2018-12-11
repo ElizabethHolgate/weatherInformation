@@ -59,12 +59,6 @@
     <Compile Include="FrmAddYear.Designer.cs">
       <DependentUpon>FrmAddYear.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmEditYear.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmEditYear.Designer.cs">
-      <DependentUpon>FrmEditYear.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,9 +75,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddYear.resx">
       <DependentUpon>FrmAddYear.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmEditYear.resx">
-      <DependentUpon>FrmEditYear.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>

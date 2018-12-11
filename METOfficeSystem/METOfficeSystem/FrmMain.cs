@@ -134,15 +134,25 @@ namespace METOfficeSystem
         {
             currentLoc = lstLocation.SelectedIndex;
 
-            lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLocationName());
-            lstLocationInfo.Items.Add("");
-            lstLocationInfo.Items.Add(Data.locations[currentLoc].GetStrtName());
-            lstLocationInfo.Items.Add(Data.locations[currentLoc].GetCounty());
-            lstLocationInfo.Items.Add(Data.locations[currentLoc].GetPostCode());
-            lstLocationInfo.Items.Add("");
-            lstLocationInfo.Items.Add("Coordinates:");
-            lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLatitude());
-            lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLongitude());
+            if (currentLoc < 0)
+            {
+                lstLocationInfo.Items.Add("No Location selected");
+            }
+            else
+            {
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLocationName());
+                lstLocationInfo.Items.Add("");
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetStrtName());
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetCounty());
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetPostCode());
+                lstLocationInfo.Items.Add("");
+                lstLocationInfo.Items.Add("Coordinates:");
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLatitude());
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLongitude());
+            }
+            
+
+            
         }
 
         private void ShowYears()
@@ -174,7 +184,7 @@ namespace METOfficeSystem
             }
             else
             {
-                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetMonthObserv();
+                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYearObserv();
                 
                 dtgMonthInfo.Rows.Clear();
 
@@ -195,8 +205,7 @@ namespace METOfficeSystem
 
         private void lstYear_SelectedIndexChanged(object sender, EventArgs e)
         {
-            currentLoc = lstLocation.SelectedIndex;
-            currentYear = lstYear.SelectedIndex;
+            SetCurrentYear();
             ShowMonths();
         }
 
@@ -207,12 +216,6 @@ namespace METOfficeSystem
             lstYear.Items.Clear();
             ShowLocationInfo();
             ShowYears();
-        }
-
-        private void lstMonths_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            currentLoc = lstLocation.SelectedIndex;
-            currentYear = lstYear.SelectedIndex;
         }
 
         private void btnEditLocation_Click(object sender, EventArgs e)
@@ -242,74 +245,51 @@ namespace METOfficeSystem
 
         private void ClearEditLoc()
         {
-            txtLocationName.Text = "";
-            txtStreetNameNum.Text = "";
-            txtCounty.Text = "";
-            txtPostcode.Text = "";
-            txtLatitude.Text = "";
-            txtLongitude.Text = "";
+            txtEditLocationName.Text = "";
+            txtEditStreetNameNum.Text = "";
+            txtEditCounty.Text = "";
+            txtEditPostcode.Text = "";
+            txtEditLatitude.Text = "";
+            txtEditLongitude.Text = "";
         }
 
         private void FillEditLoc(int loc)
         {
             Location editLoc = Data.locations[loc];
 
-            txtLocationName.Text = editLoc.GetLocationName();
-            txtStreetNameNum.Text = editLoc.GetStrtName();
-            txtCounty.Text = editLoc.GetCounty();
-            txtPostcode.Text = editLoc.GetPostCode();
-            txtLatitude.Text = editLoc.GetLatitude().ToString();
-            txtLongitude.Text = editLoc.GetLongitude().ToString();
+            txtEditLocationName.Text = editLoc.GetLocationName();
+            txtEditStreetNameNum.Text = editLoc.GetStrtName();
+            txtEditCounty.Text = editLoc.GetCounty();
+            txtEditPostcode.Text = editLoc.GetPostCode();
+            txtEditLatitude.Text = editLoc.GetLatitude().ToString();
+            txtEditLongitude.Text = editLoc.GetLongitude().ToString();
         }
 
         private void btnSaveLocation_Click(object sender, EventArgs e)
         {
-            Location editLoc = Data.locations[locEdit];
-
-            editLoc.SetLocationName(txtLocationName.Text);
-            editLoc.SetStrtName(txtStreetNameNum.Text);
-            editLoc.SetCounty(txtCounty.Text);
-            editLoc.SetPostCode(txtPostcode.Text);
-            editLoc.SetLatitude(txtLatitude.Text);
-            editLoc.SetLongitude(txtLongitude.Text);
-
-            Data.locations[locEdit] = editLoc;
-
+            SaveEditLocation();
             ClearEditLoc();
+            ShowLocations();
+            ShowLocationInfo();
+        }
+
+        private void SaveEditLocation()
+        {
+            Location locToEdit = Data.locations[locEdit];
+
+            locToEdit.SetLocationName(txtEditLocationName.Text);
+            locToEdit.SetStrtName(txtEditStreetNameNum.Text);
+            locToEdit.SetCounty(txtEditCounty.Text);
+            locToEdit.SetPostCode(txtEditPostcode.Text);
+            locToEdit.SetLatitude(txtEditLatitude.Text);
+            locToEdit.SetLongitude(txtEditLongitude.Text);
+
+            Data.locations[locEdit] = locToEdit;
         }
 
         private void clearLstBoxes()
         {
             lstYear.Items.Clear();
-        }
-
-        private void btnAddLocation_Click(object sender, EventArgs e)
-        {
-            FrmAddLocation frmAddLocation = new FrmAddLocation();
-
-            frmAddLocation.Show();
-            KeepFrmMain.Hide();
-
-            clearLstBoxes();
-        }
-
-        private void btnEditYear_Click(object sender, EventArgs e)
-        {
-            SetCurrentYear();
-
-            if (currentYear < 0 | currentLoc < 0)
-            {
-                System.Windows.Forms.MessageBox.Show("Please select a location and a year proir to 'Edit Year'.");
-            }
-            else if (currentYear > -1 & currentLoc > -1)
-            {
-                FrmEditYear frmEditYear = new FrmEditYear();
-
-                frmEditYear.Show();
-                KeepFrmMain.Hide();
-
-                clearLstBoxes();
-            }
         }
 
         private void btnAddYear_Click(object sender, EventArgs e)
@@ -386,10 +366,9 @@ namespace METOfficeSystem
             }
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private void RefreshLists()
         {
-            currentLoc = lstLocation.SelectedIndex;
-            currentYear = lstYear.SelectedIndex;
+            SetCurrentYear();
 
             lstLocation.Items.Clear();
             ShowLocations();
@@ -405,10 +384,15 @@ namespace METOfficeSystem
 
                     if (currentMonth > 0)
                     {
-                        
+
                     }
                 }
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshLists();
         }
 
         private void SetCurrentYear()
@@ -420,9 +404,13 @@ namespace METOfficeSystem
         private void btnSaveMonth_Click(object sender, EventArgs e)
         {
             SetCurrentYear();
+            SaveMonthEdit();
+        }
 
+        private void SaveMonthEdit()
+        {
             Year[] yearArray = Data.locations[currentLoc].GetAllYears();
-            MonthyObservations[] monthArray = yearArray[currentYear].GetMonthObserv();
+            MonthyObservations[] monthArray = yearArray[currentYear].GetYearObserv();
 
             for (int i = 0; i < monthArray.Length; i++)
             {
@@ -433,12 +421,26 @@ namespace METOfficeSystem
                 monthArray[i].SetMmRainfall(dtgMonthInfo.Rows[i].Cells[4].Value.ToString());
                 monthArray[i].SetSunHours(dtgMonthInfo.Rows[i].Cells[5].Value.ToString());
             }
-            
+
+            yearArray[currentYear].SetYrObserv(monthArray);
+            Data.locations[currentLoc].SetAllYears(yearArray);
+        }
+
+        private void SetEditYear()
+        {
+            locEdit = lstLocation.SelectedIndex;
+            yearEdit = lstYear.SelectedIndex;
+        }
+
+        private void ResetEditYear()
+        {
+            locEdit = -1;
+            yearEdit = -1;
         }
 
         private void btnYearEdit_Click(object sender, EventArgs e)
         {
-            SetCurrentYear();
+            SetEditYear();
 
             if (yearEdit < 0 | locEdit < 0)
             {
@@ -453,6 +455,8 @@ namespace METOfficeSystem
         private void btnYearSave_Click(object sender, EventArgs e)
         {
             SaveEditYear();
+            ResetEditYear();
+            RefreshLists();
         }
 
         private void SaveEditYear()
@@ -461,6 +465,12 @@ namespace METOfficeSystem
             Year editYear = yearArray[yearEdit];
 
             editYear.SetYrDescrip(txtYearDescrip.Text);
+
+            yearArray[yearEdit] = editYear;
+            Data.locations[locEdit].SetAllYears(yearArray);
+
+            ClearEditYear();
+            RefreshLists();
         }
 
         private void btnYearReset_Click(object sender, EventArgs e)
@@ -471,6 +481,7 @@ namespace METOfficeSystem
         private void btnYearCancel_Click(object sender, EventArgs e)
         {
             ClearEditYear();
+            ResetEditYear();
         }
 
         private void ClearEditYear()
@@ -486,6 +497,70 @@ namespace METOfficeSystem
 
             lblYearID.Text = editYear.GetYear();
             txtYearDescrip.Text = editYear.GetYrDescrip();
+        }
+
+        private void btnLocAdd_Click(object sender, EventArgs e)
+        {
+            AddLocation();
+            ClearAddLocation();
+            RefreshLists();
+        }
+
+        private void ClearAddLocation()
+        {
+            txtAddLocationName.Text = "";
+            txtAddStrtNameNum.Text = "";
+            txtAddCounty.Text = "";
+            txtAddPostcode.Text = "";
+            txtAddLatitude.Text = "";
+            txtAddLongitude.Text = "";
+        }
+
+        private void AddLocation()
+        {
+            int locArrLength;
+
+            Location newLoc = new Location(txtAddLocationName.Text, txtAddStrtNameNum.Text, txtAddCounty.Text, txtAddPostcode.Text, txtAddLatitude.Text, txtAddLongitude.Text);
+
+            locArrLength = Data.locations.Length;
+            Array.Resize(ref Data.locations, locArrLength + 1);
+            Data.locations[locArrLength] = newLoc;
+        }
+
+        private void btnLocCancelAdd_Click(object sender, EventArgs e)
+        {
+            ClearLocAdd();
+        }
+
+        private void ClearLocAdd()
+        {
+            txtAddLocationName.Text = "";
+            txtAddStrtNameNum.Text = "";
+            txtAddCounty.Text = "";
+            txtAddPostcode.Text = "";
+            txtAddLatitude.Text = "";
+            txtAddLongitude.Text = "";
+        }
+
+        private void btnYearAdd_Click(object sender, EventArgs e)
+        {
+            locEdit = lstLocation.SelectedIndex;
+
+            if (locEdit < 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Please select location to add year to.");
+            }
+            else
+            {
+                AddYear();
+            }
+        }
+
+        private void AddYear()
+        {
+            int yearArrLength;
+
+
         }
     }
 }

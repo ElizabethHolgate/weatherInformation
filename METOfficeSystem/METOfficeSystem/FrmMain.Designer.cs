@@ -32,8 +32,6 @@
             this.lstYear = new System.Windows.Forms.ListBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnLocEdit = new System.Windows.Forms.Button();
-            this.btnEditYear = new System.Windows.Forms.Button();
-            this.btnAddLocation = new System.Windows.Forms.Button();
             this.btnAddYear = new System.Windows.Forms.Button();
             this.btnEditMonth = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -49,22 +47,22 @@
             this.colSunshine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSaveMonth = new System.Windows.Forms.Button();
             this.lstLocationInfo = new System.Windows.Forms.ListBox();
-            this.txtLongitude = new System.Windows.Forms.TextBox();
+            this.txtEditLongitude = new System.Windows.Forms.TextBox();
             this.lblLong = new System.Windows.Forms.Label();
-            this.txtLatitude = new System.Windows.Forms.TextBox();
+            this.txtEditLatitude = new System.Windows.Forms.TextBox();
             this.lblLat = new System.Windows.Forms.Label();
-            this.txtPostcode = new System.Windows.Forms.TextBox();
+            this.txtEditPostcode = new System.Windows.Forms.TextBox();
             this.lblPostcode = new System.Windows.Forms.Label();
-            this.txtCounty = new System.Windows.Forms.TextBox();
+            this.txtEditCounty = new System.Windows.Forms.TextBox();
             this.lblCounty = new System.Windows.Forms.Label();
             this.lblStrtNameNum = new System.Windows.Forms.Label();
             this.lblLocationName = new System.Windows.Forms.Label();
-            this.txtStreetNameNum = new System.Windows.Forms.TextBox();
-            this.txtLocationName = new System.Windows.Forms.TextBox();
+            this.txtEditStreetNameNum = new System.Windows.Forms.TextBox();
+            this.txtEditLocationName = new System.Windows.Forms.TextBox();
             this.grpEditLocation = new System.Windows.Forms.GroupBox();
-            this.btnLocCancel = new System.Windows.Forms.Button();
-            this.btnLocReset = new System.Windows.Forms.Button();
-            this.btnLocSave = new System.Windows.Forms.Button();
+            this.btnLocCancelEdit = new System.Windows.Forms.Button();
+            this.btnLocResetEdit = new System.Windows.Forms.Button();
+            this.btnLocSaveEdit = new System.Windows.Forms.Button();
             this.lblYearID = new System.Windows.Forms.Label();
             this.lblYearDescript = new System.Windows.Forms.Label();
             this.txtYearDescrip = new System.Windows.Forms.TextBox();
@@ -74,9 +72,33 @@
             this.btnYearReset = new System.Windows.Forms.Button();
             this.btnYearEdit = new System.Windows.Forms.Button();
             this.btnYearSave = new System.Windows.Forms.Button();
+            this.grpAddLocation = new System.Windows.Forms.GroupBox();
+            this.btnLocCancelAdd = new System.Windows.Forms.Button();
+            this.txtAddLocationName = new System.Windows.Forms.TextBox();
+            this.lblLocNameAdd = new System.Windows.Forms.Label();
+            this.lblLongAdd = new System.Windows.Forms.Label();
+            this.txtAddLongitude = new System.Windows.Forms.TextBox();
+            this.lblLatAdd = new System.Windows.Forms.Label();
+            this.lblPostcodeAdd = new System.Windows.Forms.Label();
+            this.lblStrtNameNumAdd = new System.Windows.Forms.Label();
+            this.lblCountyAdd = new System.Windows.Forms.Label();
+            this.txtAddLatitude = new System.Windows.Forms.TextBox();
+            this.txtAddStrtNameNum = new System.Windows.Forms.TextBox();
+            this.txtAddCounty = new System.Windows.Forms.TextBox();
+            this.btnLocAdd = new System.Windows.Forms.Button();
+            this.txtAddPostcode = new System.Windows.Forms.TextBox();
+            this.lblAddYearDescrip = new System.Windows.Forms.Label();
+            this.txtAddYearDescrip = new System.Windows.Forms.TextBox();
+            this.lblAddYearID = new System.Windows.Forms.Label();
+            this.grpAddYear = new System.Windows.Forms.GroupBox();
+            this.btnYearAdd = new System.Windows.Forms.Button();
+            this.btnYearCancelAdd = new System.Windows.Forms.Button();
+            this.txtAddYearID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtgMonthInfo)).BeginInit();
             this.grpEditLocation.SuspendLayout();
             this.grpEditYear.SuspendLayout();
+            this.grpAddLocation.SuspendLayout();
+            this.grpAddYear.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstLocation
@@ -124,34 +146,10 @@
             this.btnLocEdit.UseVisualStyleBackColor = true;
             this.btnLocEdit.Click += new System.EventHandler(this.btnEditLocation_Click);
             // 
-            // btnEditYear
-            // 
-            this.btnEditYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditYear.Location = new System.Drawing.Point(795, 648);
-            this.btnEditYear.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEditYear.Name = "btnEditYear";
-            this.btnEditYear.Size = new System.Drawing.Size(148, 29);
-            this.btnEditYear.TabIndex = 5;
-            this.btnEditYear.Text = "Edit Year";
-            this.btnEditYear.UseVisualStyleBackColor = true;
-            this.btnEditYear.Click += new System.EventHandler(this.btnEditYear_Click);
-            // 
-            // btnAddLocation
-            // 
-            this.btnAddLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddLocation.Location = new System.Drawing.Point(795, 595);
-            this.btnAddLocation.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAddLocation.Name = "btnAddLocation";
-            this.btnAddLocation.Size = new System.Drawing.Size(148, 29);
-            this.btnAddLocation.TabIndex = 4;
-            this.btnAddLocation.Text = "Add Location";
-            this.btnAddLocation.UseVisualStyleBackColor = true;
-            this.btnAddLocation.Click += new System.EventHandler(this.btnAddLocation_Click);
-            // 
             // btnAddYear
             // 
             this.btnAddYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddYear.Location = new System.Drawing.Point(795, 682);
+            this.btnAddYear.Location = new System.Drawing.Point(577, 589);
             this.btnAddYear.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddYear.Name = "btnAddYear";
             this.btnAddYear.Size = new System.Drawing.Size(148, 29);
@@ -192,7 +190,7 @@
             // btnRefresh
             // 
             this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Location = new System.Drawing.Point(201, 698);
+            this.btnRefresh.Location = new System.Drawing.Point(339, 584);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(2);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(148, 29);
@@ -255,7 +253,7 @@
             // btnSaveMonth
             // 
             this.btnSaveMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveMonth.Location = new System.Drawing.Point(17, 726);
+            this.btnSaveMonth.Location = new System.Drawing.Point(45, 184);
             this.btnSaveMonth.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveMonth.Name = "btnSaveMonth";
             this.btnSaveMonth.Size = new System.Drawing.Size(148, 29);
@@ -275,14 +273,14 @@
             this.lstLocationInfo.Size = new System.Drawing.Size(321, 204);
             this.lstLocationInfo.TabIndex = 17;
             // 
-            // txtLongitude
+            // txtEditLongitude
             // 
-            this.txtLongitude.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLongitude.Location = new System.Drawing.Point(205, 174);
-            this.txtLongitude.Margin = new System.Windows.Forms.Padding(2);
-            this.txtLongitude.Name = "txtLongitude";
-            this.txtLongitude.Size = new System.Drawing.Size(121, 26);
-            this.txtLongitude.TabIndex = 29;
+            this.txtEditLongitude.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEditLongitude.Location = new System.Drawing.Point(205, 174);
+            this.txtEditLongitude.Margin = new System.Windows.Forms.Padding(2);
+            this.txtEditLongitude.Name = "txtEditLongitude";
+            this.txtEditLongitude.Size = new System.Drawing.Size(121, 26);
+            this.txtEditLongitude.TabIndex = 29;
             // 
             // lblLong
             // 
@@ -295,14 +293,14 @@
             this.lblLong.TabIndex = 28;
             this.lblLong.Text = "Longitude:";
             // 
-            // txtLatitude
+            // txtEditLatitude
             // 
-            this.txtLatitude.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLatitude.Location = new System.Drawing.Point(205, 144);
-            this.txtLatitude.Margin = new System.Windows.Forms.Padding(2);
-            this.txtLatitude.Name = "txtLatitude";
-            this.txtLatitude.Size = new System.Drawing.Size(121, 26);
-            this.txtLatitude.TabIndex = 27;
+            this.txtEditLatitude.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEditLatitude.Location = new System.Drawing.Point(205, 144);
+            this.txtEditLatitude.Margin = new System.Windows.Forms.Padding(2);
+            this.txtEditLatitude.Name = "txtEditLatitude";
+            this.txtEditLatitude.Size = new System.Drawing.Size(121, 26);
+            this.txtEditLatitude.TabIndex = 27;
             // 
             // lblLat
             // 
@@ -315,14 +313,14 @@
             this.lblLat.TabIndex = 26;
             this.lblLat.Text = "Latitude:";
             // 
-            // txtPostcode
+            // txtEditPostcode
             // 
-            this.txtPostcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPostcode.Location = new System.Drawing.Point(205, 114);
-            this.txtPostcode.Margin = new System.Windows.Forms.Padding(2);
-            this.txtPostcode.Name = "txtPostcode";
-            this.txtPostcode.Size = new System.Drawing.Size(121, 26);
-            this.txtPostcode.TabIndex = 25;
+            this.txtEditPostcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEditPostcode.Location = new System.Drawing.Point(205, 114);
+            this.txtEditPostcode.Margin = new System.Windows.Forms.Padding(2);
+            this.txtEditPostcode.Name = "txtEditPostcode";
+            this.txtEditPostcode.Size = new System.Drawing.Size(121, 26);
+            this.txtEditPostcode.TabIndex = 25;
             // 
             // lblPostcode
             // 
@@ -335,14 +333,14 @@
             this.lblPostcode.TabIndex = 24;
             this.lblPostcode.Text = "Post code:";
             // 
-            // txtCounty
+            // txtEditCounty
             // 
-            this.txtCounty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCounty.Location = new System.Drawing.Point(205, 84);
-            this.txtCounty.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCounty.Name = "txtCounty";
-            this.txtCounty.Size = new System.Drawing.Size(190, 26);
-            this.txtCounty.TabIndex = 23;
+            this.txtEditCounty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEditCounty.Location = new System.Drawing.Point(205, 84);
+            this.txtEditCounty.Margin = new System.Windows.Forms.Padding(2);
+            this.txtEditCounty.Name = "txtEditCounty";
+            this.txtEditCounty.Size = new System.Drawing.Size(190, 26);
+            this.txtEditCounty.TabIndex = 23;
             // 
             // lblCounty
             // 
@@ -377,42 +375,42 @@
             this.lblLocationName.TabIndex = 20;
             this.lblLocationName.Text = "Location Name:";
             // 
-            // txtStreetNameNum
+            // txtEditStreetNameNum
             // 
-            this.txtStreetNameNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStreetNameNum.Location = new System.Drawing.Point(205, 54);
-            this.txtStreetNameNum.Margin = new System.Windows.Forms.Padding(2);
-            this.txtStreetNameNum.Name = "txtStreetNameNum";
-            this.txtStreetNameNum.Size = new System.Drawing.Size(303, 26);
-            this.txtStreetNameNum.TabIndex = 19;
+            this.txtEditStreetNameNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEditStreetNameNum.Location = new System.Drawing.Point(205, 54);
+            this.txtEditStreetNameNum.Margin = new System.Windows.Forms.Padding(2);
+            this.txtEditStreetNameNum.Name = "txtEditStreetNameNum";
+            this.txtEditStreetNameNum.Size = new System.Drawing.Size(303, 26);
+            this.txtEditStreetNameNum.TabIndex = 19;
             // 
-            // txtLocationName
+            // txtEditLocationName
             // 
-            this.txtLocationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLocationName.Location = new System.Drawing.Point(205, 24);
-            this.txtLocationName.Margin = new System.Windows.Forms.Padding(2);
-            this.txtLocationName.Name = "txtLocationName";
-            this.txtLocationName.Size = new System.Drawing.Size(248, 26);
-            this.txtLocationName.TabIndex = 18;
+            this.txtEditLocationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEditLocationName.Location = new System.Drawing.Point(205, 24);
+            this.txtEditLocationName.Margin = new System.Windows.Forms.Padding(2);
+            this.txtEditLocationName.Name = "txtEditLocationName";
+            this.txtEditLocationName.Size = new System.Drawing.Size(248, 26);
+            this.txtEditLocationName.TabIndex = 18;
             // 
             // grpEditLocation
             // 
-            this.grpEditLocation.Controls.Add(this.btnLocCancel);
-            this.grpEditLocation.Controls.Add(this.btnLocReset);
-            this.grpEditLocation.Controls.Add(this.txtLocationName);
+            this.grpEditLocation.Controls.Add(this.btnLocCancelEdit);
+            this.grpEditLocation.Controls.Add(this.btnLocResetEdit);
+            this.grpEditLocation.Controls.Add(this.txtEditLocationName);
             this.grpEditLocation.Controls.Add(this.lblLocationName);
             this.grpEditLocation.Controls.Add(this.lblLong);
-            this.grpEditLocation.Controls.Add(this.txtLongitude);
+            this.grpEditLocation.Controls.Add(this.txtEditLongitude);
             this.grpEditLocation.Controls.Add(this.lblLat);
-            this.grpEditLocation.Controls.Add(this.btnLocSave);
+            this.grpEditLocation.Controls.Add(this.btnLocSaveEdit);
             this.grpEditLocation.Controls.Add(this.lblPostcode);
             this.grpEditLocation.Controls.Add(this.lblStrtNameNum);
             this.grpEditLocation.Controls.Add(this.lblCounty);
-            this.grpEditLocation.Controls.Add(this.txtLatitude);
-            this.grpEditLocation.Controls.Add(this.txtStreetNameNum);
-            this.grpEditLocation.Controls.Add(this.txtCounty);
+            this.grpEditLocation.Controls.Add(this.txtEditLatitude);
+            this.grpEditLocation.Controls.Add(this.txtEditStreetNameNum);
+            this.grpEditLocation.Controls.Add(this.txtEditCounty);
             this.grpEditLocation.Controls.Add(this.btnLocEdit);
-            this.grpEditLocation.Controls.Add(this.txtPostcode);
+            this.grpEditLocation.Controls.Add(this.txtEditPostcode);
             this.grpEditLocation.Location = new System.Drawing.Point(968, 34);
             this.grpEditLocation.Name = "grpEditLocation";
             this.grpEditLocation.Size = new System.Drawing.Size(515, 261);
@@ -420,41 +418,41 @@
             this.grpEditLocation.TabStop = false;
             this.grpEditLocation.Text = "Edit Location";
             // 
-            // btnLocCancel
+            // btnLocCancelEdit
             // 
-            this.btnLocCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLocCancel.Location = new System.Drawing.Point(386, 220);
-            this.btnLocCancel.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLocCancel.Name = "btnLocCancel";
-            this.btnLocCancel.Size = new System.Drawing.Size(122, 36);
-            this.btnLocCancel.TabIndex = 43;
-            this.btnLocCancel.Text = "Cancel";
-            this.btnLocCancel.UseVisualStyleBackColor = true;
-            this.btnLocCancel.Click += new System.EventHandler(this.btnLocCancel_Click);
+            this.btnLocCancelEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLocCancelEdit.Location = new System.Drawing.Point(386, 220);
+            this.btnLocCancelEdit.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLocCancelEdit.Name = "btnLocCancelEdit";
+            this.btnLocCancelEdit.Size = new System.Drawing.Size(122, 36);
+            this.btnLocCancelEdit.TabIndex = 43;
+            this.btnLocCancelEdit.Text = "Cancel";
+            this.btnLocCancelEdit.UseVisualStyleBackColor = true;
+            this.btnLocCancelEdit.Click += new System.EventHandler(this.btnLocCancel_Click);
             // 
-            // btnLocReset
+            // btnLocResetEdit
             // 
-            this.btnLocReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLocReset.Location = new System.Drawing.Point(257, 220);
-            this.btnLocReset.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLocReset.Name = "btnLocReset";
-            this.btnLocReset.Size = new System.Drawing.Size(125, 36);
-            this.btnLocReset.TabIndex = 32;
-            this.btnLocReset.Text = "Reset Location";
-            this.btnLocReset.UseVisualStyleBackColor = true;
-            this.btnLocReset.Click += new System.EventHandler(this.btnLocReset_Click);
+            this.btnLocResetEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLocResetEdit.Location = new System.Drawing.Point(257, 220);
+            this.btnLocResetEdit.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLocResetEdit.Name = "btnLocResetEdit";
+            this.btnLocResetEdit.Size = new System.Drawing.Size(125, 36);
+            this.btnLocResetEdit.TabIndex = 32;
+            this.btnLocResetEdit.Text = "Reset Location";
+            this.btnLocResetEdit.UseVisualStyleBackColor = true;
+            this.btnLocResetEdit.Click += new System.EventHandler(this.btnLocReset_Click);
             // 
-            // btnLocSave
+            // btnLocSaveEdit
             // 
-            this.btnLocSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLocSave.Location = new System.Drawing.Point(131, 220);
-            this.btnLocSave.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLocSave.Name = "btnLocSave";
-            this.btnLocSave.Size = new System.Drawing.Size(122, 36);
-            this.btnLocSave.TabIndex = 31;
-            this.btnLocSave.Text = "Save Location";
-            this.btnLocSave.UseVisualStyleBackColor = true;
-            this.btnLocSave.Click += new System.EventHandler(this.btnSaveLocation_Click);
+            this.btnLocSaveEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLocSaveEdit.Location = new System.Drawing.Point(131, 220);
+            this.btnLocSaveEdit.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLocSaveEdit.Name = "btnLocSaveEdit";
+            this.btnLocSaveEdit.Size = new System.Drawing.Size(122, 36);
+            this.btnLocSaveEdit.TabIndex = 31;
+            this.btnLocSaveEdit.Text = "Save Location";
+            this.btnLocSaveEdit.UseVisualStyleBackColor = true;
+            this.btnLocSaveEdit.Click += new System.EventHandler(this.btnSaveLocation_Click);
             // 
             // lblYearID
             // 
@@ -563,11 +561,258 @@
             this.btnYearSave.UseVisualStyleBackColor = true;
             this.btnYearSave.Click += new System.EventHandler(this.btnYearSave_Click);
             // 
+            // grpAddLocation
+            // 
+            this.grpAddLocation.Controls.Add(this.btnLocCancelAdd);
+            this.grpAddLocation.Controls.Add(this.txtAddLocationName);
+            this.grpAddLocation.Controls.Add(this.lblLocNameAdd);
+            this.grpAddLocation.Controls.Add(this.lblLongAdd);
+            this.grpAddLocation.Controls.Add(this.txtAddLongitude);
+            this.grpAddLocation.Controls.Add(this.lblLatAdd);
+            this.grpAddLocation.Controls.Add(this.lblPostcodeAdd);
+            this.grpAddLocation.Controls.Add(this.lblStrtNameNumAdd);
+            this.grpAddLocation.Controls.Add(this.lblCountyAdd);
+            this.grpAddLocation.Controls.Add(this.txtAddLatitude);
+            this.grpAddLocation.Controls.Add(this.txtAddStrtNameNum);
+            this.grpAddLocation.Controls.Add(this.txtAddCounty);
+            this.grpAddLocation.Controls.Add(this.txtAddPostcode);
+            this.grpAddLocation.Controls.Add(this.btnLocAdd);
+            this.grpAddLocation.Location = new System.Drawing.Point(969, 445);
+            this.grpAddLocation.Name = "grpAddLocation";
+            this.grpAddLocation.Size = new System.Drawing.Size(514, 259);
+            this.grpAddLocation.TabIndex = 43;
+            this.grpAddLocation.TabStop = false;
+            this.grpAddLocation.Text = "Add Location";
+            // 
+            // btnLocCancelAdd
+            // 
+            this.btnLocCancelAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLocCancelAdd.Location = new System.Drawing.Point(385, 218);
+            this.btnLocCancelAdd.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLocCancelAdd.Name = "btnLocCancelAdd";
+            this.btnLocCancelAdd.Size = new System.Drawing.Size(122, 36);
+            this.btnLocCancelAdd.TabIndex = 59;
+            this.btnLocCancelAdd.Text = "Cancel";
+            this.btnLocCancelAdd.UseVisualStyleBackColor = true;
+            this.btnLocCancelAdd.Click += new System.EventHandler(this.btnLocCancelAdd_Click);
+            // 
+            // txtAddLocationName
+            // 
+            this.txtAddLocationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddLocationName.Location = new System.Drawing.Point(204, 22);
+            this.txtAddLocationName.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAddLocationName.Name = "txtAddLocationName";
+            this.txtAddLocationName.Size = new System.Drawing.Size(248, 26);
+            this.txtAddLocationName.TabIndex = 45;
+            // 
+            // lblLocNameAdd
+            // 
+            this.lblLocNameAdd.AutoSize = true;
+            this.lblLocNameAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLocNameAdd.Location = new System.Drawing.Point(80, 28);
+            this.lblLocNameAdd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLocNameAdd.Name = "lblLocNameAdd";
+            this.lblLocNameAdd.Size = new System.Drawing.Size(120, 20);
+            this.lblLocNameAdd.TabIndex = 47;
+            this.lblLocNameAdd.Text = "Location Name:";
+            // 
+            // lblLongAdd
+            // 
+            this.lblLongAdd.AutoSize = true;
+            this.lblLongAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLongAdd.Location = new System.Drawing.Point(116, 178);
+            this.lblLongAdd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLongAdd.Name = "lblLongAdd";
+            this.lblLongAdd.Size = new System.Drawing.Size(84, 20);
+            this.lblLongAdd.TabIndex = 55;
+            this.lblLongAdd.Text = "Longitude:";
+            // 
+            // txtAddLongitude
+            // 
+            this.txtAddLongitude.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddLongitude.Location = new System.Drawing.Point(204, 172);
+            this.txtAddLongitude.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAddLongitude.Name = "txtAddLongitude";
+            this.txtAddLongitude.Size = new System.Drawing.Size(121, 26);
+            this.txtAddLongitude.TabIndex = 56;
+            // 
+            // lblLatAdd
+            // 
+            this.lblLatAdd.AutoSize = true;
+            this.lblLatAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLatAdd.Location = new System.Drawing.Point(129, 148);
+            this.lblLatAdd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLatAdd.Name = "lblLatAdd";
+            this.lblLatAdd.Size = new System.Drawing.Size(71, 20);
+            this.lblLatAdd.TabIndex = 53;
+            this.lblLatAdd.Text = "Latitude:";
+            // 
+            // lblPostcodeAdd
+            // 
+            this.lblPostcodeAdd.AutoSize = true;
+            this.lblPostcodeAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPostcodeAdd.Location = new System.Drawing.Point(116, 118);
+            this.lblPostcodeAdd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPostcodeAdd.Name = "lblPostcodeAdd";
+            this.lblPostcodeAdd.Size = new System.Drawing.Size(84, 20);
+            this.lblPostcodeAdd.TabIndex = 51;
+            this.lblPostcodeAdd.Text = "Post code:";
+            // 
+            // lblStrtNameNumAdd
+            // 
+            this.lblStrtNameNumAdd.AutoSize = true;
+            this.lblStrtNameNumAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStrtNameNumAdd.Location = new System.Drawing.Point(6, 58);
+            this.lblStrtNameNumAdd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblStrtNameNumAdd.Name = "lblStrtNameNumAdd";
+            this.lblStrtNameNumAdd.Size = new System.Drawing.Size(194, 20);
+            this.lblStrtNameNumAdd.TabIndex = 48;
+            this.lblStrtNameNumAdd.Text = "Street Number and Name:";
+            // 
+            // lblCountyAdd
+            // 
+            this.lblCountyAdd.AutoSize = true;
+            this.lblCountyAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountyAdd.Location = new System.Drawing.Point(137, 88);
+            this.lblCountyAdd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCountyAdd.Name = "lblCountyAdd";
+            this.lblCountyAdd.Size = new System.Drawing.Size(63, 20);
+            this.lblCountyAdd.TabIndex = 49;
+            this.lblCountyAdd.Text = "County:";
+            // 
+            // txtAddLatitude
+            // 
+            this.txtAddLatitude.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddLatitude.Location = new System.Drawing.Point(204, 142);
+            this.txtAddLatitude.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAddLatitude.Name = "txtAddLatitude";
+            this.txtAddLatitude.Size = new System.Drawing.Size(121, 26);
+            this.txtAddLatitude.TabIndex = 54;
+            // 
+            // txtAddStrtNameNum
+            // 
+            this.txtAddStrtNameNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddStrtNameNum.Location = new System.Drawing.Point(204, 52);
+            this.txtAddStrtNameNum.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAddStrtNameNum.Name = "txtAddStrtNameNum";
+            this.txtAddStrtNameNum.Size = new System.Drawing.Size(303, 26);
+            this.txtAddStrtNameNum.TabIndex = 46;
+            // 
+            // txtAddCounty
+            // 
+            this.txtAddCounty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddCounty.Location = new System.Drawing.Point(204, 82);
+            this.txtAddCounty.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAddCounty.Name = "txtAddCounty";
+            this.txtAddCounty.Size = new System.Drawing.Size(190, 26);
+            this.txtAddCounty.TabIndex = 50;
+            // 
+            // btnLocAdd
+            // 
+            this.btnLocAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLocAdd.Location = new System.Drawing.Point(259, 218);
+            this.btnLocAdd.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLocAdd.Name = "btnLocAdd";
+            this.btnLocAdd.Size = new System.Drawing.Size(122, 36);
+            this.btnLocAdd.TabIndex = 44;
+            this.btnLocAdd.Text = "Add Location";
+            this.btnLocAdd.UseVisualStyleBackColor = true;
+            this.btnLocAdd.Click += new System.EventHandler(this.btnLocAdd_Click);
+            // 
+            // txtAddPostcode
+            // 
+            this.txtAddPostcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddPostcode.Location = new System.Drawing.Point(204, 112);
+            this.txtAddPostcode.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAddPostcode.Name = "txtAddPostcode";
+            this.txtAddPostcode.Size = new System.Drawing.Size(121, 26);
+            this.txtAddPostcode.TabIndex = 52;
+            // 
+            // lblAddYearDescrip
+            // 
+            this.lblAddYearDescrip.AutoSize = true;
+            this.lblAddYearDescrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAddYearDescrip.Location = new System.Drawing.Point(7, 51);
+            this.lblAddYearDescrip.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblAddYearDescrip.Name = "lblAddYearDescrip";
+            this.lblAddYearDescrip.Size = new System.Drawing.Size(131, 20);
+            this.lblAddYearDescrip.TabIndex = 46;
+            this.lblAddYearDescrip.Text = "Year Description:";
+            // 
+            // txtAddYearDescrip
+            // 
+            this.txtAddYearDescrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddYearDescrip.Location = new System.Drawing.Point(142, 48);
+            this.txtAddYearDescrip.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAddYearDescrip.Name = "txtAddYearDescrip";
+            this.txtAddYearDescrip.Size = new System.Drawing.Size(366, 26);
+            this.txtAddYearDescrip.TabIndex = 45;
+            // 
+            // lblAddYearID
+            // 
+            this.lblAddYearID.AutoSize = true;
+            this.lblAddYearID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAddYearID.Location = new System.Drawing.Point(70, 26);
+            this.lblAddYearID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblAddYearID.Name = "lblAddYearID";
+            this.lblAddYearID.Size = new System.Drawing.Size(68, 20);
+            this.lblAddYearID.TabIndex = 44;
+            this.lblAddYearID.Text = "Year ID:";
+            // 
+            // grpAddYear
+            // 
+            this.grpAddYear.Controls.Add(this.txtAddYearID);
+            this.grpAddYear.Controls.Add(this.btnYearCancelAdd);
+            this.grpAddYear.Controls.Add(this.btnYearAdd);
+            this.grpAddYear.Controls.Add(this.lblAddYearID);
+            this.grpAddYear.Controls.Add(this.txtAddYearDescrip);
+            this.grpAddYear.Controls.Add(this.lblAddYearDescrip);
+            this.grpAddYear.Location = new System.Drawing.Point(968, 710);
+            this.grpAddYear.Name = "grpAddYear";
+            this.grpAddYear.Size = new System.Drawing.Size(515, 132);
+            this.grpAddYear.TabIndex = 48;
+            this.grpAddYear.TabStop = false;
+            this.grpAddYear.Text = "Add Year";
+            // 
+            // btnYearAdd
+            // 
+            this.btnYearAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnYearAdd.Location = new System.Drawing.Point(262, 91);
+            this.btnYearAdd.Margin = new System.Windows.Forms.Padding(2);
+            this.btnYearAdd.Name = "btnYearAdd";
+            this.btnYearAdd.Size = new System.Drawing.Size(122, 36);
+            this.btnYearAdd.TabIndex = 49;
+            this.btnYearAdd.Text = "Add Year";
+            this.btnYearAdd.UseVisualStyleBackColor = true;
+            this.btnYearAdd.Click += new System.EventHandler(this.btnYearAdd_Click);
+            // 
+            // btnYearCancelAdd
+            // 
+            this.btnYearCancelAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnYearCancelAdd.Location = new System.Drawing.Point(388, 91);
+            this.btnYearCancelAdd.Margin = new System.Windows.Forms.Padding(2);
+            this.btnYearCancelAdd.Name = "btnYearCancelAdd";
+            this.btnYearCancelAdd.Size = new System.Drawing.Size(122, 36);
+            this.btnYearCancelAdd.TabIndex = 60;
+            this.btnYearCancelAdd.Text = "Cancel";
+            this.btnYearCancelAdd.UseVisualStyleBackColor = true;
+            // 
+            // txtAddYearID
+            // 
+            this.txtAddYearID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddYearID.Location = new System.Drawing.Point(142, 18);
+            this.txtAddYearID.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAddYearID.Name = "txtAddYearID";
+            this.txtAddYearID.Size = new System.Drawing.Size(114, 26);
+            this.txtAddYearID.TabIndex = 61;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1493, 913);
+            this.Controls.Add(this.grpAddYear);
+            this.Controls.Add(this.grpAddLocation);
             this.Controls.Add(this.grpEditYear);
             this.Controls.Add(this.lstLocationInfo);
             this.Controls.Add(this.btnSaveMonth);
@@ -577,8 +822,6 @@
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnEditMonth);
             this.Controls.Add(this.btnAddYear);
-            this.Controls.Add(this.btnAddLocation);
-            this.Controls.Add(this.btnEditYear);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lstYear);
             this.Controls.Add(this.lstLocation);
@@ -591,6 +834,10 @@
             this.grpEditLocation.PerformLayout();
             this.grpEditYear.ResumeLayout(false);
             this.grpEditYear.PerformLayout();
+            this.grpAddLocation.ResumeLayout(false);
+            this.grpAddLocation.PerformLayout();
+            this.grpAddYear.ResumeLayout(false);
+            this.grpAddYear.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -602,8 +849,6 @@
         private System.Windows.Forms.ListBox lstYear;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnLocEdit;
-        private System.Windows.Forms.Button btnEditYear;
-        private System.Windows.Forms.Button btnAddLocation;
         private System.Windows.Forms.Button btnAddYear;
         private System.Windows.Forms.Button btnEditMonth;
         private System.Windows.Forms.Button btnSearch;
@@ -619,20 +864,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSunshine;
         private System.Windows.Forms.Button btnSaveMonth;
         private System.Windows.Forms.ListBox lstLocationInfo;
-        private System.Windows.Forms.TextBox txtLongitude;
+        private System.Windows.Forms.TextBox txtEditLongitude;
         private System.Windows.Forms.Label lblLong;
-        private System.Windows.Forms.TextBox txtLatitude;
+        private System.Windows.Forms.TextBox txtEditLatitude;
         private System.Windows.Forms.Label lblLat;
-        private System.Windows.Forms.TextBox txtPostcode;
+        private System.Windows.Forms.TextBox txtEditPostcode;
         private System.Windows.Forms.Label lblPostcode;
-        private System.Windows.Forms.TextBox txtCounty;
+        private System.Windows.Forms.TextBox txtEditCounty;
         private System.Windows.Forms.Label lblCounty;
         private System.Windows.Forms.Label lblStrtNameNum;
         private System.Windows.Forms.Label lblLocationName;
-        private System.Windows.Forms.TextBox txtStreetNameNum;
-        private System.Windows.Forms.TextBox txtLocationName;
+        private System.Windows.Forms.TextBox txtEditStreetNameNum;
+        private System.Windows.Forms.TextBox txtEditLocationName;
         private System.Windows.Forms.GroupBox grpEditLocation;
-        private System.Windows.Forms.Button btnLocSave;
+        private System.Windows.Forms.Button btnLocSaveEdit;
         private System.Windows.Forms.Label lblYearID;
         private System.Windows.Forms.Label lblYearDescript;
         private System.Windows.Forms.TextBox txtYearDescrip;
@@ -640,10 +885,32 @@
         private System.Windows.Forms.GroupBox grpEditYear;
         private System.Windows.Forms.Button btnYearEdit;
         private System.Windows.Forms.Button btnYearSave;
-        private System.Windows.Forms.Button btnLocReset;
-        private System.Windows.Forms.Button btnLocCancel;
+        private System.Windows.Forms.Button btnLocResetEdit;
+        private System.Windows.Forms.Button btnLocCancelEdit;
         private System.Windows.Forms.Button btnYearCancel;
         private System.Windows.Forms.Button btnYearReset;
+        private System.Windows.Forms.GroupBox grpAddLocation;
+        private System.Windows.Forms.Button btnLocCancelAdd;
+        private System.Windows.Forms.TextBox txtAddLocationName;
+        private System.Windows.Forms.Label lblLocNameAdd;
+        private System.Windows.Forms.Label lblLongAdd;
+        private System.Windows.Forms.TextBox txtAddLongitude;
+        private System.Windows.Forms.Label lblLatAdd;
+        private System.Windows.Forms.Label lblPostcodeAdd;
+        private System.Windows.Forms.Label lblStrtNameNumAdd;
+        private System.Windows.Forms.Label lblCountyAdd;
+        private System.Windows.Forms.TextBox txtAddLatitude;
+        private System.Windows.Forms.TextBox txtAddStrtNameNum;
+        private System.Windows.Forms.TextBox txtAddCounty;
+        private System.Windows.Forms.Button btnLocAdd;
+        private System.Windows.Forms.TextBox txtAddPostcode;
+        private System.Windows.Forms.Label lblAddYearDescrip;
+        private System.Windows.Forms.TextBox txtAddYearDescrip;
+        private System.Windows.Forms.Label lblAddYearID;
+        private System.Windows.Forms.GroupBox grpAddYear;
+        private System.Windows.Forms.TextBox txtAddYearID;
+        private System.Windows.Forms.Button btnYearCancelAdd;
+        private System.Windows.Forms.Button btnYearAdd;
     }
 }
 

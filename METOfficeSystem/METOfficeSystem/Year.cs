@@ -61,7 +61,7 @@ namespace METOfficeSystem
         /// Gets the array of monthy observations for the year.
         /// </summary>
         /// <returns>The yr observ.</returns>
-        public MonthyObservations[] GetMonthObserv()
+        public MonthyObservations[] GetYearObserv()
         {
             return monthObserv;
         }
