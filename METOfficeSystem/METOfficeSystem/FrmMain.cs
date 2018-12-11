@@ -295,8 +295,7 @@ namespace METOfficeSystem
 
         private void btnEditYear_Click(object sender, EventArgs e)
         {
-            currentLoc = lstLocation.SelectedIndex;
-            currentYear = lstYear.SelectedIndex;
+            SetCurrentYear();
 
             if (currentYear < 0 | currentLoc < 0)
             {
@@ -412,10 +411,15 @@ namespace METOfficeSystem
             }
         }
 
-        private void btnSaveMonth_Click(object sender, EventArgs e)
+        private void SetCurrentYear()
         {
             currentLoc = lstLocation.SelectedIndex;
             currentYear = lstYear.SelectedIndex;
+        }
+
+        private void btnSaveMonth_Click(object sender, EventArgs e)
+        {
+            SetCurrentYear();
 
             Year[] yearArray = Data.locations[currentLoc].GetAllYears();
             MonthyObservations[] monthArray = yearArray[currentYear].GetMonthObserv();
@@ -434,8 +438,7 @@ namespace METOfficeSystem
 
         private void btnYearEdit_Click(object sender, EventArgs e)
         {
-            locEdit = lstLocation.SelectedIndex;
-            yearEdit = lstYear.SelectedIndex;
+            SetCurrentYear();
 
             if (yearEdit < 0 | locEdit < 0)
             {
@@ -448,6 +451,11 @@ namespace METOfficeSystem
         }
 
         private void btnYearSave_Click(object sender, EventArgs e)
+        {
+            SaveEditYear();
+        }
+
+        private void SaveEditYear()
         {
             Year[] yearArray = Data.locations[locEdit].GetAllYears();
             Year editYear = yearArray[yearEdit];
