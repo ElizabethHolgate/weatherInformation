@@ -63,11 +63,13 @@ namespace METOfficeSystem
             string userFile, locName, locStrtNameNum, locCounty, locPostcode, locLatitude, locLongitude, yearDescription, yearID, monthID, maxTemp, minTemp, airFrostDays, mmRainfall, sunHours;
             int numLocations, numLocationYears, locArrSize;
 
-            StreamReader getData = new StreamReader(@"inputEXTENDED.txt");
+            //Hard coded stream reader for testing purposes
+            //StreamReader getData = new StreamReader(@"inputEXTENDED.txt");
             
-            //openFileDialog.ShowDialog();
-            //userFile = openFileDialog.FileName;
-            //StreamReader getData = new StreamReader(@userFile);
+            //file dialog
+            openFileDialog.ShowDialog();
+            userFile = openFileDialog.FileName;
+            StreamReader getData = new StreamReader(@userFile);
 
             //read number of locations in data file
             numLocations = Convert.ToInt32(getData.ReadLine());
@@ -330,56 +332,118 @@ namespace METOfficeSystem
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string userSearch, locName, yrID;
-            bool resultFound = false, searching = true;
+            SetCurrentYear();
+            Search();
+        }
 
-            Location loc = new Location();
-            Year year = new Year();
-            
-            userSearch = txtSearch.Text.ToUpper();
+        private void Search()
+        {
+            string userSearch;
+            bool searching = true, resultFound = false;
+
+            userSearch = txtSearch.Text.ToLower();
 
             while (searching == true)
             {
-                for (int l = 0; l < Data.locations.Length; l++)
+                if (rdbSearchLocation.Checked)
                 {
-                    loc = Data.locations[l];
-                    locName = loc.GetLocationName().ToUpper();
-
-                    if (userSearch == locName)
-                    {
-                        lstLocation.SelectedIndex = l;
-                        resultFound = true;
-                        searching = false;
-                    }
-
-                    //Year[] yearArr = loc.GetAllYears();
-
-                    //for (int y = 0; y < yearArr.Length; y++)
-                    //{
-                    //    year = yearArr[y];
-                    //    yrID = year.ToString().ToUpper();
-
-                    //    if (userSearch == yrID)
-                    //    {
-                    //        lstLocation.SelectedIndex = l;
-                    //        lstYear.SelectedIndex = y;
-                    //        resultFound = true;
-                    //        searching = false;
-                    //    }
-                    //}
+                    resultFound = SearchLocation(userSearch);
+                    searching = false;
                 }
+                else if(rdbSearchYear.Checked)
+                {
+                    resultFound = SearchYear(userSearch);
+                    searching = false;
+                }
+                else if(rdbSearchMonth.Checked)
+                {
 
-                
+                }
+                else
+                {
+                    lblSearchResult.Text = "Please select a catagory to search.";
+                    searching = false;
+                }
+            }
+        }
+
+        private bool SearchLocation(string userInput)
+        {
+            string locName;
+            bool found = false;
+            Location loc = new Location();
+
+            for (int i = 0; i < Data.locations.Length; i++)
+            {
+                loc = Data.locations[i];
+                locName = loc.GetLocationName().ToLower();
+
+                if (userInput == locName)
+                {
+                    lstLocation.SelectedIndex = i;
+                    lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n location list.", locName, i + 1);
+                    found = true;
+                    return found;
+                }
             }
 
-            if (resultFound == false)
+            return found;
+        }
+
+        private bool SearchYear(string userInput)
+        {
+            string yearID;
+            bool found = false;
+            Year[] yrArr = Data.locations[currentLoc].GetAllYears();
+            Year year = new Year();
+
+            for (int i = 0; i < yrArr.Length; i++)
             {
-                System.Windows.Forms.MessageBox.Show("No result found");
+                year = yrArr[i];
+                yearID = year.GetYear().ToLower();
+
+                if (userInput == yearID)
+                {
+                    lstYear.SelectedIndex = i;
+                    lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n year list.", yearID, i + 1);
+                    found = true;
+                    return found;
+                }
+            }
+
+            return found;
+        }
+
+        private bool SearchMonth(string userInput)
+        {
+            string monthID;
+            bool found = false;
+
+            if (currentLoc > 0 & currentYear > 0)
+            {
+                Year[] yrArr = Data.locations[currentLoc].GetAllYears();
+                MonthyObservations[] monthArr = yrArr[currentYear].GetYearObserv();
+                MonthyObservations month = new MonthyObservations();
+
+                for (int i = 0; i < monthArr.Length; i++)
+                {
+                    month = monthArr[i];
+                    monthID = month.GetMonthID().ToLower();
+
+                    if (userInput == monthID)
+                    {
+                        lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n month data grid.", monthID, i + 1);
+                        found = true;
+                        return found;
+                    }
+                }
             }
             else
             {
-                txtSearch.Clear();
+                lblSearchResult.Text = "Please select location and year\n to search for month within";
             }
+            
+            return found;
         }
 
         /// <summary>

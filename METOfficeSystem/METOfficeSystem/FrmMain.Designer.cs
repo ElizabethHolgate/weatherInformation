@@ -34,7 +34,6 @@
             this.btnLocEdit = new System.Windows.Forms.Button();
             this.btnEditMonth = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.lblSeachLoc = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.dtgMonthInfo = new System.Windows.Forms.DataGridView();
@@ -94,9 +93,12 @@
             this.btnYearCancelAdd = new System.Windows.Forms.Button();
             this.btnYearAdd = new System.Windows.Forms.Button();
             this.grpSearch = new System.Windows.Forms.GroupBox();
-            this.rdbSearchLocation = new System.Windows.Forms.RadioButton();
-            this.rdbSearchYear = new System.Windows.Forms.RadioButton();
             this.rdbSearchMonth = new System.Windows.Forms.RadioButton();
+            this.rdbSearchYear = new System.Windows.Forms.RadioButton();
+            this.rdbSearchLocation = new System.Windows.Forms.RadioButton();
+            this.lblSeachLoc = new System.Windows.Forms.Label();
+            this.lbl = new System.Windows.Forms.Label();
+            this.lblSearchResult = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtgMonthInfo)).BeginInit();
             this.grpEditLocation.SuspendLayout();
             this.grpEditYear.SuspendLayout();
@@ -132,7 +134,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(57, 144);
+            this.txtSearch.Location = new System.Drawing.Point(57, 115);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(191, 26);
@@ -160,7 +162,7 @@
             // btnSearch
             // 
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(252, 143);
+            this.btnSearch.Location = new System.Drawing.Point(252, 114);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(37, 29);
@@ -168,16 +170,6 @@
             this.btnSearch.Text = "Go";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // lblSeachLoc
-            // 
-            this.lblSeachLoc.AutoSize = true;
-            this.lblSeachLoc.Location = new System.Drawing.Point(9, 153);
-            this.lblSeachLoc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblSeachLoc.Name = "lblSeachLoc";
-            this.lblSeachLoc.Size = new System.Drawing.Size(44, 13);
-            this.lblSeachLoc.TabIndex = 13;
-            this.lblSeachLoc.Text = "Search:";
             // 
             // btnRefresh
             // 
@@ -801,36 +793,38 @@
             // 
             // grpSearch
             // 
+            this.grpSearch.Controls.Add(this.lblSearchResult);
+            this.grpSearch.Controls.Add(this.lbl);
             this.grpSearch.Controls.Add(this.rdbSearchMonth);
             this.grpSearch.Controls.Add(this.rdbSearchYear);
             this.grpSearch.Controls.Add(this.rdbSearchLocation);
             this.grpSearch.Controls.Add(this.lblSeachLoc);
             this.grpSearch.Controls.Add(this.btnSearch);
             this.grpSearch.Controls.Add(this.txtSearch);
-            this.grpSearch.Location = new System.Drawing.Point(10, 34);
+            this.grpSearch.Location = new System.Drawing.Point(10, 29);
             this.grpSearch.Name = "grpSearch";
-            this.grpSearch.Size = new System.Drawing.Size(302, 204);
+            this.grpSearch.Size = new System.Drawing.Size(302, 209);
             this.grpSearch.TabIndex = 49;
             this.grpSearch.TabStop = false;
             this.grpSearch.Text = "Search";
             // 
-            // rdbSearchLocation
+            // rdbSearchMonth
             // 
-            this.rdbSearchLocation.AutoSize = true;
-            this.rdbSearchLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbSearchLocation.Location = new System.Drawing.Point(57, 36);
-            this.rdbSearchLocation.Name = "rdbSearchLocation";
-            this.rdbSearchLocation.Size = new System.Drawing.Size(88, 24);
-            this.rdbSearchLocation.TabIndex = 14;
-            this.rdbSearchLocation.TabStop = true;
-            this.rdbSearchLocation.Text = "Location";
-            this.rdbSearchLocation.UseVisualStyleBackColor = true;
+            this.rdbSearchMonth.AutoSize = true;
+            this.rdbSearchMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbSearchMonth.Location = new System.Drawing.Point(57, 79);
+            this.rdbSearchMonth.Name = "rdbSearchMonth";
+            this.rdbSearchMonth.Size = new System.Drawing.Size(72, 24);
+            this.rdbSearchMonth.TabIndex = 16;
+            this.rdbSearchMonth.TabStop = true;
+            this.rdbSearchMonth.Text = "Month";
+            this.rdbSearchMonth.UseVisualStyleBackColor = true;
             // 
             // rdbSearchYear
             // 
             this.rdbSearchYear.AutoSize = true;
             this.rdbSearchYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbSearchYear.Location = new System.Drawing.Point(57, 66);
+            this.rdbSearchYear.Location = new System.Drawing.Point(57, 49);
             this.rdbSearchYear.Name = "rdbSearchYear";
             this.rdbSearchYear.Size = new System.Drawing.Size(61, 24);
             this.rdbSearchYear.TabIndex = 15;
@@ -838,17 +832,47 @@
             this.rdbSearchYear.Text = "Year";
             this.rdbSearchYear.UseVisualStyleBackColor = true;
             // 
-            // rdbSearchMonth
+            // rdbSearchLocation
             // 
-            this.rdbSearchMonth.AutoSize = true;
-            this.rdbSearchMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbSearchMonth.Location = new System.Drawing.Point(57, 96);
-            this.rdbSearchMonth.Name = "rdbSearchMonth";
-            this.rdbSearchMonth.Size = new System.Drawing.Size(72, 24);
-            this.rdbSearchMonth.TabIndex = 16;
-            this.rdbSearchMonth.TabStop = true;
-            this.rdbSearchMonth.Text = "Month";
-            this.rdbSearchMonth.UseVisualStyleBackColor = true;
+            this.rdbSearchLocation.AutoSize = true;
+            this.rdbSearchLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbSearchLocation.Location = new System.Drawing.Point(57, 19);
+            this.rdbSearchLocation.Name = "rdbSearchLocation";
+            this.rdbSearchLocation.Size = new System.Drawing.Size(88, 24);
+            this.rdbSearchLocation.TabIndex = 14;
+            this.rdbSearchLocation.TabStop = true;
+            this.rdbSearchLocation.Text = "Location";
+            this.rdbSearchLocation.UseVisualStyleBackColor = true;
+            // 
+            // lblSeachLoc
+            // 
+            this.lblSeachLoc.AutoSize = true;
+            this.lblSeachLoc.Location = new System.Drawing.Point(9, 123);
+            this.lblSeachLoc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSeachLoc.Name = "lblSeachLoc";
+            this.lblSeachLoc.Size = new System.Drawing.Size(44, 13);
+            this.lblSeachLoc.TabIndex = 13;
+            this.lblSeachLoc.Text = "Search:";
+            // 
+            // lbl
+            // 
+            this.lbl.AutoSize = true;
+            this.lbl.Location = new System.Drawing.Point(9, 166);
+            this.lbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(40, 13);
+            this.lbl.TabIndex = 17;
+            this.lbl.Text = "Result:";
+            // 
+            // lblSearchResult
+            // 
+            this.lblSearchResult.AutoSize = true;
+            this.lblSearchResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchResult.Location = new System.Drawing.Point(54, 158);
+            this.lblSearchResult.Name = "lblSearchResult";
+            this.lblSearchResult.Size = new System.Drawing.Size(13, 20);
+            this.lblSearchResult.TabIndex = 18;
+            this.lblSearchResult.Text = " ";
             // 
             // FrmMain
             // 
@@ -893,7 +917,6 @@
         private System.Windows.Forms.Button btnLocEdit;
         private System.Windows.Forms.Button btnEditMonth;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Label lblSeachLoc;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.DataGridView dtgMonthInfo;
@@ -956,6 +979,9 @@
         private System.Windows.Forms.RadioButton rdbSearchMonth;
         private System.Windows.Forms.RadioButton rdbSearchYear;
         private System.Windows.Forms.RadioButton rdbSearchLocation;
+        private System.Windows.Forms.Label lblSearchResult;
+        private System.Windows.Forms.Label lbl;
+        private System.Windows.Forms.Label lblSeachLoc;
     }
 }
 
