@@ -13,22 +13,41 @@ namespace METOfficeSystem
 {
     public partial class FrmMain : Form
     {
-        //var for this form
-        public static FrmMain KeepFrmMain = null;
-
         //public vars for which location, year and month is selected
+        /// <summary>
+        /// The current location.
+        /// </summary>
         public static int currentLoc = -1;
+        /// <summary>
+        /// The current year.
+        /// </summary>
         public static int currentYear = -1;
+        /// <summary>
+        /// The current month.
+        /// </summary>
         public static int currentMonth = -1;
+        /// <summary>
+        /// The location being edited.
+        /// </summary>
         public static int locEdit = -1;
+        /// <summary>
+        /// The year being edited.
+        /// </summary>
         public static int yearEdit = -1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:METOfficeSystem.FrmMain"/> class.
+        /// </summary>
         public FrmMain()
         {
             InitializeComponent();
-            KeepFrmMain = this;
         }
 
+        /// <summary>
+        /// Loads the main form.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
         private void FrmMain_Load(object sender, EventArgs e)
         {
             SetUpWeatherInfo();
@@ -36,6 +55,9 @@ namespace METOfficeSystem
             lblYearID.Text = "";
         }
 
+        /// <summary>
+        /// Sets up weather info (data read in).
+        /// </summary>
         private void SetUpWeatherInfo()
         {
             string userFile, locName, locStrtNameNum, locCounty, locPostcode, locLatitude, locLongitude, yearDescription, yearID, monthID, maxTemp, minTemp, airFrostDays, mmRainfall, sunHours;
@@ -122,6 +144,9 @@ namespace METOfficeSystem
             getData.Close();
         }
 
+        /// <summary>
+        /// Shows the locations.
+        /// </summary>
         private void ShowLocations()
         {
             foreach (Location l in Data.locations)
@@ -130,6 +155,9 @@ namespace METOfficeSystem
             }
         }
 
+        /// <summary>
+        /// Shows the location information.
+        /// </summary>
         private void ShowLocationInfo()
         {
             currentLoc = lstLocation.SelectedIndex;
@@ -150,11 +178,11 @@ namespace METOfficeSystem
                 lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLatitude());
                 lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLongitude());
             }
-            
-
-            
         }
 
+        /// <summary>
+        /// Shows the years.
+        /// </summary>
         private void ShowYears()
         {
             Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
@@ -174,6 +202,9 @@ namespace METOfficeSystem
             }
         }
 
+        /// <summary>
+        /// Shows the months.
+        /// </summary>
         private void ShowMonths()
         {
             Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
@@ -243,6 +274,9 @@ namespace METOfficeSystem
             ClearEditLoc();
         }
 
+        /// <summary>
+        /// Clears the edit location.
+        /// </summary>
         private void ClearEditLoc()
         {
             txtEditLocationName.Text = "";
@@ -253,6 +287,10 @@ namespace METOfficeSystem
             txtEditLongitude.Text = "";
         }
 
+        /// <summary>
+        /// Fills the edit location.
+        /// </summary>
+        /// <param name="loc">Location.</param>
         private void FillEditLoc(int loc)
         {
             Location editLoc = Data.locations[loc];
@@ -273,6 +311,9 @@ namespace METOfficeSystem
             ShowLocationInfo();
         }
 
+        /// <summary>
+        /// Saves the edited location.
+        /// </summary>
         private void SaveEditLocation()
         {
             Location locToEdit = Data.locations[locEdit];
@@ -287,11 +328,13 @@ namespace METOfficeSystem
             Data.locations[locEdit] = locToEdit;
         }
 
-        private void clearLstBoxes()
+        //don't need this
+        private void ClearLstBoxes()
         {
             lstYear.Items.Clear();
         }
 
+        //don't need this
         private void btnAddYear_Click(object sender, EventArgs e)
         {
             currentLoc = lstLocation.SelectedIndex;
@@ -305,9 +348,8 @@ namespace METOfficeSystem
                 FrmAddYear frmAddYear = new FrmAddYear();
 
                 frmAddYear.Show();
-                KeepFrmMain.Hide();
 
-                clearLstBoxes();
+                ClearLstBoxes();
             }
         }
 
@@ -354,7 +396,6 @@ namespace METOfficeSystem
 
                 
             }
-            
 
             if (resultFound == false)
             {
@@ -366,26 +407,24 @@ namespace METOfficeSystem
             }
         }
 
+        /// <summary>
+        /// Refreshs the lists.
+        /// </summary>
         private void RefreshLists()
         {
             SetCurrentYear();
 
             lstLocation.Items.Clear();
+            lstYear.Items.Clear();
             ShowLocations();
 
             if (currentLoc > 0)
             {
-                lstYear.Items.Clear();
                 ShowYears();
 
                 if (currentYear > 0)
                 {
                     ShowMonths();
-
-                    if (currentMonth > 0)
-                    {
-
-                    }
                 }
             }
         }
@@ -395,6 +434,9 @@ namespace METOfficeSystem
             RefreshLists();
         }
 
+        /// <summary>
+        /// Sets the current year.
+        /// </summary>
         private void SetCurrentYear()
         {
             currentLoc = lstLocation.SelectedIndex;
@@ -407,6 +449,9 @@ namespace METOfficeSystem
             SaveMonthEdit();
         }
 
+        /// <summary>
+        /// Saves the edited month.
+        /// </summary>
         private void SaveMonthEdit()
         {
             Year[] yearArray = Data.locations[currentLoc].GetAllYears();
@@ -426,12 +471,18 @@ namespace METOfficeSystem
             Data.locations[currentLoc].SetAllYears(yearArray);
         }
 
+        /// <summary>
+        /// Sets the editLoc and editYear values.
+        /// </summary>
         private void SetEditYear()
         {
             locEdit = lstLocation.SelectedIndex;
             yearEdit = lstYear.SelectedIndex;
         }
 
+        /// <summary>
+        /// Resets the editLoc and editYear values.
+        /// </summary>
         private void ResetEditYear()
         {
             locEdit = -1;
@@ -459,6 +510,9 @@ namespace METOfficeSystem
             RefreshLists();
         }
 
+        /// <summary>
+        /// Saves the edited year.
+        /// </summary>
         private void SaveEditYear()
         {
             Year[] yearArray = Data.locations[locEdit].GetAllYears();
@@ -484,12 +538,18 @@ namespace METOfficeSystem
             ResetEditYear();
         }
 
+        /// <summary>
+        /// Clears the edit year text fields.
+        /// </summary>
         private void ClearEditYear()
         {
             lblYearID.Text = "";
             txtYearDescrip.Text = "";
         }
 
+        /// <summary>
+        /// Fills the edit year text fields.
+        /// </summary>
         private void FillEditYear()
         {
             Year[] yearArray = Data.locations[locEdit].GetAllYears();
@@ -506,6 +566,9 @@ namespace METOfficeSystem
             RefreshLists();
         }
 
+        /// <summary>
+        /// Clears the add location text fields.
+        /// </summary>
         private void ClearAddLocation()
         {
             txtAddLocationName.Text = "";
@@ -516,6 +579,9 @@ namespace METOfficeSystem
             txtAddLongitude.Text = "";
         }
 
+        /// <summary>
+        /// Adds the new location.
+        /// </summary>
         private void AddLocation()
         {
             int locArrLength;
@@ -532,6 +598,9 @@ namespace METOfficeSystem
             ClearLocAdd();
         }
 
+        /// <summary>
+        /// Clears the location add text fields.
+        /// </summary>
         private void ClearLocAdd()
         {
             txtAddLocationName.Text = "";
@@ -560,6 +629,9 @@ namespace METOfficeSystem
             }
         }
 
+        /// <summary>
+        /// Adds the new year.
+        /// </summary>
         private void AddYear()
         {
             int yearArrLength;
@@ -575,6 +647,9 @@ namespace METOfficeSystem
             Data.locations[locEdit].SetAllYears(yearArr);
         }
 
+        /// <summary>
+        /// Clears the add year text fields.
+        /// </summary>
         private void ClearAddYear()
         {
             txtAddYearID.Text = "";
