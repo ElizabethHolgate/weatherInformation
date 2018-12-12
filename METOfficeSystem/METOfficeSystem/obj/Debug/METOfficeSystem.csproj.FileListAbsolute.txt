@@ -8,7 +8,6 @@ C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METO
 C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.csproj.CoreCompileInputs.cache
 C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.exe
 C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.pdb
-C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmAddLocation.resources
 C:\Users\bethh\OneDrive\Documents\GitHub\weatherInformation\METOfficeSystem\METOfficeSystem\obj\Debug\METOfficeSystem.FrmAddYear.resources
 C:\Users\ekholgate\Downloads\weatherInformation-Dev\weatherInformation-Dev\METOfficeSystem\METOfficeSystem\bin\Debug\METOfficeSystem.exe.config
 C:\Users\ekholgate\Downloads\weatherInformation-Dev\weatherInformation-Dev\METOfficeSystem\METOfficeSystem\bin\Debug\METOfficeSystem.exe

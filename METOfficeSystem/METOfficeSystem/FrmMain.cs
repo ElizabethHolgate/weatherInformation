@@ -544,6 +544,7 @@ namespace METOfficeSystem
 
         private void btnYearAdd_Click(object sender, EventArgs e)
         {
+            currentLoc = lstLocation.SelectedIndex;
             locEdit = lstLocation.SelectedIndex;
 
             if (locEdit < 0)
@@ -553,6 +554,9 @@ namespace METOfficeSystem
             else
             {
                 AddYear();
+                ClearAddYear();
+                ResetEditYear();
+                RefreshLists();
             }
         }
 
@@ -560,7 +564,27 @@ namespace METOfficeSystem
         {
             int yearArrLength;
 
+            Year[] yearArr = Data.locations[locEdit].GetAllYears();
 
+            Year newYear = new Year(txtAddYearID.Text, txtAddYearDescrip.Text);
+
+            yearArrLength = yearArr.Length;
+            Array.Resize(ref yearArr, yearArrLength + 1);
+            yearArr[yearArrLength] = newYear;
+
+            Data.locations[locEdit].SetAllYears(yearArr);
+        }
+
+        private void ClearAddYear()
+        {
+            txtAddYearID.Text = "";
+            txtAddYearDescrip.Text = "";
+        }
+
+        private void btnYearCancelAdd_Click(object sender, EventArgs e)
+        {
+            ClearAddYear();
+            ResetEditYear();
         }
     }
 }
