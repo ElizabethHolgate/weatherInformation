@@ -328,31 +328,6 @@ namespace METOfficeSystem
             Data.locations[locEdit] = locToEdit;
         }
 
-        //don't need this
-        private void ClearLstBoxes()
-        {
-            lstYear.Items.Clear();
-        }
-
-        //don't need this
-        private void btnAddYear_Click(object sender, EventArgs e)
-        {
-            currentLoc = lstLocation.SelectedIndex;
-
-            if (currentLoc < 0)
-            {
-                System.Windows.Forms.MessageBox.Show("Please select a location to store the year in.");
-            }
-            else if (currentLoc > -1)
-            {
-                FrmAddYear frmAddYear = new FrmAddYear();
-
-                frmAddYear.Show();
-
-                ClearLstBoxes();
-            }
-        }
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string userSearch, locName, yrID;
@@ -413,16 +388,16 @@ namespace METOfficeSystem
         private void RefreshLists()
         {
             SetCurrentYear();
-
             lstLocation.Items.Clear();
-            lstYear.Items.Clear();
+            
             ShowLocations();
 
-            if (currentLoc > 0)
+            if (currentLoc >= 0)
             {
+                lstYear.Items.Clear();
                 ShowYears();
 
-                if (currentYear > 0)
+                if (currentYear >= 0)
                 {
                     ShowMonths();
                 }
@@ -613,7 +588,7 @@ namespace METOfficeSystem
 
         private void btnYearAdd_Click(object sender, EventArgs e)
         {
-            currentLoc = lstLocation.SelectedIndex;
+            SetCurrentYear();
             locEdit = lstLocation.SelectedIndex;
 
             if (locEdit < 0)
