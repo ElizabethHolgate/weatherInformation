@@ -13,6 +13,7 @@ namespace METOfficeSystem
 {
     public partial class FrmMain : Form
     {
+        public static string selectedFile;
         //public vars for which location, year and month is selected
         /// <summary>
         /// The current location.
@@ -55,6 +56,14 @@ namespace METOfficeSystem
             lblYearID.Text = "";
         }
 
+        private string SelectFile()
+        {
+            openFileDialog.ShowDialog();
+            selectedFile = openFileDialog.FileName;
+
+            return selectedFile;
+        }
+
         /// <summary>
         /// Sets up weather info (data read in).
         /// </summary>
@@ -64,12 +73,11 @@ namespace METOfficeSystem
             int numLocations, numLocationYears, locArrSize;
 
             //Hard coded stream reader for testing purposes
-            //StreamReader getData = new StreamReader(@"inputEXTENDED.txt");
-            
-            //file dialog
-            openFileDialog.ShowDialog();
-            userFile = openFileDialog.FileName;
-            StreamReader getData = new StreamReader(@userFile);
+            StreamReader getData = new StreamReader(@"inputEXTENDED.txt");
+            selectedFile = "inputEXTENDED.txt";
+
+            //userFile = SelectFile()
+            //StreamReader getData = new StreamReader(@userFile);
 
             //read number of locations in data file
             numLocations = Convert.ToInt32(getData.ReadLine());
@@ -144,6 +152,67 @@ namespace METOfficeSystem
             }
             //close stream reader
             getData.Close();
+        }
+
+        //write data to file
+        private void SaveDataToFile()
+        {
+            int yrLength, monthLength;
+            Location addLoc = new Location();
+            Year[] yrArr = null;
+            Year addYr = new Year();
+            MonthyObservations[] monthArr = null;
+            MonthyObservations addMonth = new MonthyObservations();
+
+            StreamWriter sw = new StreamWriter(selectedFile, false, Encoding.ASCII);
+
+            sw.WriteLine(Data.locations.Length);
+
+            for (int l = 0; l < Data.locations.Length; l++)
+            {
+                addLoc = Data.locations[l];
+                yrArr = addLoc.GetAllYears();
+
+                if (yrArr == null)
+                {
+                    yrLength = 0;
+                }
+                else
+                {
+                    yrLength = yrArr.Length;
+                }
+
+                sw.WriteLine(addLoc.GetLocationName());
+                sw.WriteLine(addLoc.GetStrtName());
+                sw.WriteLine(addLoc.GetCounty());
+                sw.WriteLine(addLoc.GetPostCode());
+                sw.WriteLine(addLoc.GetLatitude());
+                sw.WriteLine(addLoc.GetLongitude());
+                sw.WriteLine(yrLength);
+
+                for (int y = 0; y < yrLength; y++)
+                {
+                    addYr = yrArr[y];
+                    monthArr = addYr.GetYearObserv();
+                    
+                    sw.WriteLine(addYr.GetYrDescrip());
+
+                    for (int m = 0; m < monthArr.Length; m++)
+                    {
+                        addMonth = monthArr[m];
+
+                        sw.WriteLine(addYr.GetYear());
+                        sw.WriteLine(addMonth.GetMonthID());
+                        sw.WriteLine(addMonth.GetMaxTemp());
+                        sw.WriteLine(addMonth.GetMinTemp());
+                        sw.WriteLine(addMonth.GetFrostDays());
+                        sw.WriteLine(addMonth.GetMmRainfall());
+                        sw.WriteLine(addMonth.GetSunHours());
+                    }
+                }
+            }
+
+            sw.Close();
         }
 
         /// <summary>
@@ -328,6 +397,8 @@ namespace METOfficeSystem
             locToEdit.SetLongitude(txtEditLongitude.Text);
 
             Data.locations[locEdit] = locToEdit;
+
+            SaveDataToFile();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -339,32 +410,27 @@ namespace METOfficeSystem
         private void Search()
         {
             string userSearch;
-            bool searching = true, resultFound = false;
+            bool resultFound = false;
 
             userSearch = txtSearch.Text.ToLower();
 
-            while (searching == true)
-            {
+            
                 if (rdbSearchLocation.Checked)
                 {
                     resultFound = SearchLocation(userSearch);
-                    searching = false;
                 }
                 else if(rdbSearchYear.Checked)
                 {
                     resultFound = SearchYear(userSearch);
-                    searching = false;
                 }
                 else if(rdbSearchMonth.Checked)
                 {
-
+                    resultFound = SearchMonth(userSearch);
                 }
                 else
                 {
                     lblSearchResult.Text = "Please select a catagory to search.";
-                    searching = false;
                 }
-            }
         }
 
         private bool SearchLocation(string userInput)
@@ -458,11 +524,13 @@ namespace METOfficeSystem
 
             if (currentLoc >= 0)
             {
+                lstLocation.SelectedIndex = currentLoc;
                 lstYear.Items.Clear();
                 ShowYears();
 
                 if (currentYear >= 0)
                 {
+                    lstYear.SelectedIndex = currentYear;
                     ShowMonths();
                 }
             }
@@ -486,6 +554,7 @@ namespace METOfficeSystem
         {
             SetCurrentYear();
             SaveMonthEdit();
+            SaveDataToFile();
         }
 
         /// <summary>
@@ -564,6 +633,8 @@ namespace METOfficeSystem
 
             ClearEditYear();
             RefreshLists();
+
+            SaveDataToFile();
         }
 
         private void btnYearReset_Click(object sender, EventArgs e)
@@ -630,6 +701,8 @@ namespace METOfficeSystem
             locArrLength = Data.locations.Length;
             Array.Resize(ref Data.locations, locArrLength + 1);
             Data.locations[locArrLength] = newLoc;
+
+            SaveDataToFile();
         }
 
         private void btnLocCancelAdd_Click(object sender, EventArgs e)
@@ -674,16 +747,36 @@ namespace METOfficeSystem
         private void AddYear()
         {
             int yearArrLength;
-
             Year[] yearArr = Data.locations[locEdit].GetAllYears();
+            MonthyObservations[] monthArr = new MonthyObservations[12];
+            
 
             Year newYear = new Year(txtAddYearID.Text, txtAddYearDescrip.Text);
 
-            yearArrLength = yearArr.Length;
+            if (yearArr == null)
+            {
+                yearArrLength = 0;
+            }
+            else
+            {
+                yearArrLength = yearArr.Length;
+            }
+
+            for (int i = 0; i < monthArr.Length; i++)
+            {
+                MonthyObservations month = new MonthyObservations((i + 1).ToString(), "1000", "1000", "1000", "1000", "1000");
+
+                monthArr[i] = month;
+            }
+
+            newYear.SetYrObserv(monthArr);
+            
             Array.Resize(ref yearArr, yearArrLength + 1);
             yearArr[yearArrLength] = newYear;
 
             Data.locations[locEdit].SetAllYears(yearArr);
+
+            SaveDataToFile();
         }
 
         /// <summary>
