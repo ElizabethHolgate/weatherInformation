@@ -13,35 +13,70 @@ namespace METOfficeSystem
 {
     public partial class FrmMain : Form
     {
-        //var for this form
-        public static FrmMain KeepFrmMain = null;
-
+        public static string selectedFile;
         //public vars for which location, year and month is selected
+        /// <summary>
+        /// The current location.
+        /// </summary>
         public static int currentLoc = -1;
+        /// <summary>
+        /// The current year.
+        /// </summary>
         public static int currentYear = -1;
+        /// <summary>
+        /// The current month.
+        /// </summary>
         public static int currentMonth = -1;
+        /// <summary>
+        /// The location being edited.
+        /// </summary>
+        public static int locEdit = -1;
+        /// <summary>
+        /// The year being edited.
+        /// </summary>
+        public static int yearEdit = -1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:METOfficeSystem.FrmMain"/> class.
+        /// </summary>
         public FrmMain()
         {
             InitializeComponent();
-            KeepFrmMain = this;
         }
 
+        /// <summary>
+        /// Loads the main form.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
         private void FrmMain_Load(object sender, EventArgs e)
         {
             SetUpWeatherInfo();
-            showLocations();
+            ShowLocations();
+            lblYearID.Text = "";
         }
 
+        private string SelectFile()
+        {
+            openFileDialog.ShowDialog();
+            selectedFile = openFileDialog.FileName;
+
+            return selectedFile;
+        }
+
+        /// <summary>
+        /// Sets up weather info (data read in).
+        /// </summary>
         private void SetUpWeatherInfo()
         {
             string userFile, locName, locStrtNameNum, locCounty, locPostcode, locLatitude, locLongitude, yearDescription, yearID, monthID, maxTemp, minTemp, airFrostDays, mmRainfall, sunHours;
             int numLocations, numLocationYears, locArrSize;
 
+            //Hard coded stream reader for testing purposes
             StreamReader getData = new StreamReader(@"inputEXTENDED.txt");
-            
-            //openFileDialog.ShowDialog();
-            //userFile = openFileDialog.FileName;
+            selectedFile = "inputEXTENDED.txt";
+
+            //userFile = SelectFile()
             //StreamReader getData = new StreamReader(@userFile);
 
             //read number of locations in data file
@@ -119,7 +154,71 @@ namespace METOfficeSystem
             getData.Close();
         }
 
-        private void showLocations()
+        //write data to file
+        private void SaveDataToFile()
+        {
+            int yrLength, monthLength;
+            Location addLoc = new Location();
+            Year[] yrArr = null;
+            Year addYr = new Year();
+            MonthyObservations[] monthArr = null;
+            MonthyObservations addMonth = new MonthyObservations();
+
+            StreamWriter sw = new StreamWriter(selectedFile, false, Encoding.ASCII);
+
+            sw.WriteLine(Data.locations.Length);
+
+            for (int l = 0; l < Data.locations.Length; l++)
+            {
+                addLoc = Data.locations[l];
+                yrArr = addLoc.GetAllYears();
+
+                if (yrArr == null)
+                {
+                    yrLength = 0;
+                }
+                else
+                {
+                    yrLength = yrArr.Length;
+                }
+
+                sw.WriteLine(addLoc.GetLocationName());
+                sw.WriteLine(addLoc.GetStrtName());
+                sw.WriteLine(addLoc.GetCounty());
+                sw.WriteLine(addLoc.GetPostCode());
+                sw.WriteLine(addLoc.GetLatitude());
+                sw.WriteLine(addLoc.GetLongitude());
+                sw.WriteLine(yrLength);
+
+                for (int y = 0; y < yrLength; y++)
+                {
+                    addYr = yrArr[y];
+                    monthArr = addYr.GetYearObserv();
+                    
+                    sw.WriteLine(addYr.GetYrDescrip());
+
+                    for (int m = 0; m < monthArr.Length; m++)
+                    {
+                        addMonth = monthArr[m];
+
+                        sw.WriteLine(addYr.GetYear());
+                        sw.WriteLine(addMonth.GetMonthID());
+                        sw.WriteLine(addMonth.GetMaxTemp());
+                        sw.WriteLine(addMonth.GetMinTemp());
+                        sw.WriteLine(addMonth.GetFrostDays());
+                        sw.WriteLine(addMonth.GetMmRainfall());
+                        sw.WriteLine(addMonth.GetSunHours());
+                    }
+                }
+            }
+
+            sw.Close();
+        }
+
+        /// <summary>
+        /// Shows the locations.
+        /// </summary>
+        private void ShowLocations()
         {
             foreach (Location l in Data.locations)
             {
@@ -127,7 +226,35 @@ namespace METOfficeSystem
             }
         }
 
-        private void showYears()
+        /// <summary>
+        /// Shows the location information.
+        /// </summary>
+        private void ShowLocationInfo()
+        {
+            currentLoc = lstLocation.SelectedIndex;
+
+            if (currentLoc < 0)
+            {
+                lstLocationInfo.Items.Add("No Location selected");
+            }
+            else
+            {
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLocationName());
+                lstLocationInfo.Items.Add("");
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetStrtName());
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetCounty());
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetPostCode());
+                lstLocationInfo.Items.Add("");
+                lstLocationInfo.Items.Add("Coordinates:");
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLatitude());
+                lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLongitude());
+            }
+        }
+
+        /// <summary>
+        /// Shows the years.
+        /// </summary>
+        private void ShowYears()
         {
             Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
 
@@ -146,287 +273,525 @@ namespace METOfficeSystem
             }
         }
 
-        private void showMonths()
+        /// <summary>
+        /// Shows the months.
+        /// </summary>
+        private void ShowMonths()
         {
             Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
             
             if (yearsInLoc == null)
             {
-                lstMonths.Items.Add("No month ");
-                lstMonths.Items.Add("data availble.");
+                dtgMonthInfo.Rows[0].Cells[0].Value = "No month info";
             }
             else
             {
-                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
+                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYearObserv();
+                
+                dtgMonthInfo.Rows.Clear();
 
-                lstMonths.Items.Clear();
-
-                foreach (MonthyObservations m in monthsInYear)
+                for (int i = 0; i < monthsInYear.Length; i++)
                 {
-                    lstMonths.Items.Add("Month ID: " + m.GetMonthID());
+                    MonthyObservations m = monthsInYear[i];
+
+                    dtgMonthInfo.Rows.Add();
+                    dtgMonthInfo.Rows[i].Cells[0].Value = m.GetMonthID();
+                    dtgMonthInfo.Rows[i].Cells[1].Value = m.GetMaxTemp();
+                    dtgMonthInfo.Rows[i].Cells[2].Value = m.GetMinTemp();
+                    dtgMonthInfo.Rows[i].Cells[3].Value = m.GetFrostDays();
+                    dtgMonthInfo.Rows[i].Cells[4].Value = m.GetMmRainfall();
+                    dtgMonthInfo.Rows[i].Cells[5].Value = m.GetSunHours();
                 }
-            }
-        }
-
-        private void showMonthsInfo()
-        {
-            Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
-
-            if (yearsInLoc == null)
-            {
-                lstMonthInfo.Items.Add("No month data availble.");
-            }
-            else
-            {
-                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYrObserv();
-
-                MonthyObservations m = monthsInYear[currentMonth];
-
-                lstMonthInfo.Items.Clear();
-
-                lstMonthInfo.Items.Add("Month ID: " + m.GetMonthID());
-                lstMonthInfo.Items.Add("Maximum Temperature: " + m.GetMaxTemp());
-                lstMonthInfo.Items.Add("Minimum Temperature: " + m.GetMinTemp());
-                lstMonthInfo.Items.Add("Air Frost Days: " + m.GetFrostDays());
-                lstMonthInfo.Items.Add("Rainfall in mm: " + m.GetMmRainfall());
-                lstMonthInfo.Items.Add("Hours of Sunshine: " + m.GetSunHours());
             }
         }
 
         private void lstYear_SelectedIndexChanged(object sender, EventArgs e)
         {
-            currentLoc = lstLocation.SelectedIndex;
-            currentYear = lstYear.SelectedIndex;
-            lstMonths.Items.Clear();
-            lstMonthInfo.Items.Clear();
-            showMonths();
+            SetCurrentYear();
+            ShowMonths();
         }
 
         private void lstLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentLoc = lstLocation.SelectedIndex;
+            lstLocationInfo.Items.Clear();
             lstYear.Items.Clear();
-            lstMonths.Items.Clear();
-            lstMonthInfo.Items.Clear();
-            showYears();
-        }
-
-        private void lstMonths_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            currentLoc = lstLocation.SelectedIndex;
-            currentYear = lstYear.SelectedIndex;
-            currentMonth = lstMonths.SelectedIndex;
-            lstMonthInfo.Items.Clear();
-            showMonthsInfo();
-        }
-
-        private void btnViewLocation_Click(object sender, EventArgs e)
-        {
-            //select current location
-            currentLoc = lstLocation.SelectedIndex;
-
-            if (currentLoc < 0)
-            {
-                System.Windows.Forms.MessageBox.Show("Please select the location prior to 'View Location'.");
-            }
-            else
-            {
-                Location locInfo = Data.locations[currentLoc];
-
-                clearLstBoxes();
-
-                lstYear.Items.Add(locInfo.GetLocationName());
-                lstYear.Items.Add("");
-                lstYear.Items.Add("Address:");
-                lstYear.Items.Add(locInfo.GetStrtName());
-                lstYear.Items.Add(locInfo.GetCounty());
-                lstYear.Items.Add(locInfo.GetPostCode());
-                lstYear.Items.Add("");
-                lstYear.Items.Add("Coordinates:");
-                lstYear.Items.Add(locInfo.GetLongitude());
-                lstYear.Items.Add(locInfo.GetLatitude());
-            }
-
-            
+            ShowLocationInfo();
+            ShowYears();
         }
 
         private void btnEditLocation_Click(object sender, EventArgs e)
         {
-            currentLoc = lstLocation.SelectedIndex;
+            locEdit = lstLocation.SelectedIndex;
 
-            if (currentLoc < 0)
+            if (locEdit < 0)
             {
                 System.Windows.Forms.MessageBox.Show("Please select a location prior to 'Edit Location'.");
             }
             else
             {
-                FrmEditLocation frmEditLocation = new FrmEditLocation();
-
-                frmEditLocation.Show();
-                KeepFrmMain.Hide();
-
-                clearLstBoxes();
+                FillEditLoc(locEdit);
             }
         }
 
-        private void clearLstBoxes()
+        private void btnLocReset_Click(object sender, EventArgs e)
         {
-            lstMonthInfo.Items.Clear();
-            lstMonths.Items.Clear();
-            lstYear.Items.Clear();
+            FillEditLoc(locEdit);
         }
 
-        private void btnAddLocation_Click(object sender, EventArgs e)
+
+        private void btnLocCancel_Click(object sender, EventArgs e)
         {
-            FrmAddLocation frmAddLocation = new FrmAddLocation();
-
-            frmAddLocation.Show();
-            KeepFrmMain.Hide();
-
-            clearLstBoxes();
+            ClearEditLoc();
         }
 
-        private void btnEditYear_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Clears the edit location.
+        /// </summary>
+        private void ClearEditLoc()
         {
-            currentLoc = lstLocation.SelectedIndex;
-            currentYear = lstYear.SelectedIndex;
-
-            if (currentYear < 0 | currentLoc < 0)
-            {
-                System.Windows.Forms.MessageBox.Show("Please select a location and a year proir to 'Edit Year'.");
-            }
-            else if (currentYear > -1 & currentLoc > -1)
-            {
-                FrmEditYear frmEditYear = new FrmEditYear();
-
-                frmEditYear.Show();
-                KeepFrmMain.Hide();
-
-                clearLstBoxes();
-            }
+            txtEditLocationName.Text = "";
+            txtEditStreetNameNum.Text = "";
+            txtEditCounty.Text = "";
+            txtEditPostcode.Text = "";
+            txtEditLatitude.Text = "";
+            txtEditLongitude.Text = "";
         }
 
-        private void btnAddYear_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Fills the edit location.
+        /// </summary>
+        /// <param name="loc">Location.</param>
+        private void FillEditLoc(int loc)
         {
-            currentLoc = lstLocation.SelectedIndex;
+            Location editLoc = Data.locations[loc];
 
-            if (currentLoc < 0)
-            {
-                System.Windows.Forms.MessageBox.Show("Please select a location to store the year in.");
-            }
-            else if (currentLoc > -1)
-            {
-                FrmAddYear frmAddYear = new FrmAddYear();
-
-                frmAddYear.Show();
-                KeepFrmMain.Hide();
-
-                clearLstBoxes();
-            }
+            txtEditLocationName.Text = editLoc.GetLocationName();
+            txtEditStreetNameNum.Text = editLoc.GetStrtName();
+            txtEditCounty.Text = editLoc.GetCounty();
+            txtEditPostcode.Text = editLoc.GetPostCode();
+            txtEditLatitude.Text = editLoc.GetLatitude().ToString();
+            txtEditLongitude.Text = editLoc.GetLongitude().ToString();
         }
 
-        private void btnEditMonth_Click(object sender, EventArgs e)
+        private void btnSaveLocation_Click(object sender, EventArgs e)
         {
-            currentLoc = lstLocation.SelectedIndex;
-            currentYear = lstYear.SelectedIndex;
-            currentMonth = lstMonths.SelectedIndex;
+            SaveEditLocation();
+            ClearEditLoc();
+            ShowLocations();
+            ShowLocationInfo();
+        }
 
-            if (currentYear < 0 | currentLoc < 0 | currentMonth < 0)
-            {
-                System.Windows.Forms.MessageBox.Show("Please select a location, a year and a month proir to 'Edit Month'.");
-            }
-            else
-            {
-                FrmEditMonth frmEditMonth = new FrmEditMonth();
+        /// <summary>
+        /// Saves the edited location.
+        /// </summary>
+        private void SaveEditLocation()
+        {
+            Location locToEdit = Data.locations[locEdit];
 
-                frmEditMonth.Show();
-                KeepFrmMain.Hide();
+            locToEdit.SetLocationName(txtEditLocationName.Text);
+            locToEdit.SetStrtName(txtEditStreetNameNum.Text);
+            locToEdit.SetCounty(txtEditCounty.Text);
+            locToEdit.SetPostCode(txtEditPostcode.Text);
+            locToEdit.SetLatitude(txtEditLatitude.Text);
+            locToEdit.SetLongitude(txtEditLongitude.Text);
 
-                lstMonthInfo.Items.Clear();
-            }
+            Data.locations[locEdit] = locToEdit;
+
+            SaveDataToFile();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string userSearch, locName, yrID;
-            bool resultFound = false, searching = true;
+            SetCurrentYear();
+            Search();
+        }
 
-            Location loc = new Location();
-            Year year = new Year();
+        private void Search()
+        {
+            string userSearch;
+            bool resultFound = false;
+
+            userSearch = txtSearch.Text.ToLower();
+
             
-            userSearch = txtSearch.Text.ToUpper();
-
-            while (searching == true)
-            {
-                for (int l = 0; l < Data.locations.Length; l++)
+                if (rdbSearchLocation.Checked)
                 {
-                    loc = Data.locations[l];
-                    locName = loc.GetLocationName().ToUpper();
-
-                    if (userSearch == locName)
-                    {
-                        lstLocation.SelectedIndex = l;
-                        resultFound = true;
-                        searching = false;
-                    }
-
-                    //Year[] yearArr = loc.GetAllYears();
-
-                    //for (int y = 0; y < yearArr.Length; y++)
-                    //{
-                    //    year = yearArr[y];
-                    //    yrID = year.ToString().ToUpper();
-
-                    //    if (userSearch == yrID)
-                    //    {
-                    //        lstLocation.SelectedIndex = l;
-                    //        lstYear.SelectedIndex = y;
-                    //        resultFound = true;
-                    //        searching = false;
-                    //    }
-                    //}
+                    resultFound = SearchLocation(userSearch);
                 }
+                else if(rdbSearchYear.Checked)
+                {
+                    resultFound = SearchYear(userSearch);
+                }
+                else if(rdbSearchMonth.Checked)
+                {
+                    resultFound = SearchMonth(userSearch);
+                }
+                else
+                {
+                    lblSearchResult.Text = "Please select a catagory to search.";
+                }
+        }
 
-                
-            }
-            
+        private bool SearchLocation(string userInput)
+        {
+            string locName;
+            bool found = false;
+            Location loc = new Location();
 
-            if (resultFound == false)
+            for (int i = 0; i < Data.locations.Length; i++)
             {
-                System.Windows.Forms.MessageBox.Show("No result found");
+                loc = Data.locations[i];
+                locName = loc.GetLocationName().ToLower();
+
+                if (userInput == locName)
+                {
+                    lstLocation.SelectedIndex = i;
+                    lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n location list.", locName, i + 1);
+                    found = true;
+                    return found;
+                }
+            }
+
+            return found;
+        }
+
+        private bool SearchYear(string userInput)
+        {
+            string yearID;
+            bool found = false;
+            Year[] yrArr = Data.locations[currentLoc].GetAllYears();
+            Year year = new Year();
+
+            for (int i = 0; i < yrArr.Length; i++)
+            {
+                year = yrArr[i];
+                yearID = year.GetYear().ToLower();
+
+                if (userInput == yearID)
+                {
+                    lstYear.SelectedIndex = i;
+                    lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n year list.", yearID, i + 1);
+                    found = true;
+                    return found;
+                }
+            }
+
+            return found;
+        }
+
+        private bool SearchMonth(string userInput)
+        {
+            string monthID;
+            bool found = false;
+
+            if (currentLoc > 0 & currentYear > 0)
+            {
+                Year[] yrArr = Data.locations[currentLoc].GetAllYears();
+                MonthyObservations[] monthArr = yrArr[currentYear].GetYearObserv();
+                MonthyObservations month = new MonthyObservations();
+
+                for (int i = 0; i < monthArr.Length; i++)
+                {
+                    month = monthArr[i];
+                    monthID = month.GetMonthID().ToLower();
+
+                    if (userInput == monthID)
+                    {
+                        lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n month data grid.", monthID, i + 1);
+                        found = true;
+                        return found;
+                    }
+                }
             }
             else
             {
-                txtSearch.Clear();
+                lblSearchResult.Text = "Please select location and year\n to search for month within";
+            }
+            
+            return found;
+        }
+
+        /// <summary>
+        /// Refreshs the lists.
+        /// </summary>
+        private void RefreshLists()
+        {
+            SetCurrentYear();
+            lstLocation.Items.Clear();
+            
+            ShowLocations();
+
+            if (currentLoc >= 0)
+            {
+                lstLocation.SelectedIndex = currentLoc;
+                lstYear.Items.Clear();
+                ShowYears();
+
+                if (currentYear >= 0)
+                {
+                    lstYear.SelectedIndex = currentYear;
+                    ShowMonths();
+                }
             }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            RefreshLists();
+        }
+
+        /// <summary>
+        /// Sets the current year.
+        /// </summary>
+        private void SetCurrentYear()
+        {
             currentLoc = lstLocation.SelectedIndex;
             currentYear = lstYear.SelectedIndex;
-            currentMonth = lstMonths.SelectedIndex;
+        }
 
-            lstLocation.Items.Clear();
-            showLocations();
+        private void btnSaveMonth_Click(object sender, EventArgs e)
+        {
+            SetCurrentYear();
+            SaveMonthEdit();
+            SaveDataToFile();
+        }
 
-            if (currentLoc > 0)
+        /// <summary>
+        /// Saves the edited month.
+        /// </summary>
+        private void SaveMonthEdit()
+        {
+            Year[] yearArray = Data.locations[currentLoc].GetAllYears();
+            MonthyObservations[] monthArray = yearArray[currentYear].GetYearObserv();
+
+            for (int i = 0; i < monthArray.Length; i++)
             {
-                lstYear.Items.Clear();
-                showYears();
-
-                if (currentYear > 0)
-                {
-                    lstMonths.Items.Clear();
-                    showMonths();
-
-                    if (currentMonth > 0)
-                    {
-                        lstMonthInfo.Items.Clear();
-                        showMonthsInfo();
-                    }
-                }
+                monthArray[i].SetMonthID(dtgMonthInfo.Rows[i].Cells[0].Value.ToString());
+                monthArray[i].SetMaxTemp(dtgMonthInfo.Rows[i].Cells[1].Value.ToString());
+                monthArray[i].SetMinTemp(dtgMonthInfo.Rows[i].Cells[2].Value.ToString());
+                monthArray[i].SetFrostDays(dtgMonthInfo.Rows[i].Cells[3].Value.ToString());
+                monthArray[i].SetMmRainfall(dtgMonthInfo.Rows[i].Cells[4].Value.ToString());
+                monthArray[i].SetSunHours(dtgMonthInfo.Rows[i].Cells[5].Value.ToString());
             }
+
+            yearArray[currentYear].SetYrObserv(monthArray);
+            Data.locations[currentLoc].SetAllYears(yearArray);
+        }
+
+        /// <summary>
+        /// Sets the editLoc and editYear values.
+        /// </summary>
+        private void SetEditYear()
+        {
+            locEdit = lstLocation.SelectedIndex;
+            yearEdit = lstYear.SelectedIndex;
+        }
+
+        /// <summary>
+        /// Resets the editLoc and editYear values.
+        /// </summary>
+        private void ResetEditYear()
+        {
+            locEdit = -1;
+            yearEdit = -1;
+        }
+
+        private void btnYearEdit_Click(object sender, EventArgs e)
+        {
+            SetEditYear();
+
+            if (yearEdit < 0 | locEdit < 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Please select the Location and Year proir to 'Edit Year'.");
+            }
+            else
+            {
+                FillEditYear();
+            }
+        }
+
+        private void btnYearSave_Click(object sender, EventArgs e)
+        {
+            SaveEditYear();
+            ResetEditYear();
+            RefreshLists();
+        }
+
+        /// <summary>
+        /// Saves the edited year.
+        /// </summary>
+        private void SaveEditYear()
+        {
+            Year[] yearArray = Data.locations[locEdit].GetAllYears();
+            Year editYear = yearArray[yearEdit];
+
+            editYear.SetYrDescrip(txtYearDescrip.Text);
+
+            yearArray[yearEdit] = editYear;
+            Data.locations[locEdit].SetAllYears(yearArray);
+
+            ClearEditYear();
+            RefreshLists();
+
+            SaveDataToFile();
+        }
+
+        private void btnYearReset_Click(object sender, EventArgs e)
+        {
+            FillEditYear();
+        }
+
+        private void btnYearCancel_Click(object sender, EventArgs e)
+        {
+            ClearEditYear();
+            ResetEditYear();
+        }
+
+        /// <summary>
+        /// Clears the edit year text fields.
+        /// </summary>
+        private void ClearEditYear()
+        {
+            lblYearID.Text = "";
+            txtYearDescrip.Text = "";
+        }
+
+        /// <summary>
+        /// Fills the edit year text fields.
+        /// </summary>
+        private void FillEditYear()
+        {
+            Year[] yearArray = Data.locations[locEdit].GetAllYears();
+            Year editYear = yearArray[yearEdit];
+
+            lblYearID.Text = editYear.GetYear();
+            txtYearDescrip.Text = editYear.GetYrDescrip();
+        }
+
+        private void btnLocAdd_Click(object sender, EventArgs e)
+        {
+            AddLocation();
+            ClearAddLocation();
+            RefreshLists();
+        }
+
+        /// <summary>
+        /// Clears the add location text fields.
+        /// </summary>
+        private void ClearAddLocation()
+        {
+            txtAddLocationName.Text = "";
+            txtAddStrtNameNum.Text = "";
+            txtAddCounty.Text = "";
+            txtAddPostcode.Text = "";
+            txtAddLatitude.Text = "";
+            txtAddLongitude.Text = "";
+        }
+
+        /// <summary>
+        /// Adds the new location.
+        /// </summary>
+        private void AddLocation()
+        {
+            int locArrLength;
+
+            Location newLoc = new Location(txtAddLocationName.Text, txtAddStrtNameNum.Text, txtAddCounty.Text, txtAddPostcode.Text, txtAddLatitude.Text, txtAddLongitude.Text);
+
+            locArrLength = Data.locations.Length;
+            Array.Resize(ref Data.locations, locArrLength + 1);
+            Data.locations[locArrLength] = newLoc;
+
+            SaveDataToFile();
+        }
+
+        private void btnLocCancelAdd_Click(object sender, EventArgs e)
+        {
+            ClearLocAdd();
+        }
+
+        /// <summary>
+        /// Clears the location add text fields.
+        /// </summary>
+        private void ClearLocAdd()
+        {
+            txtAddLocationName.Text = "";
+            txtAddStrtNameNum.Text = "";
+            txtAddCounty.Text = "";
+            txtAddPostcode.Text = "";
+            txtAddLatitude.Text = "";
+            txtAddLongitude.Text = "";
+        }
+
+        private void btnYearAdd_Click(object sender, EventArgs e)
+        {
+            SetCurrentYear();
+            locEdit = lstLocation.SelectedIndex;
+
+            if (locEdit < 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Please select location to add year to.");
+            }
+            else
+            {
+                AddYear();
+                ClearAddYear();
+                ResetEditYear();
+                RefreshLists();
+            }
+        }
+
+        /// <summary>
+        /// Adds the new year.
+        /// </summary>
+        private void AddYear()
+        {
+            int yearArrLength;
+            Year[] yearArr = Data.locations[locEdit].GetAllYears();
+            MonthyObservations[] monthArr = new MonthyObservations[12];
+            
+
+            Year newYear = new Year(txtAddYearID.Text, txtAddYearDescrip.Text);
+
+            if (yearArr == null)
+            {
+                yearArrLength = 0;
+            }
+            else
+            {
+                yearArrLength = yearArr.Length;
+            }
+
+            for (int i = 0; i < monthArr.Length; i++)
+            {
+                MonthyObservations month = new MonthyObservations((i + 1).ToString(), "1000", "1000", "1000", "1000", "1000");
+
+                monthArr[i] = month;
+            }
+
+            newYear.SetYrObserv(monthArr);
+            
+            Array.Resize(ref yearArr, yearArrLength + 1);
+            yearArr[yearArrLength] = newYear;
+
+            Data.locations[locEdit].SetAllYears(yearArr);
+
+            SaveDataToFile();
+        }
+
+        /// <summary>
+        /// Clears the add year text fields.
+        /// </summary>
+        private void ClearAddYear()
+        {
+            txtAddYearID.Text = "";
+            txtAddYearDescrip.Text = "";
+        }
+
+        private void btnYearCancelAdd_Click(object sender, EventArgs e)
+        {
+            ClearAddYear();
+            ResetEditYear();
         }
     }
 }
