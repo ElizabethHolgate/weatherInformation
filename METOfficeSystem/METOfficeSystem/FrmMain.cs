@@ -56,7 +56,7 @@ namespace METOfficeSystem
             lblYearID.Text = "";
         }
 
-        private string SelectFile()
+        public string SelectFile()
         {
             openFileDialog.ShowDialog();
             selectedFile = openFileDialog.FileName;
@@ -76,7 +76,7 @@ namespace METOfficeSystem
             StreamReader getData = new StreamReader(@"inputEXTENDED.txt");
             selectedFile = "inputEXTENDED.txt";
 
-            //userFile = SelectFile()
+            //userFile = SelectFile();
             //StreamReader getData = new StreamReader(@userFile);
 
             //read number of locations in data file
@@ -132,7 +132,7 @@ namespace METOfficeSystem
 
                     //add new year to array of years
                     yearsInLocation[y] = newYear;
-                    
+
                 }
                 //add year to location
                 newLocation.SetAllYears(yearsInLocation);
@@ -143,7 +143,7 @@ namespace METOfficeSystem
                 }
                 else
                 {
-                    locArrSize = Data.locations.Length;
+                    locArrSize = Data.locations.Length;  
                 }
 
                 //add location to array of locations
@@ -435,25 +435,65 @@ namespace METOfficeSystem
 
         private bool SearchLocation(string userInput)
         {
-            string locName;
+            //variables
+            string locName, nextMatch;
+            int numLocs, locCount, locLength, currentPosition, amountLeft, findLength;
             bool found = false;
             Location loc = new Location();
 
-            for (int i = 0; i < Data.locations.Length; i++)
-            {
-                loc = Data.locations[i];
-                locName = loc.GetLocationName().ToLower();
+            //initialise variables
+            numLocs = Data.locations.Length;
+            locCount = 0;
+            findLength = userInput.Length;
 
-                if (userInput == locName)
+            while ((locCount < numLocs - 1) & (found == false))
+            {
+                locName = Data.locations[locCount].GetLocationName();
+                locLength = locName.Length;
+                currentPosition = 0;
+                amountLeft = currentPosition - findLength - 1;
+
+                if (findLength < locLength)
                 {
-                    lstLocation.SelectedIndex = i;
-                    lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n location list.", locName, i + 1);
-                    found = true;
-                    return found;
+                    while ((amountLeft < locLength) & (found == false))
+                    {
+                        nextMatch = locName.Substring(currentPosition, findLength).ToLower();
+
+                        if (nextMatch != userInput)
+                        {
+                            currentPosition++;
+                            amountLeft = currentPosition + findLength;
+                        }
+                        else
+                        {
+                            lstLocation.SelectedIndex = locCount;
+                            lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n location list.", locName, locCount + 1);
+                            found = true;
+                            return found;
+                        }
+                    }
                 }
+
+                locCount++;
             }
 
             return found;
+
+            //for (int i = 0; i < Data.locations.Length; i++)
+            //{
+            //    loc = Data.locations[i];
+            //    locName = loc.GetLocationName().ToLower();
+
+            //    if (userInput == locName)
+            //    {
+            //        lstLocation.SelectedIndex = i;
+            //        lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n location list.", locName, i + 1);
+            //        found = true;
+            //        return found;
+            //    }
+            //}
+
+            //return found;
         }
 
         private bool SearchYear(string userInput)
