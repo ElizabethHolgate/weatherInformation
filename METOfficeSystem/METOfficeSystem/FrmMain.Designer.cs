@@ -93,12 +93,13 @@
             this.btnYearCancelAdd = new System.Windows.Forms.Button();
             this.btnYearAdd = new System.Windows.Forms.Button();
             this.grpSearch = new System.Windows.Forms.GroupBox();
+            this.lblSearchResult = new System.Windows.Forms.Label();
+            this.lbl = new System.Windows.Forms.Label();
             this.rdbSearchMonth = new System.Windows.Forms.RadioButton();
             this.rdbSearchYear = new System.Windows.Forms.RadioButton();
             this.rdbSearchLocation = new System.Windows.Forms.RadioButton();
             this.lblSeachLoc = new System.Windows.Forms.Label();
-            this.lbl = new System.Windows.Forms.Label();
-            this.lblSearchResult = new System.Windows.Forms.Label();
+            this.DrawingPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dtgMonthInfo)).BeginInit();
             this.grpEditLocation.SuspendLayout();
             this.grpEditYear.SuspendLayout();
@@ -808,6 +809,26 @@
             this.grpSearch.TabStop = false;
             this.grpSearch.Text = "Search";
             // 
+            // lblSearchResult
+            // 
+            this.lblSearchResult.AutoSize = true;
+            this.lblSearchResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchResult.Location = new System.Drawing.Point(54, 158);
+            this.lblSearchResult.Name = "lblSearchResult";
+            this.lblSearchResult.Size = new System.Drawing.Size(13, 20);
+            this.lblSearchResult.TabIndex = 18;
+            this.lblSearchResult.Text = " ";
+            // 
+            // lbl
+            // 
+            this.lbl.AutoSize = true;
+            this.lbl.Location = new System.Drawing.Point(9, 166);
+            this.lbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(40, 13);
+            this.lbl.TabIndex = 17;
+            this.lbl.Text = "Result:";
+            // 
             // rdbSearchMonth
             // 
             this.rdbSearchMonth.AutoSize = true;
@@ -854,31 +875,20 @@
             this.lblSeachLoc.TabIndex = 13;
             this.lblSeachLoc.Text = "Search:";
             // 
-            // lbl
+            // DrawingPanel
             // 
-            this.lbl.AutoSize = true;
-            this.lbl.Location = new System.Drawing.Point(9, 166);
-            this.lbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(40, 13);
-            this.lbl.TabIndex = 17;
-            this.lbl.Text = "Result:";
-            // 
-            // lblSearchResult
-            // 
-            this.lblSearchResult.AutoSize = true;
-            this.lblSearchResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchResult.Location = new System.Drawing.Point(54, 158);
-            this.lblSearchResult.Name = "lblSearchResult";
-            this.lblSearchResult.Size = new System.Drawing.Size(13, 20);
-            this.lblSearchResult.TabIndex = 18;
-            this.lblSearchResult.Text = " ";
+            this.DrawingPanel.Location = new System.Drawing.Point(317, 587);
+            this.DrawingPanel.Name = "DrawingPanel";
+            this.DrawingPanel.Size = new System.Drawing.Size(645, 314);
+            this.DrawingPanel.TabIndex = 50;
+            this.DrawingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawingPanel_Paint);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1493, 913);
+            this.Controls.Add(this.DrawingPanel);
             this.Controls.Add(this.grpAddYear);
             this.Controls.Add(this.grpAddLocation);
             this.Controls.Add(this.grpEditYear);
@@ -982,6 +992,7 @@
         private System.Windows.Forms.Label lblSearchResult;
         private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.Label lblSeachLoc;
+        private System.Windows.Forms.Panel DrawingPanel;
     }
 }
 

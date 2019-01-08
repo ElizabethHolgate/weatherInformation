@@ -157,7 +157,7 @@ namespace METOfficeSystem
         //write data to file
         private void SaveDataToFile()
         {
-            int yrLength, monthLength;
+            int yrLength;
             Location addLoc = new Location();
             Year[] yrArr = null;
             Year addYr = new Year();
@@ -231,13 +231,14 @@ namespace METOfficeSystem
         /// </summary>
         private void ShowLocationInfo()
         {
+            currentLoc = -1;
             currentLoc = lstLocation.SelectedIndex;
 
             if (currentLoc < 0)
             {
                 lstLocationInfo.Items.Add("No Location selected");
             }
-            else
+            else if (currentLoc < Data.locations.Length)
             {
                 lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLocationName());
                 lstLocationInfo.Items.Add("");
@@ -249,6 +250,18 @@ namespace METOfficeSystem
                 lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLatitude());
                 lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLongitude());
             }
+            else
+            {
+                try
+                {
+                    lstLocationInfo.Items.Add(Data.locations[currentLoc].GetLocationName());
+                }
+                catch (Exception e)
+                {
+                    System.Windows.Forms.MessageBox.Show("ERROR: " + e.Message + " Please refresh the form and try again");
+                    
+                }
+            }
         }
 
         /// <summary>
@@ -256,21 +269,29 @@ namespace METOfficeSystem
         /// </summary>
         private void ShowYears()
         {
-            Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
-
-            lstYear.Items.Clear();
-
-            if (yearsInLoc == null)
+            try
             {
-                lstYear.Items.Add("No year data availble.");
-            }
-            else
-            {
-                foreach (Year y in yearsInLoc)
+                Year[] yearsInLoc = Data.locations[currentLoc].GetAllYears();
+
+                lstYear.Items.Clear();
+
+                if (yearsInLoc == null)
                 {
-                    lstYear.Items.Add(y.GetYear() + ": " + y.GetYrDescrip());
+                    lstYear.Items.Add("No year data availble.");
+                }
+                else
+                {
+                    foreach (Year y in yearsInLoc)
+                    {
+                        lstYear.Items.Add(y.GetYear() + ": " + y.GetYrDescrip());
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show("ERROR: " + e.Message + " Please refresh the form and try again");
+            }
+            
         }
 
         /// <summary>
@@ -286,21 +307,28 @@ namespace METOfficeSystem
             }
             else
             {
-                MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYearObserv();
-                
-                dtgMonthInfo.Rows.Clear();
-
-                for (int i = 0; i < monthsInYear.Length; i++)
+                try
                 {
-                    MonthyObservations m = monthsInYear[i];
+                    MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYearObserv();
 
-                    dtgMonthInfo.Rows.Add();
-                    dtgMonthInfo.Rows[i].Cells[0].Value = m.GetMonthID();
-                    dtgMonthInfo.Rows[i].Cells[1].Value = m.GetMaxTemp();
-                    dtgMonthInfo.Rows[i].Cells[2].Value = m.GetMinTemp();
-                    dtgMonthInfo.Rows[i].Cells[3].Value = m.GetFrostDays();
-                    dtgMonthInfo.Rows[i].Cells[4].Value = m.GetMmRainfall();
-                    dtgMonthInfo.Rows[i].Cells[5].Value = m.GetSunHours();
+                    dtgMonthInfo.Rows.Clear();
+
+                    for (int i = 0; i < monthsInYear.Length; i++)
+                    {
+                        MonthyObservations m = monthsInYear[i];
+
+                        dtgMonthInfo.Rows.Add();
+                        dtgMonthInfo.Rows[i].Cells[0].Value = m.GetMonthID();
+                        dtgMonthInfo.Rows[i].Cells[1].Value = m.GetMaxTemp();
+                        dtgMonthInfo.Rows[i].Cells[2].Value = m.GetMinTemp();
+                        dtgMonthInfo.Rows[i].Cells[3].Value = m.GetFrostDays();
+                        dtgMonthInfo.Rows[i].Cells[4].Value = m.GetMmRainfall();
+                        dtgMonthInfo.Rows[i].Cells[5].Value = m.GetSunHours();
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Windows.Forms.MessageBox.Show("ERROR: " + e.Message + " Please ensure you have selected a year.");
                 }
             }
         }
@@ -387,18 +415,26 @@ namespace METOfficeSystem
         /// </summary>
         private void SaveEditLocation()
         {
-            Location locToEdit = Data.locations[locEdit];
+            try
+            {
+                Location locToEdit = Data.locations[locEdit];
 
-            locToEdit.SetLocationName(txtEditLocationName.Text);
-            locToEdit.SetStrtName(txtEditStreetNameNum.Text);
-            locToEdit.SetCounty(txtEditCounty.Text);
-            locToEdit.SetPostCode(txtEditPostcode.Text);
-            locToEdit.SetLatitude(txtEditLatitude.Text);
-            locToEdit.SetLongitude(txtEditLongitude.Text);
+                locToEdit.SetLocationName(txtEditLocationName.Text);
+                locToEdit.SetStrtName(txtEditStreetNameNum.Text);
+                locToEdit.SetCounty(txtEditCounty.Text);
+                locToEdit.SetPostCode(txtEditPostcode.Text);
+                locToEdit.SetLatitude(txtEditLatitude.Text);
+                locToEdit.SetLongitude(txtEditLongitude.Text);
 
-            Data.locations[locEdit] = locToEdit;
+                Data.locations[locEdit] = locToEdit;
 
-            SaveDataToFile();
+                SaveDataToFile();
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show("ERROR: " + e.Message + " Please ensure all fields have been filled out correctly.");
+            }
+            
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -439,23 +475,22 @@ namespace METOfficeSystem
             string locName, nextMatch;
             int numLocs, locCount, locLength, currentPosition, amountLeft, findLength;
             bool found = false;
-            Location loc = new Location();
 
             //initialise variables
             numLocs = Data.locations.Length;
             locCount = 0;
             findLength = userInput.Length;
 
-            while ((locCount < numLocs - 1) & (found == false))
+            while ((locCount < numLocs - 1) && (found == false))
             {
                 locName = Data.locations[locCount].GetLocationName();
                 locLength = locName.Length;
                 currentPosition = 0;
                 amountLeft = currentPosition - findLength - 1;
 
-                if (findLength < locLength)
+                if (findLength <= locLength)
                 {
-                    while ((amountLeft < locLength) & (found == false))
+                    while ((amountLeft < locLength) && (found == false))
                     {
                         nextMatch = locName.Substring(currentPosition, findLength).ToLower();
 
@@ -478,43 +513,48 @@ namespace METOfficeSystem
             }
 
             return found;
-
-            //for (int i = 0; i < Data.locations.Length; i++)
-            //{
-            //    loc = Data.locations[i];
-            //    locName = loc.GetLocationName().ToLower();
-
-            //    if (userInput == locName)
-            //    {
-            //        lstLocation.SelectedIndex = i;
-            //        lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n location list.", locName, i + 1);
-            //        found = true;
-            //        return found;
-            //    }
-            //}
-
-            //return found;
         }
 
         private bool SearchYear(string userInput)
         {
-            string yearID;
+            string yearID, nextMatch;
+            int numYears, yearCount, yearLength, currentPosition, amountLeft, findLength;
             bool found = false;
             Year[] yrArr = Data.locations[currentLoc].GetAllYears();
-            Year year = new Year();
 
-            for (int i = 0; i < yrArr.Length; i++)
+            numYears = yrArr.Length;
+            yearCount = 0;
+            findLength = userInput.Length;
+
+            while ((yearCount < numYears - 1) && (found == false))
             {
-                year = yrArr[i];
-                yearID = year.GetYear().ToLower();
+                yearID = yrArr[yearCount].GetYear();
+                yearLength = yearID.Length;
+                currentPosition = 0;
+                amountLeft = currentPosition - findLength - 1;
 
-                if (userInput == yearID)
+                if (findLength <= yearLength)
                 {
-                    lstYear.SelectedIndex = i;
-                    lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n year list.", yearID, i + 1);
-                    found = true;
-                    return found;
+                    while ((amountLeft < yearLength) && (found == false))
+                    {
+                        nextMatch = yearID.Substring(currentPosition, findLength).ToLower();
+
+                        if (nextMatch != userInput)
+                        {
+                            currentPosition++;
+                            amountLeft = currentPosition + findLength;
+                        }
+                        else
+                        {
+                            lstYear.SelectedIndex = yearCount;
+                            lblSearchResult.Text = string.Format("\"{0}\" is number {1} in the\n year list.", yearID, yearCount + 1);
+                            found = true;
+                            return found;
+                        }
+                    }
                 }
+
+                yearCount++;
             }
 
             return found;
@@ -579,6 +619,7 @@ namespace METOfficeSystem
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             RefreshLists();
+            System.Windows.Forms.MessageBox.Show("Form Refreshed!");
         }
 
         /// <summary>
@@ -663,18 +704,26 @@ namespace METOfficeSystem
         /// </summary>
         private void SaveEditYear()
         {
-            Year[] yearArray = Data.locations[locEdit].GetAllYears();
-            Year editYear = yearArray[yearEdit];
+            try
+            {
+                Year[] yearArray = Data.locations[locEdit].GetAllYears();
+                Year editYear = yearArray[yearEdit];
 
-            editYear.SetYrDescrip(txtYearDescrip.Text);
+                editYear.SetYrDescrip(txtYearDescrip.Text);
 
-            yearArray[yearEdit] = editYear;
-            Data.locations[locEdit].SetAllYears(yearArray);
+                yearArray[yearEdit] = editYear;
+                Data.locations[locEdit].SetAllYears(yearArray);
 
-            ClearEditYear();
-            RefreshLists();
+                ClearEditYear();
+                RefreshLists();
 
-            SaveDataToFile();
+                SaveDataToFile();
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show("ERROR: " + e.Message + " Please ensure all fields have been filled out correctly.");
+            }
+            
         }
 
         private void btnYearReset_Click(object sender, EventArgs e)
@@ -735,14 +784,85 @@ namespace METOfficeSystem
         private void AddLocation()
         {
             int locArrLength;
+            bool addLocInput;
 
-            Location newLoc = new Location(txtAddLocationName.Text, txtAddStrtNameNum.Text, txtAddCounty.Text, txtAddPostcode.Text, txtAddLatitude.Text, txtAddLongitude.Text);
+            addLocInput = TestAddLocationInput();
 
-            locArrLength = Data.locations.Length;
-            Array.Resize(ref Data.locations, locArrLength + 1);
-            Data.locations[locArrLength] = newLoc;
+            if (addLocInput == true)
+            {
+                Location newLoc = new Location(txtAddLocationName.Text, txtAddStrtNameNum.Text, txtAddCounty.Text, txtAddPostcode.Text, txtAddLatitude.Text, txtAddLongitude.Text);
 
-            SaveDataToFile();
+                locArrLength = Data.locations.Length;
+                Array.Resize(ref Data.locations, locArrLength + 1);
+                Data.locations[locArrLength] = newLoc;
+
+                SaveDataToFile();
+            }
+            else if (addLocInput == false)
+            {
+                System.Windows.Forms.MessageBox.Show("Please ensure all the values are entered correctly before clicking 'Add Location'.");
+            }
+            
+        }
+
+        private bool TestAddLocationInput()
+        {
+            bool textBoxesFull = false, name = true, street = true, county = true, postcode = true, lat = true, longitude = true;
+            double latTry, longTry;
+
+            if (String.IsNullOrEmpty(txtAddLocationName.Text))
+            {
+                name = false;
+            }
+            if (String.IsNullOrEmpty(txtAddStrtNameNum.Text))
+            {
+                street = false;
+            }
+            if (String.IsNullOrEmpty(txtAddCounty.Text))
+            {
+                county = false;
+            }
+            if (String.IsNullOrEmpty(txtAddPostcode.Text))
+            {
+                postcode = false;
+            }
+            if (String.IsNullOrEmpty(txtAddLatitude.Text))
+            {
+                lat = false;
+            }
+            else
+            {
+                if (double.TryParse(txtAddLatitude.Text, out latTry))
+                {
+                    lat = true;
+                }
+                else
+                {
+                    lat = false;
+                }
+            }
+            if (String.IsNullOrEmpty(txtAddLongitude.Text))
+            {
+                if (double.TryParse(txtAddLongitude.Text, out longTry))
+                {
+                    longitude = true;
+                }
+                else
+                {
+                    longitude = false;
+                }
+            }
+
+            if (name == false || street == false || county == false || postcode == false || lat == false || longitude == false)
+            {
+                textBoxesFull = false;
+            }
+            else
+            {
+                textBoxesFull = true;
+            }
+
+            return textBoxesFull;
         }
 
         private void btnLocCancelAdd_Click(object sender, EventArgs e)
@@ -781,6 +901,18 @@ namespace METOfficeSystem
             }
         }
 
+        private bool TestAddYearInputs()
+        {
+            bool textBoxesFull = true;
+
+            if (String.IsNullOrEmpty(txtAddYearID.Text))
+            {
+                textBoxesFull = false;
+            }
+
+            return textBoxesFull;
+        }
+
         /// <summary>
         /// Adds the new year.
         /// </summary>
@@ -804,7 +936,7 @@ namespace METOfficeSystem
 
             for (int i = 0; i < monthArr.Length; i++)
             {
-                MonthyObservations month = new MonthyObservations((i + 1).ToString(), "1000", "1000", "1000", "1000", "1000");
+                MonthyObservations month = new MonthyObservations((i + 1).ToString(), "000", "000", "1000", "1000", "1000");
 
                 monthArr[i] = month;
             }
@@ -833,5 +965,60 @@ namespace METOfficeSystem
             ClearAddYear();
             ResetEditYear();
         }
+
+        private void DrawingPanel_Paint(object sender, PaintEventArgs e)
+        {
+            Pen linePen;
+            Brush solidBrush;
+            Point lineStart, lineStop;
+            Rectangle rectangle;
+            int penSize;
+
+            Color myColour = Color.Red;
+            penSize = 5;
+            Color solidColor = Color.Aqua;
+
+            lineStart = new Point(10, 20);
+            lineStop = new Point(10, 200);
+            rectangle = new Rectangle(10, 20, 50, 280);
+
+            linePen = new Pen(myColour, penSize);
+
+            using (Graphics panelGraphics = DrawingPanel.CreateGraphics())
+            using (solidBrush = new SolidBrush(solidColor))
+            {
+                panelGraphics.DrawLine(linePen, lineStart, lineStop);
+                panelGraphics.FillRectangle(solidBrush, rectangle);
+            }
+
+            linePen.Dispose();
+            solidBrush.Dispose();
+
+            GraphLines();
+        }
+
+        private void GraphLines()
+        {
+            Pen linePen;
+            Point firstLine, secondLine, lineStop;
+            int penSize;
+
+            Color myColour = Color.Black;
+            penSize = 3;
+
+            firstLine = new Point(10, 10);
+            secondLine = new Point(600, 300);
+            lineStop = new Point(10, 300);
+
+            linePen = new Pen(myColour, penSize);
+
+            using (Graphics panelGraphics = DrawingPanel.CreateGraphics())
+            {
+                panelGraphics.DrawLine(linePen, firstLine, lineStop);
+                panelGraphics.DrawLine(linePen, lineStop, secondLine);
+            }
+        }
+
+
     }
 }
