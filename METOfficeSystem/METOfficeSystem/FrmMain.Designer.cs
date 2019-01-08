@@ -99,13 +99,22 @@
             this.rdbSearchYear = new System.Windows.Forms.RadioButton();
             this.rdbSearchLocation = new System.Windows.Forms.RadioButton();
             this.lblSeachLoc = new System.Windows.Forms.Label();
-            this.DrawingPanel = new System.Windows.Forms.Panel();
+            this.lblMeanOutput = new System.Windows.Forms.Label();
+            this.btnStats = new System.Windows.Forms.Button();
+            this.rdbMaxTemp = new System.Windows.Forms.RadioButton();
+            this.grbStatistics = new System.Windows.Forms.GroupBox();
+            this.rdbMinTemp = new System.Windows.Forms.RadioButton();
+            this.rdbAirFrost = new System.Windows.Forms.RadioButton();
+            this.rdbRain = new System.Windows.Forms.RadioButton();
+            this.rdbSunshine = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtgMonthInfo)).BeginInit();
             this.grpEditLocation.SuspendLayout();
             this.grpEditYear.SuspendLayout();
             this.grpAddLocation.SuspendLayout();
             this.grpAddYear.SuspendLayout();
             this.grpSearch.SuspendLayout();
+            this.grbStatistics.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstLocation
@@ -175,7 +184,7 @@
             // btnRefresh
             // 
             this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Location = new System.Drawing.Point(1335, 873);
+            this.btnRefresh.Location = new System.Drawing.Point(80, 687);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(2);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(148, 29);
@@ -875,20 +884,122 @@
             this.lblSeachLoc.TabIndex = 13;
             this.lblSeachLoc.Text = "Search:";
             // 
-            // DrawingPanel
+            // lblMeanOutput
             // 
-            this.DrawingPanel.Location = new System.Drawing.Point(317, 587);
-            this.DrawingPanel.Name = "DrawingPanel";
-            this.DrawingPanel.Size = new System.Drawing.Size(645, 314);
-            this.DrawingPanel.TabIndex = 50;
-            this.DrawingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawingPanel_Paint);
+            this.lblMeanOutput.AutoSize = true;
+            this.lblMeanOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMeanOutput.Location = new System.Drawing.Point(429, 48);
+            this.lblMeanOutput.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMeanOutput.Name = "lblMeanOutput";
+            this.lblMeanOutput.Size = new System.Drawing.Size(117, 20);
+            this.lblMeanOutput.TabIndex = 50;
+            this.lblMeanOutput.Text = " lblMeanOutput";
+            // 
+            // btnStats
+            // 
+            this.btnStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStats.Location = new System.Drawing.Point(19, 172);
+            this.btnStats.Margin = new System.Windows.Forms.Padding(2);
+            this.btnStats.Name = "btnStats";
+            this.btnStats.Size = new System.Drawing.Size(152, 36);
+            this.btnStats.TabIndex = 51;
+            this.btnStats.Text = "Calculate Statistics";
+            this.btnStats.UseVisualStyleBackColor = true;
+            this.btnStats.Click += new System.EventHandler(this.btnStats_Click);
+            // 
+            // rdbMaxTemp
+            // 
+            this.rdbMaxTemp.AutoSize = true;
+            this.rdbMaxTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbMaxTemp.Location = new System.Drawing.Point(19, 18);
+            this.rdbMaxTemp.Name = "rdbMaxTemp";
+            this.rdbMaxTemp.Size = new System.Drawing.Size(189, 24);
+            this.rdbMaxTemp.TabIndex = 52;
+            this.rdbMaxTemp.TabStop = true;
+            this.rdbMaxTemp.Text = "Maximum Temperature";
+            this.rdbMaxTemp.UseVisualStyleBackColor = true;
+            // 
+            // grbStatistics
+            // 
+            this.grbStatistics.Controls.Add(this.label1);
+            this.grbStatistics.Controls.Add(this.rdbSunshine);
+            this.grbStatistics.Controls.Add(this.rdbRain);
+            this.grbStatistics.Controls.Add(this.rdbAirFrost);
+            this.grbStatistics.Controls.Add(this.rdbMinTemp);
+            this.grbStatistics.Controls.Add(this.btnStats);
+            this.grbStatistics.Controls.Add(this.rdbMaxTemp);
+            this.grbStatistics.Controls.Add(this.lblMeanOutput);
+            this.grbStatistics.Location = new System.Drawing.Point(317, 587);
+            this.grbStatistics.Name = "grbStatistics";
+            this.grbStatistics.Size = new System.Drawing.Size(645, 213);
+            this.grbStatistics.TabIndex = 53;
+            this.grbStatistics.TabStop = false;
+            this.grbStatistics.Text = "Statistics";
+            // 
+            // rdbMinTemp
+            // 
+            this.rdbMinTemp.AutoSize = true;
+            this.rdbMinTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbMinTemp.Location = new System.Drawing.Point(19, 48);
+            this.rdbMinTemp.Name = "rdbMinTemp";
+            this.rdbMinTemp.Size = new System.Drawing.Size(185, 24);
+            this.rdbMinTemp.TabIndex = 53;
+            this.rdbMinTemp.TabStop = true;
+            this.rdbMinTemp.Text = "Minimum Temperature";
+            this.rdbMinTemp.UseVisualStyleBackColor = true;
+            // 
+            // rdbAirFrost
+            // 
+            this.rdbAirFrost.AutoSize = true;
+            this.rdbAirFrost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbAirFrost.Location = new System.Drawing.Point(19, 78);
+            this.rdbAirFrost.Name = "rdbAirFrost";
+            this.rdbAirFrost.Size = new System.Drawing.Size(127, 24);
+            this.rdbAirFrost.TabIndex = 54;
+            this.rdbAirFrost.TabStop = true;
+            this.rdbAirFrost.Text = "Air Frost Days";
+            this.rdbAirFrost.UseVisualStyleBackColor = true;
+            // 
+            // rdbRain
+            // 
+            this.rdbRain.AutoSize = true;
+            this.rdbRain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbRain.Location = new System.Drawing.Point(19, 108);
+            this.rdbRain.Name = "rdbRain";
+            this.rdbRain.Size = new System.Drawing.Size(80, 24);
+            this.rdbRain.TabIndex = 55;
+            this.rdbRain.TabStop = true;
+            this.rdbRain.Text = "Rainfall";
+            this.rdbRain.UseVisualStyleBackColor = true;
+            // 
+            // rdbSunshine
+            // 
+            this.rdbSunshine.AutoSize = true;
+            this.rdbSunshine.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbSunshine.Location = new System.Drawing.Point(19, 138);
+            this.rdbSunshine.Name = "rdbSunshine";
+            this.rdbSunshine.Size = new System.Drawing.Size(141, 24);
+            this.rdbSunshine.TabIndex = 56;
+            this.rdbSunshine.TabStop = true;
+            this.rdbSunshine.Text = "Sunshine Hours";
+            this.rdbSunshine.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(357, 48);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 20);
+            this.label1.TabIndex = 57;
+            this.label1.Text = "Mean:";
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1493, 913);
-            this.Controls.Add(this.DrawingPanel);
+            this.ClientSize = new System.Drawing.Size(1493, 851);
             this.Controls.Add(this.grpAddYear);
             this.Controls.Add(this.grpAddLocation);
             this.Controls.Add(this.grpEditYear);
@@ -901,6 +1012,7 @@
             this.Controls.Add(this.lstLocation);
             this.Controls.Add(this.grpEditLocation);
             this.Controls.Add(this.grpSearch);
+            this.Controls.Add(this.grbStatistics);
             this.Name = "FrmMain";
             this.Text = "Weather Information";
             this.Load += new System.EventHandler(this.FrmMain_Load);
@@ -915,6 +1027,8 @@
             this.grpAddYear.PerformLayout();
             this.grpSearch.ResumeLayout(false);
             this.grpSearch.PerformLayout();
+            this.grbStatistics.ResumeLayout(false);
+            this.grbStatistics.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -992,7 +1106,15 @@
         private System.Windows.Forms.Label lblSearchResult;
         private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.Label lblSeachLoc;
-        private System.Windows.Forms.Panel DrawingPanel;
+        private System.Windows.Forms.Label lblMeanOutput;
+        private System.Windows.Forms.Button btnStats;
+        private System.Windows.Forms.RadioButton rdbMaxTemp;
+        private System.Windows.Forms.GroupBox grbStatistics;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton rdbSunshine;
+        private System.Windows.Forms.RadioButton rdbRain;
+        private System.Windows.Forms.RadioButton rdbAirFrost;
+        private System.Windows.Forms.RadioButton rdbMinTemp;
     }
 }
 

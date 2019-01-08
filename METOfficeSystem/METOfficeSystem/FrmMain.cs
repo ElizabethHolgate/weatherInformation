@@ -54,6 +54,7 @@ namespace METOfficeSystem
             SetUpWeatherInfo();
             ShowLocations();
             lblYearID.Text = "";
+            lblMeanOutput.Text = "";
         }
 
         public string SelectFile()
@@ -128,7 +129,7 @@ namespace METOfficeSystem
                         newYear.SetYear(yearID);
                     }
                     //add months to year
-                    newYear.SetYrObserv(monthsInYear);
+                    newYear.SetMonthObserv(monthsInYear);
 
                     //add new year to array of years
                     yearsInLocation[y] = newYear;
@@ -193,7 +194,7 @@ namespace METOfficeSystem
                 for (int y = 0; y < yrLength; y++)
                 {
                     addYr = yrArr[y];
-                    monthArr = addYr.GetYearObserv();
+                    monthArr = addYr.GetMonthObserv();
                     
                     sw.WriteLine(addYr.GetYrDescrip());
 
@@ -309,7 +310,7 @@ namespace METOfficeSystem
             {
                 try
                 {
-                    MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetYearObserv();
+                    MonthyObservations[] monthsInYear = yearsInLoc[currentYear].GetMonthObserv();
 
                     dtgMonthInfo.Rows.Clear();
 
@@ -568,7 +569,7 @@ namespace METOfficeSystem
             if (currentLoc > 0 & currentYear > 0)
             {
                 Year[] yrArr = Data.locations[currentLoc].GetAllYears();
-                MonthyObservations[] monthArr = yrArr[currentYear].GetYearObserv();
+                MonthyObservations[] monthArr = yrArr[currentYear].GetMonthObserv();
                 MonthyObservations month = new MonthyObservations();
 
                 for (int i = 0; i < monthArr.Length; i++)
@@ -644,7 +645,7 @@ namespace METOfficeSystem
         private void SaveMonthEdit()
         {
             Year[] yearArray = Data.locations[currentLoc].GetAllYears();
-            MonthyObservations[] monthArray = yearArray[currentYear].GetYearObserv();
+            MonthyObservations[] monthArray = yearArray[currentYear].GetMonthObserv();
 
             for (int i = 0; i < monthArray.Length; i++)
             {
@@ -656,7 +657,7 @@ namespace METOfficeSystem
                 monthArray[i].SetSunHours(dtgMonthInfo.Rows[i].Cells[5].Value.ToString());
             }
 
-            yearArray[currentYear].SetYrObserv(monthArray);
+            yearArray[currentYear].SetMonthObserv(monthArray);
             Data.locations[currentLoc].SetAllYears(yearArray);
         }
 
@@ -941,7 +942,7 @@ namespace METOfficeSystem
                 monthArr[i] = month;
             }
 
-            newYear.SetYrObserv(monthArr);
+            newYear.SetMonthObserv(monthArr);
             
             Array.Resize(ref yearArr, yearArrLength + 1);
             yearArr[yearArrLength] = newYear;
@@ -966,59 +967,158 @@ namespace METOfficeSystem
             ResetEditYear();
         }
 
-        private void DrawingPanel_Paint(object sender, PaintEventArgs e)
+        private string CalculateMean(double[] numArr)
         {
-            Pen linePen;
-            Brush solidBrush;
-            Point lineStart, lineStop;
-            Rectangle rectangle;
-            int penSize;
+            string answer;
+            double numAnswer, sum = 0;
 
-            Color myColour = Color.Red;
-            penSize = 5;
-            Color solidColor = Color.Aqua;
-
-            lineStart = new Point(10, 20);
-            lineStop = new Point(10, 200);
-            rectangle = new Rectangle(10, 20, 50, 280);
-
-            linePen = new Pen(myColour, penSize);
-
-            using (Graphics panelGraphics = DrawingPanel.CreateGraphics())
-            using (solidBrush = new SolidBrush(solidColor))
+            foreach (double d in numArr)
             {
-                panelGraphics.DrawLine(linePen, lineStart, lineStop);
-                panelGraphics.FillRectangle(solidBrush, rectangle);
+                sum =+ d;
             }
 
-            linePen.Dispose();
-            solidBrush.Dispose();
+            numAnswer = sum / 12;
+            answer = String.Format("{0:0.00}", numAnswer);
 
-            GraphLines();
+            return answer;
         }
 
-        private void GraphLines()
+        private double[] MinArray()
         {
-            Pen linePen;
-            Point firstLine, secondLine, lineStop;
-            int penSize;
+            double num;
+            Year[] yrArr = Data.locations[currentLoc].GetAllYears();
+            MonthyObservations[] allMonths = yrArr[currentYear].GetMonthObserv();
 
-            Color myColour = Color.Black;
-            penSize = 3;
+            double[] minArr = new double[allMonths.Length];
 
-            firstLine = new Point(10, 10);
-            secondLine = new Point(600, 300);
-            lineStop = new Point(10, 300);
-
-            linePen = new Pen(myColour, penSize);
-
-            using (Graphics panelGraphics = DrawingPanel.CreateGraphics())
+            for (int i = 0; i < allMonths.Length; i++)
             {
-                panelGraphics.DrawLine(linePen, firstLine, lineStop);
-                panelGraphics.DrawLine(linePen, lineStop, secondLine);
+                num = allMonths[i].GetMinTemp();
+                minArr[i] = num;
             }
+
+            return minArr;
         }
 
+        private double[] MaxArray()
+        {
+            double num;
+            Year[] yrArr = Data.locations[currentLoc].GetAllYears();
+            MonthyObservations[] allMonths = yrArr[currentYear].GetMonthObserv();
 
+            double[] maxArr = new double[allMonths.Length];
+
+            for (int i = 0; i < allMonths.Length; i++)
+            {
+                num = allMonths[i].GetMaxTemp();
+                maxArr[i] = num;
+            }
+
+            return maxArr;
+        }
+
+        private double[] AirFrostArray()
+        {
+            double num;
+            Year[] yrArr = Data.locations[currentLoc].GetAllYears();
+            MonthyObservations[] allMonths = yrArr[currentYear].GetMonthObserv();
+
+            double[] airFrostArr = new double[allMonths.Length];
+
+            for (int i = 0; i < allMonths.Length; i++)
+            {
+                num = allMonths[i].GetFrostDays();
+                airFrostArr[i] = num;
+            }
+
+            return airFrostArr;
+        }
+
+        private double[] RainArray()
+        {
+            double num;
+            Year[] yrArr = Data.locations[currentLoc].GetAllYears();
+            MonthyObservations[] allMonths = yrArr[currentYear].GetMonthObserv();
+
+            double[] rainArr = new double[allMonths.Length];
+
+            for (int i = 0; i < allMonths.Length; i++)
+            {
+                num = allMonths[i].GetMmRainfall();
+                rainArr[i] = num;
+            }
+
+            return rainArr;
+        }
+
+        private double[] SunArray()
+        {
+            double num;
+            Year[] yrArr = Data.locations[currentLoc].GetAllYears();
+            MonthyObservations[] allMonths = yrArr[currentYear].GetMonthObserv();
+
+            double[]sunArr = new double[allMonths.Length];
+
+            for (int i = 0; i < allMonths.Length; i++)
+            {
+                num = allMonths[i].GetSunHours();
+                sunArr[i] = num;
+            }
+
+            return sunArr;
+        }
+
+        private void btnStats_Click(object sender, EventArgs e)
+        {
+            bool categoryChecked = false;
+            string meanResult;
+            double[] categoryArray = new double[12];
+
+            SetCurrentYear();
+
+            if (currentYear < 0 | currentLoc < 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Please select the Location and Year proir to 'Edit Year'.");
+            }
+            else
+            {
+                if (rdbMaxTemp.Checked)
+                {
+                    categoryArray = MaxArray();
+                    categoryChecked = true;
+                }
+                else if (rdbMinTemp.Checked)
+                {
+                    categoryArray = MinArray();
+                    categoryChecked = true;
+                }
+                else if (rdbAirFrost.Checked)
+                {
+                    categoryArray = AirFrostArray();
+                    categoryChecked = true;
+                }
+                else if (rdbRain.Checked)
+                {
+                    categoryArray = RainArray();
+                    categoryChecked = true;
+                }
+                else if(rdbSunshine.Checked)
+                {
+                    categoryArray = SunArray();
+                    categoryChecked = true;
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Please select the cateogory you want to calculate statistics for.");
+                }
+            }
+
+            if (categoryChecked == true)
+            {
+                meanResult = CalculateMean(categoryArray);
+                lblMeanOutput.Text = meanResult;
+            }
+            
+        }
     }
 }

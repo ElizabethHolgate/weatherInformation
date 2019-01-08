@@ -97,7 +97,7 @@ namespace METOfficeSystem
             }
             else
             {
-                return 1000;
+                return 0;
             }
         }
 

@@ -61,7 +61,7 @@ namespace METOfficeSystem
         /// Gets the array of monthy observations for the year.
         /// </summary>
         /// <returns>The yr observ.</returns>
-        public MonthyObservations[] GetYearObserv()
+        public MonthyObservations[] GetMonthObserv()
         {
             return monthObserv;
         }
@@ -104,7 +104,7 @@ namespace METOfficeSystem
         /// Sets the array of monthy observations for the year.
         /// </summary>
         /// <param name="inYrObserv">In yr observ.</param>
-        public void SetYrObserv(MonthyObservations[] inYrObserv)
+        public void SetMonthObserv(MonthyObservations[] inYrObserv)
         {
             try
             {
