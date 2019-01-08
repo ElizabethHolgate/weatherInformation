@@ -77,12 +77,8 @@ namespace METOfficeSystem
             string userFile, locName, locStrtNameNum, locCounty, locPostcode, locLatitude, locLongitude, yearDescription, yearID, monthID, maxTemp, minTemp, airFrostDays, mmRainfall, sunHours;
             int numLocations, numLocationYears, locArrSize;
 
-            //Hard coded stream reader for testing purposes
-            StreamReader getData = new StreamReader(@"inputEXTENDED.txt");
-            selectedFile = "inputEXTENDED.txt";
-
-            //userFile = SelectFile();
-            //StreamReader getData = new StreamReader(@userFile);
+            userFile = SelectFile();
+            StreamReader getData = new StreamReader(@userFile);
 
             //read number of locations in data file
             numLocations = Convert.ToInt32(getData.ReadLine());
