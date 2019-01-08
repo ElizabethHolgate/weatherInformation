@@ -951,37 +951,47 @@ namespace METOfficeSystem
         /// </summary>
         private void AddYear()
         {
+            bool addYearInput;
             int yearArrLength;
             Year[] yearArr = Data.locations[locEdit].GetAllYears();
             MonthyObservations[] monthArr = new MonthyObservations[12];
-            
 
-            Year newYear = new Year(txtAddYearID.Text, txtAddYearDescrip.Text);
+            addYearInput = TestAddYearInputs();
 
-            if (yearArr == null)
+            if (addYearInput == true)
             {
-                yearArrLength = 0;
+                Year newYear = new Year(txtAddYearID.Text, txtAddYearDescrip.Text);
+
+                if (yearArr == null)
+                {
+                    yearArrLength = 0;
+                }
+                else
+                {
+                    yearArrLength = yearArr.Length;
+                }
+
+                for (int i = 0; i < monthArr.Length; i++)
+                {
+                    MonthyObservations month = new MonthyObservations((i + 1).ToString(), "000", "000", "1000", "1000", "1000");
+
+                    monthArr[i] = month;
+                }
+
+                newYear.SetMonthObserv(monthArr);
+
+                Array.Resize(ref yearArr, yearArrLength + 1);
+                yearArr[yearArrLength] = newYear;
+
+                Data.locations[locEdit].SetAllYears(yearArr);
+
+                SaveDataToFile();
             }
-            else
+            else if (addYearInput == false)
             {
-                yearArrLength = yearArr.Length;
+                System.Windows.Forms.MessageBox.Show("Please ensure the 'Year ID' has been filled out before clicking 'Add Year'.");
             }
 
-            for (int i = 0; i < monthArr.Length; i++)
-            {
-                MonthyObservations month = new MonthyObservations((i + 1).ToString(), "000", "000", "1000", "1000", "1000");
-
-                monthArr[i] = month;
-            }
-
-            newYear.SetMonthObserv(monthArr);
-            
-            Array.Resize(ref yearArr, yearArrLength + 1);
-            yearArr[yearArrLength] = newYear;
-
-            Data.locations[locEdit].SetAllYears(yearArr);
-
-            SaveDataToFile();
         }
 
         /// <summary>

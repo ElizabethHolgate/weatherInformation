@@ -103,11 +103,11 @@
             this.btnStats = new System.Windows.Forms.Button();
             this.rdbMaxTemp = new System.Windows.Forms.RadioButton();
             this.grbStatistics = new System.Windows.Forms.GroupBox();
-            this.rdbMinTemp = new System.Windows.Forms.RadioButton();
-            this.rdbAirFrost = new System.Windows.Forms.RadioButton();
-            this.rdbRain = new System.Windows.Forms.RadioButton();
-            this.rdbSunshine = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.rdbSunshine = new System.Windows.Forms.RadioButton();
+            this.rdbRain = new System.Windows.Forms.RadioButton();
+            this.rdbAirFrost = new System.Windows.Forms.RadioButton();
+            this.rdbMinTemp = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dtgMonthInfo)).BeginInit();
             this.grpEditLocation.SuspendLayout();
             this.grpEditYear.SuspendLayout();
@@ -184,7 +184,7 @@
             // btnRefresh
             // 
             this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Location = new System.Drawing.Point(80, 687);
+            this.btnRefresh.Location = new System.Drawing.Point(82, 720);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(2);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(148, 29);
@@ -247,7 +247,7 @@
             // btnSaveMonth
             // 
             this.btnSaveMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveMonth.Location = new System.Drawing.Point(816, 548);
+            this.btnSaveMonth.Location = new System.Drawing.Point(815, 548);
             this.btnSaveMonth.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveMonth.Name = "btnSaveMonth";
             this.btnSaveMonth.Size = new System.Drawing.Size(148, 29);
@@ -936,41 +936,16 @@
             this.grbStatistics.TabStop = false;
             this.grbStatistics.Text = "Statistics";
             // 
-            // rdbMinTemp
+            // label1
             // 
-            this.rdbMinTemp.AutoSize = true;
-            this.rdbMinTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbMinTemp.Location = new System.Drawing.Point(19, 48);
-            this.rdbMinTemp.Name = "rdbMinTemp";
-            this.rdbMinTemp.Size = new System.Drawing.Size(185, 24);
-            this.rdbMinTemp.TabIndex = 53;
-            this.rdbMinTemp.TabStop = true;
-            this.rdbMinTemp.Text = "Minimum Temperature";
-            this.rdbMinTemp.UseVisualStyleBackColor = true;
-            // 
-            // rdbAirFrost
-            // 
-            this.rdbAirFrost.AutoSize = true;
-            this.rdbAirFrost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbAirFrost.Location = new System.Drawing.Point(19, 78);
-            this.rdbAirFrost.Name = "rdbAirFrost";
-            this.rdbAirFrost.Size = new System.Drawing.Size(127, 24);
-            this.rdbAirFrost.TabIndex = 54;
-            this.rdbAirFrost.TabStop = true;
-            this.rdbAirFrost.Text = "Air Frost Days";
-            this.rdbAirFrost.UseVisualStyleBackColor = true;
-            // 
-            // rdbRain
-            // 
-            this.rdbRain.AutoSize = true;
-            this.rdbRain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbRain.Location = new System.Drawing.Point(19, 108);
-            this.rdbRain.Name = "rdbRain";
-            this.rdbRain.Size = new System.Drawing.Size(80, 24);
-            this.rdbRain.TabIndex = 55;
-            this.rdbRain.TabStop = true;
-            this.rdbRain.Text = "Rainfall";
-            this.rdbRain.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(357, 48);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 20);
+            this.label1.TabIndex = 57;
+            this.label1.Text = "Mean:";
             // 
             // rdbSunshine
             // 
@@ -984,16 +959,41 @@
             this.rdbSunshine.Text = "Sunshine Hours";
             this.rdbSunshine.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // rdbRain
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(357, 48);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 20);
-            this.label1.TabIndex = 57;
-            this.label1.Text = "Mean:";
+            this.rdbRain.AutoSize = true;
+            this.rdbRain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbRain.Location = new System.Drawing.Point(19, 108);
+            this.rdbRain.Name = "rdbRain";
+            this.rdbRain.Size = new System.Drawing.Size(80, 24);
+            this.rdbRain.TabIndex = 55;
+            this.rdbRain.TabStop = true;
+            this.rdbRain.Text = "Rainfall";
+            this.rdbRain.UseVisualStyleBackColor = true;
+            // 
+            // rdbAirFrost
+            // 
+            this.rdbAirFrost.AutoSize = true;
+            this.rdbAirFrost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbAirFrost.Location = new System.Drawing.Point(19, 78);
+            this.rdbAirFrost.Name = "rdbAirFrost";
+            this.rdbAirFrost.Size = new System.Drawing.Size(127, 24);
+            this.rdbAirFrost.TabIndex = 54;
+            this.rdbAirFrost.TabStop = true;
+            this.rdbAirFrost.Text = "Air Frost Days";
+            this.rdbAirFrost.UseVisualStyleBackColor = true;
+            // 
+            // rdbMinTemp
+            // 
+            this.rdbMinTemp.AutoSize = true;
+            this.rdbMinTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbMinTemp.Location = new System.Drawing.Point(19, 48);
+            this.rdbMinTemp.Name = "rdbMinTemp";
+            this.rdbMinTemp.Size = new System.Drawing.Size(185, 24);
+            this.rdbMinTemp.TabIndex = 53;
+            this.rdbMinTemp.TabStop = true;
+            this.rdbMinTemp.Text = "Minimum Temperature";
+            this.rdbMinTemp.UseVisualStyleBackColor = true;
             // 
             // FrmMain
             // 
