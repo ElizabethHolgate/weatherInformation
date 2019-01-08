@@ -57,6 +57,10 @@ namespace METOfficeSystem
             lblMeanOutput.Text = "";
         }
 
+        /// <summary>
+        /// Selects the file.
+        /// </summary>
+        /// <returns>The file.</returns>
         public string SelectFile()
         {
             openFileDialog.ShowDialog();
@@ -155,7 +159,9 @@ namespace METOfficeSystem
             getData.Close();
         }
 
-        //write data to file
+        /// <summary>
+        /// Saves the data to file.
+        /// </summary>
         private void SaveDataToFile()
         {
             int yrLength;
@@ -444,6 +450,9 @@ namespace METOfficeSystem
             Search();
         }
 
+        /// <summary>
+        /// Searches in either locations, years or months for a given input.
+        /// </summary>
         private void Search()
         {
             string userSearch;
@@ -470,6 +479,11 @@ namespace METOfficeSystem
                 }
         }
 
+        /// <summary>
+        /// Searchs the location.
+        /// </summary>
+        /// <returns><c>true</c>, if location was searched, <c>false</c> otherwise.</returns>
+        /// <param name="userInput">User input.</param>
         private bool SearchLocation(string userInput)
         {
             //variables
@@ -516,6 +530,11 @@ namespace METOfficeSystem
             return found;
         }
 
+        /// <summary>
+        /// Searchs the year.
+        /// </summary>
+        /// <returns><c>true</c>, if year was searched, <c>false</c> otherwise.</returns>
+        /// <param name="userInput">User input.</param>
         private bool SearchYear(string userInput)
         {
             string yearID, nextMatch;
@@ -561,6 +580,11 @@ namespace METOfficeSystem
             return found;
         }
 
+        /// <summary>
+        /// Searchs the month.
+        /// </summary>
+        /// <returns><c>true</c>, if month was searched, <c>false</c> otherwise.</returns>
+        /// <param name="userInput">User input.</param>
         private bool SearchMonth(string userInput)
         {
             string monthID;
@@ -806,6 +830,10 @@ namespace METOfficeSystem
             
         }
 
+        /// <summary>
+        /// Validates the add location input.
+        /// </summary>
+        /// <returns><c>true</c>, if add location input was tested, <c>false</c> otherwise.</returns>
         private bool TestAddLocationInput()
         {
             bool textBoxesFull = false, name = true, street = true, county = true, postcode = true, lat = true, longitude = true;
@@ -902,6 +930,10 @@ namespace METOfficeSystem
             }
         }
 
+        /// <summary>
+        /// Validates the add year inputs.
+        /// </summary>
+        /// <returns><c>true</c>, if add year inputs was tested, <c>false</c> otherwise.</returns>
         private bool TestAddYearInputs()
         {
             bool textBoxesFull = true;
@@ -967,6 +999,11 @@ namespace METOfficeSystem
             ResetEditYear();
         }
 
+        /// <summary>
+        /// Calculates the mean.
+        /// </summary>
+        /// <returns>The mean.</returns>
+        /// <param name="numArr">Number arr.</param>
         private string CalculateMean(double[] numArr)
         {
             string answer;
@@ -983,6 +1020,10 @@ namespace METOfficeSystem
             return answer;
         }
 
+        /// <summary>
+        /// Returns array of minimum temps.
+        /// </summary>
+        /// <returns>The array.</returns>
         private double[] MinArray()
         {
             double num;
@@ -1000,6 +1041,10 @@ namespace METOfficeSystem
             return minArr;
         }
 
+        /// <summary>
+        /// Returns array of maximum temps.
+        /// </summary>
+        /// <returns>The array.</returns>
         private double[] MaxArray()
         {
             double num;
@@ -1017,6 +1062,10 @@ namespace METOfficeSystem
             return maxArr;
         }
 
+        /// <summary>
+        /// Returns array of air frost days.
+        /// </summary>
+        /// <returns>The frost array.</returns>
         private double[] AirFrostArray()
         {
             double num;
@@ -1034,6 +1083,10 @@ namespace METOfficeSystem
             return airFrostArr;
         }
 
+        /// <summary>
+        /// Returns array of rainfall.
+        /// </summary>
+        /// <returns>The array.</returns>
         private double[] RainArray()
         {
             double num;
@@ -1051,6 +1104,10 @@ namespace METOfficeSystem
             return rainArr;
         }
 
+        /// <summary>
+        /// Returns array of sun hours.
+        /// </summary>
+        /// <returns>The array.</returns>
         private double[] SunArray()
         {
             double num;
